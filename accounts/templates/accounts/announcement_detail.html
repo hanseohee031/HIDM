@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ announcement.title }}</h2>
+<p>작성자: {{ announcement.author.username }}</p>
+<p>등록일: {{ announcement.created_at|date:"Y-m-d H:i" }}</p>
+<p>조회수: {{ announcement.views }}</p>
+<hr>
+<div>{{ announcement.content|linebreaks }}</div>
+
+{% if user.is_authenticated and user.username in allowed_users %}
+  <a href="{% url 'announcement_edit' announcement.pk %}">수정</a> |
+  <a href="{% url 'announcement_delete' announcement.pk %}">삭제</a>
+{% endif %}
+
+<a href="{% url 'announcement_list' %}">목록</a>
+{% endblock %}

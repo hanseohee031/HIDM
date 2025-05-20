@@ -14,6 +14,11 @@ from django.contrib import messages
 import json
 from .models import Friendship 
 from django.db.models import Q
+from django.core.exceptions import PermissionDenied
+from .models import Announcement
+from .forms import AnnouncementForm
+
+
 
 # 1. Signup View (uses Student ID, Email Verification)
 def signup_view(request):
@@ -343,3 +348,59 @@ def friend_reject_view(request):
         return JsonResponse({"success": False})
     Friendship.objects.filter(from_user_id=userid, to_user=request.user, status="requested").delete()
     return JsonResponse({"success": True})
+def is_allowed_user(user):
+    return user.is_authenticated and user.username in ['admin', 'HID', '개발자']
+
+
+
+def announcement_list(request):
+    announcements = Announcement.objects.all()
+    allowed_users = ['admin', 'HID', '개발자']
+    return render(request, 'accounts/announcement_list.html', {
+        'announcements': announcements,
+        'allowed_users': allowed_users,
+    })
+def announcement_detail(request, pk):
+    announcement = get_object_or_404(Announcement, pk=pk)
+    announcement.views += 1
+    announcement.save(update_fields=['views'])
+    return render(request, 'accounts/announcement_detail.html', {'announcement': announcement})
+
+@login_required
+def announcement_create(request):
+    if not is_allowed_user(request.user):
+        raise PermissionDenied
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST)
+        if form.is_valid():
+            announcement = form.save(commit=False)
+            announcement.author = request.user
+            announcement.save()
+            return redirect('announcement_detail', pk=announcement.pk)
+    else:
+        form = AnnouncementForm()
+    return render(request, 'accounts/announcement_form.html', {'form': form})
+
+@login_required
+def announcement_edit(request, pk):
+    if not is_allowed_user(request.user):
+        raise PermissionDenied
+    announcement = get_object_or_404(Announcement, pk=pk)
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST, instance=announcement)
+        if form.is_valid():
+            form.save()
+            return redirect('announcement_detail', pk=announcement.pk)
+    else:
+        form = AnnouncementForm(instance=announcement)
+    return render(request, 'accounts/announcement_form.html', {'form': form})
+
+@login_required
+def announcement_delete(request, pk):
+    if not is_allowed_user(request.user):
+        raise PermissionDenied
+    announcement = get_object_or_404(Announcement, pk=pk)
+    if request.method == 'POST':
+        announcement.delete()
+        return redirect('announcement_list')
+    return render(request, 'accounts/announcement_confirm_delete.html', {'announcement': announcement})

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>공지사항</h2>
+
+{% if user.is_authenticated and user.username in allowed_users %}
+  <a href="{% url 'announcement_create' %}">글쓰기</a>
+{% endif %}
+
+<table>
+  <thead>
+    <tr>
+      <th>번호</th>
+      <th>제목</th>
+      <th>작성자</th>
+      <th>등록일</th>
+      <th>조회수</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for announcement in announcements %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td><a href="{% url 'announcement_detail' announcement.pk %}">{{ announcement.title }}</a></td>
+      <td>{{ announcement.author.username }}</td>
+      <td>{{ announcement.created_at|date:"Y-m-d" }}</td>
+      <td>{{ announcement.views }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">공지사항이 없습니다.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

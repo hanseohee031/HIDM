@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>삭제 확인</h2>
+<p>정말 "{{ announcement.title }}" 을(를) 삭제하시겠습니까?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">삭제</button>
+  <a href="{% url 'announcement_detail' announcement.pk %}">취소</a>
+</form>
+{% endblock %}

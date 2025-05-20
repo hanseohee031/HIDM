@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import UserProfile
+from .models import Announcement  # 맨 위 import 추가 필요
+
 
 ### 1. 회원가입용 SignupForm
 class SignupForm(UserCreationForm):
@@ -82,3 +84,9 @@ class AdvancedProfileForm(forms.ModelForm):
             'nationality': forms.Select(attrs={'class': 'form-select'}),
             # 여기에 더 필요한 필드 widget 옵션 추가 가능
         }
+
+
+class AnnouncementForm(forms.ModelForm):
+    class Meta:
+        model = Announcement
+        fields = ['title', 'content']

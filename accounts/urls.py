@@ -21,4 +21,11 @@ urlpatterns = [
     path('friend-remove/', views.friend_remove_view, name='friend_remove'),
     path('friend-accept/', views.friend_accept_view, name='friend_accept'),
     path('friend-reject/', views.friend_reject_view, name='friend_reject'),
+    path('announcement/', views.announcement_list, name='announcement_list'),
+    path('announcement/create/', views.announcement_create, name='announcement_create'),
+    path('announcement/<int:pk>/', views.announcement_detail, name='announcement_detail'),
+    path('announcement/<int:pk>/edit/', views.announcement_edit, name='announcement_edit'),
+    path('announcement/<int:pk>/delete/', views.announcement_delete, name='announcement_delete'),
 ]
+
+
