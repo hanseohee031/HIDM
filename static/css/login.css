@@ -1,0 +1,91 @@
+/* 전체 배경과 가운데 정렬 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f5f5f5;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 컨테이너 */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+/* 로그인 카드 스타일 */
+.login-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+/* 제목 */
+.login-card h2 {
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* 입력 필드 */
+.input-group {
+    margin-bottom: 1.2rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* 로그인 버튼 */
+.login-button {
+    width: 100%;
+    padding: 0.9rem;
+    background-color: #4a90e2;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    margin-top: 0.5rem;
+}
+
+.login-button:hover {
+    background-color: #357ab8;
+}
+
+/* 에러 메시지 */
+.error-text {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* 회원가입 링크 */
+.signup-link {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.signup-link a {
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}

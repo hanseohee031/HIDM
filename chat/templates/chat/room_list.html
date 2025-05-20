@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>채팅방 목록</h2>
+  <ul>
+    {% for room in rooms %}
+      <li>{{ room.name }} (참가자: {{ room.participants.count }})</li>
+    {% empty %}
+      <li>생성된 방이 없습니다.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'chat:create_room' %}">방 생성</a> |
+  <a href="{% url 'chat:join_room'   %}">방 입장</a>
+{% endblock %}

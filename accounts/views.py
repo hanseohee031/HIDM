@@ -1,0 +1,345 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, JsonResponse
+from .models import UserProfile
+from .forms import SignupForm, UserProfileForm, AdvancedProfileForm
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.sessions.models import Session
+from django.utils import timezone
+from django.core.mail import send_mail
+import random
+from django.contrib import messages
+import json
+from .models import Friendship 
+from django.db.models import Q
+
+# 1. Signup View (uses Student ID, Email Verification)
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        session_code = request.session.get('email_verification_code')
+        user_code = request.POST.get('email_code', '')
+        student_id = request.POST.get('student_id', '').strip()
+        email_verified = (session_code and user_code and str(session_code) == str(user_code))
+
+        # 디버깅용 로그
+        print("SESSION CODE:", session_code)
+        print("USER CODE:", user_code)
+        print("email_verified:", email_verified)
+        print("form.is_valid():", form.is_valid())
+        print("form.errors:", form.errors)   # <=== ★★이 줄만 추가하세요!
+
+        if form.is_valid() and email_verified:
+            user = form.save()
+            login(request, user)
+            if 'email_verification_code' in request.session:
+                del request.session['email_verification_code']
+            return redirect('home')
+        else:
+            if not email_verified:
+                form.add_error(None, "Email verification code does not match.")
+    else:
+        form = SignupForm()  # GET 요청일 때는 여기만 실행됨
+
+    return render(request, 'signup.html', {'form': form})
+
+
+
+# 2. Send Email Verification Code (Ajax View)
+@csrf_exempt
+def send_verification_code_view(request):
+    if request.method == "POST":
+        student_id = request.POST.get('student_id', '').strip()
+        if not student_id:
+            return JsonResponse({'success': False, 'msg': 'Student ID Number is required.'})
+
+        email = f"{student_id}@hallym.ac.kr"
+        code = random.randint(100000, 999999)
+        request.session['email_verification_code'] = str(code)
+
+        # Send email (Django EMAIL settings required)
+        send_mail(
+            subject="Your Verification Code",
+            message=f"Your verification code is: {code}",
+            from_email=None,  # Use DEFAULT_FROM_EMAIL from settings
+            recipient_list=[email],
+            fail_silently=False,
+        )
+
+        return JsonResponse({
+            'success': True,
+            'msg': f"A verification code has been sent to {email}. Please check your email and enter the code below."
+        })
+
+    return JsonResponse({'success': False, 'msg': 'Invalid request.'})
+
+# 3. Login View
+def login_view(request):
+    if request.method == 'POST':
+        student_id = request.POST['student_id']
+        password = request.POST['password']
+        user = authenticate(request, username=student_id, password=password)
+        if user is not None:
+            login(request, user)
+            if not hasattr(user, 'userprofile'):
+                return redirect('profile_setup')
+            return redirect('home')
+        else:
+            return render(request, 'login.html', {'error': 'Invalid Student ID Number or password.'})
+    return render(request, 'login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+# 4. Home View (with online status)
+from django.contrib.auth.models import User
+
+def home_view(request):
+    profiles = UserProfile.objects.all()
+    sessions = Session.objects.filter(expire_date__gte=timezone.now())
+    user_id_list = []
+    for session in sessions:
+        data = session.get_decoded()
+        uid = data.get('_auth_user_id')
+        if uid:
+            user_id_list.append(int(uid))
+    active_user_ids = set(user_id_list)
+
+    # 🔽 여기 추가
+    total_users = User.objects.count()
+    recent_users = User.objects.order_by('-date_joined')[:5]
+
+    context = {
+        'profiles': profiles,
+        'active_user_ids': active_user_ids,
+        'total_users': total_users,
+        'recent_users': recent_users,
+    }
+
+    if request.user.is_authenticated:
+        context['username'] = request.user.username
+        context['profile'] = getattr(request.user, 'userprofile', None)
+
+    return render(request, 'home.html', context)
+
+
+
+
+@login_required
+def profile_setup_view(request):
+    try:
+        if hasattr(request.user, 'userprofile'):
+            return redirect('home')
+    except:
+        pass
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('home')
+    else:
+        form = UserProfileForm()
+    return render(request, 'profile_setup.html', {'form': form})
+
+@login_required
+def profile_update_view(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=profile)
+    return render(request, 'profile_setup.html', {
+        'form': form,
+        'title': 'Update Basic Profile',
+    })
+
+@login_required
+def advanced_profile_setup_view(request):
+    profile = get_object_or_404(UserProfile, user=request.user)
+    if request.method == 'POST':
+        adv_form = AdvancedProfileForm(request.POST, instance=profile)
+        if adv_form.is_valid():
+            adv_form.save()
+            return redirect('profile')
+    else:
+        adv_form = AdvancedProfileForm(instance=profile)
+    return render(request, 'profile_advanced_setup.html', {
+        'form': adv_form,
+        'title': 'Advanced Profile Setup',
+    })
+
+
+
+
+
+@login_required
+def delete_account_view(request):
+    if request.method == 'POST':
+        user = request.user
+        logout(request)
+        user.delete()
+        messages.success(request, "Your account has been deleted.")
+        return redirect('home')
+    else:
+        return HttpResponse("Invalid request method.", status=400)
+
+
+
+
+
+
+
+@csrf_exempt
+def verify_code_ajax(request):
+    if request.method == 'POST':
+        code = request.POST.get('code')
+        session_code = request.session.get('email_verification_code')
+        if code and session_code and code.strip() == session_code:
+            return JsonResponse({'valid': True})
+        else:
+            return JsonResponse({'valid': False})
+
+
+@login_required
+def profile_view(request):
+    profiles = UserProfile.objects.all()
+    sessions = Session.objects.filter(expire_date__gte=timezone.now())
+    user_id_list = []
+    for session in sessions:
+        data = session.get_decoded()
+        uid = data.get('_auth_user_id')
+        if uid:
+            user_id_list.append(int(uid))
+    active_user_ids = set(user_id_list)
+
+    context = {
+        'profiles': profiles,
+        'active_user_ids': active_user_ids,
+        'profile': getattr(request.user, 'userprofile', None),
+    }
+    return render(request, 'profile.html', context)
+
+
+from django.shortcuts import render
+from accounts.models import UserProfile
+
+from .models import UserProfile, Friendship
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def find_friends_view(request):
+    # 친구 요청을 보낸 유저 id 리스트
+    sent_requests_ids = list(
+        Friendship.objects.filter(from_user=request.user, status='requested')
+        .values_list('to_user_id', flat=True)
+    )
+
+    # 친구 id 리스트
+    friends_ids = list(
+        Friendship.objects.filter(
+            (Q(from_user=request.user) | Q(to_user=request.user)), 
+            status='accepted'
+        )
+        .values_list('from_user_id', 'to_user_id')
+    )
+    # 중복제거, 자기자신 제외
+    friends_ids = set([i for pair in friends_ids for i in pair if i != request.user.id])
+
+    # 친구(User 객체)
+    friends = User.objects.filter(id__in=friends_ids)
+
+    # 나에게 온 친구 요청(Friendship 객체)
+    friend_requests_received = Friendship.objects.filter(
+        to_user=request.user, status='requested'
+    ).select_related('from_user__userprofile')
+
+    profiles = UserProfile.objects.exclude(user=request.user)
+    public_profiles_json = {}
+    for prof in profiles:
+        public_profiles_json[prof.user.id] = {
+            "nickname": prof.nickname,
+            "gender": prof.get_gender_display(),
+            "native_language": prof.get_native_language_display(),
+            # ... 기타 필드 ...
+        }
+    public_profiles_json = json.dumps(public_profiles_json)
+
+    return render(request, "find_friends.html", {
+        "profiles": profiles,
+        "public_profiles_json": public_profiles_json,
+        "friends": friends,
+        "friend_requests_received": friend_requests_received,
+        "friends_ids": list(friends_ids),
+        "sent_requests_ids": sent_requests_ids,
+    })
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+
+@require_POST
+@login_required
+def friend_request_view(request):
+    data = json.loads(request.body)
+    userid = data.get("userid")
+    if not userid or int(userid) == request.user.id:
+        return JsonResponse({"success": False, "msg": "Invalid user."})
+    to_user = get_object_or_404(User, id=userid)
+    # 중복 요청, 이미 친구 체크
+    already = Friendship.objects.filter(from_user=request.user, to_user=to_user).exists()
+    if already:
+        return JsonResponse({"success": False, "msg": "Already requested or already friends."})
+    Friendship.objects.create(from_user=request.user, to_user=to_user, status="requested")
+    return JsonResponse({"success": True})
+
+@require_POST
+@login_required
+def friend_request_cancel_view(request):
+    data = json.loads(request.body)
+    userid = data.get("userid")
+    if not userid:
+        return JsonResponse({"success": False})
+    Friendship.objects.filter(from_user=request.user, to_user_id=userid, status="requested").delete()
+    return JsonResponse({"success": True})
+
+@require_POST
+@login_required
+def friend_remove_view(request):
+    data = json.loads(request.body)
+    userid = data.get("userid")
+    if not userid:
+        return JsonResponse({"success": False})
+    Friendship.objects.filter(
+        ((Q(from_user=request.user) & Q(to_user_id=userid)) | (Q(from_user_id=userid) & Q(to_user=request.user))),
+        status="accepted"
+    ).delete()
+    return JsonResponse({"success": True})
+
+@require_POST
+@login_required
+def friend_accept_view(request):
+    data = json.loads(request.body)
+    userid = data.get("userid")
+    if not userid:
+        return JsonResponse({"success": False})
+    fs = Friendship.objects.filter(from_user_id=userid, to_user=request.user, status="requested").first()
+    if fs:
+        fs.status = "accepted"
+        fs.save()
+    return JsonResponse({"success": True})
+
+@require_POST
+@login_required
+def friend_reject_view(request):
+    data = json.loads(request.body)
+    userid = data.get("userid")
+    if not userid:
+        return JsonResponse({"success": False})
+    Friendship.objects.filter(from_user_id=userid, to_user=request.user, status="requested").delete()
+    return JsonResponse({"success": True})

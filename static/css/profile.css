@@ -1,0 +1,142 @@
+body {
+  background: #fff;
+}
+
+/* 2-column layout: exactly half */
+.profile-2col-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 1160px;
+  margin: 48px auto 0 auto;
+}
+
+.profile-card {
+  flex: 1 1 0;
+  width: 100%;
+  min-width: 350px;
+  max-width: 480px;
+  background: #fff;
+  border: 2.5px solid #2249ad;
+  border-radius: 17px;
+  box-sizing: border-box;
+  padding: 40px 36px 32px 36px;
+  box-shadow: none;
+}
+
+.profile-title {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: #2249ad;
+  margin-bottom: 19px;
+  letter-spacing: -1px;
+}
+
+.profile-section-title {
+  color: #2351b6;
+  font-weight: 700;
+  font-size: 1.07rem;
+  margin-top: 2em;
+  margin-bottom: 9px;
+}
+
+.profile-info-list {
+  list-style: none;
+  padding: 0;
+  font-size: 1.09em;
+  color: #232945;
+}
+
+.profile-info-list li {
+  margin-bottom: 11px;
+}
+
+.profile-info-list b {
+  font-weight: 800;
+  color: #183b80;
+}
+
+.profile-privacy {
+  font-size: 0.99em;
+  color: #a3a3b7;
+  margin-left: 2px;
+}
+
+
+
+
+
+
+
+.profile-btn-row {
+  display: flex;
+  gap: 18px;
+  margin: 32px 0 0 0;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.profile-btn {
+  min-width: 180px;
+  padding: 0.95em 0;
+  margin-bottom: 0;
+  border: none;
+  border-radius: 13px;
+  background: #2249ad;
+  color: #fff;
+  font-size: 1.08em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.16s, color 0.14s;
+  outline: none;
+  box-shadow: 0 1.5px 0 #183c82;
+  margin-right: 0;
+  margin-top: 0;
+}
+.profile-btn:hover,
+.profile-btn:focus {
+  background: #183c82;
+  color: #f4f6ff;
+}
+
+.profile-btn-row a {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-delete-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 21px;
+  justify-content: flex-start;
+}
+.profile-delete-btn {
+  background: #ef4040;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 7px;
+  padding: 0.97em 2em;
+  font-size: 1.01em;
+  cursor: pointer;
+  transition: background .13s;
+}
+.profile-delete-btn:hover, .profile-delete-btn:focus {
+  background: #b02121;
+}
+.profile-logout-link {
+  color: #2249ad;
+  margin-left: 9px;
+  font-size: 1.03em;
+  text-decoration: underline;
+  transition: color .15s;
+}
+.profile-logout-link:hover {
+  color: #d12828;
+}

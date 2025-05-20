@@ -1,0 +1,290 @@
+body {
+  background: #fff;
+}
+
+.find-friends-main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 54px; /* 공간 더 넓힘 */
+  max-width: 1400px; /* 전체 최대폭 넓힘 */
+  margin: 54px auto 0 auto;
+  min-height: 680px;
+}
+
+/* 세 개의 사각형 크기를 더 크게/고정 */
+.find-friends-left, .find-friends-right, .find-friends-center {
+  background: #fff;
+  border: 2.2px solid #2346a2;
+  border-radius: 16px;
+  box-sizing: border-box;
+  min-width: 390px;
+  max-width: 460px;
+  padding: 44px 38px 38px 38px;
+  display: flex;
+  flex-direction: column;
+  min-height: 540px;
+  height: 540px;         /* 고정 높이! */
+}
+
+.find-friends-center {
+  flex: 1.2;
+  align-items: stretch;
+  min-width: 410px;
+  max-width: 520px;
+  margin: 0 10px;
+  justify-content: flex-start;
+  padding: 44px 38px 38px 38px;
+  position: relative;
+  height: 540px;
+}
+
+.center-card-fixed {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow-y: auto;
+}
+
+/* 나머지 영역 동일하게 유지 */
+.search-title {
+  font-weight: 800;
+  font-size: 1.13rem;
+  color: #223481;
+  margin-bottom: 16px;
+}
+
+#nickname-search {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 1.08rem;
+  border: 1.5px solid #b3c1e5;
+  border-radius: 7px;
+  margin-bottom: 22px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#nickname-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.nickname-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0 9px 2px;
+  border-bottom: 1px solid #e6eaf3;
+}
+
+.nickname-text {
+  font-size: 1.11em;
+  color: #1d2b51;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.view-profile-btn {
+  background: #2249ad;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 16px;
+  font-size: 1.01em;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.no-members {
+  color: #b8b8c5;
+  margin-top: 34px;
+  text-align: center;
+}
+
+.profile-placeholder {
+  color: #b0b1c7;
+  font-size: 1.12em;
+  text-align: center;
+}
+
+.public-profile-card {
+  width: 100%;
+}
+
+.public-profile-title {
+  color: #2249ad;
+  font-weight: 900;
+  font-size: 1.38rem;
+  margin-bottom: 18px;
+  letter-spacing: -0.6px;
+}
+
+.public-info-list {
+  list-style: none;
+  padding: 0;
+  font-size: 1.09em;
+  color: #222;
+}
+
+.public-info-list li {
+  margin-bottom: 10px;
+}
+
+.public-info-list b {
+  font-weight: 800;
+  color: #1e3980;
+}
+
+.add-friend-btn {
+  background: #007bff;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 22px;
+  font-size: 1.09em;
+  margin-top: 22px;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.add-friend-btn:hover {
+  background: #0056b3;
+}
+
+.cancel-request-btn {
+  background: #fd7e14;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 22px;
+  font-size: 1.09em;
+  margin-top: 22px;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.cancel-request-btn:hover {
+  background: #bc5a00;
+}
+
+.remove-friend-btn {
+  background: #3cb371;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 22px;
+  font-size: 1.09em;
+  margin-top: 22px;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.remove-friend-btn:hover {
+  background: #20714a;
+}
+
+.friends-section {
+  width: 100%;
+}
+
+.friends-title {
+  font-size: 1.13em;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #1e3980;
+}
+
+#friend-requests-list,
+#friends-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-height: 210px;
+  overflow-y: auto;
+}
+
+#friend-requests-list li,
+#friends-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid #e6eaf3;
+}
+
+.friend-nickname {
+  font-weight: 700;
+  color: #1d2b51;
+}
+
+.accept-friend-btn, .reject-friend-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 4px 13px;
+  font-size: 0.99em;
+  font-weight: 600;
+  margin-left: 7px;
+  cursor: pointer;
+  transition: background 0.16s;
+}
+
+.accept-friend-btn {
+  background: #28a745;
+  color: #fff;
+}
+.accept-friend-btn:hover {
+  background: #17692f;
+}
+
+.reject-friend-btn {
+  background: #e24545;
+  color: #fff;
+}
+.reject-friend-btn:hover {
+  background: #a81b1b;
+}
+
+#nickname-list::-webkit-scrollbar,
+#friend-requests-list::-webkit-scrollbar,
+#friends-list::-webkit-scrollbar {
+  width: 7px;
+  background: #f3f6fb;
+  border-radius: 7px;
+}
+#nickname-list::-webkit-scrollbar-thumb,
+#friend-requests-list::-webkit-scrollbar-thumb,
+#friends-list::-webkit-scrollbar-thumb {
+  background: #d1d6ec;
+  border-radius: 7px;
+}
+
+@media (max-width: 1300px) {
+  .find-friends-main {
+    flex-direction: column;
+    gap: 22px;
+    max-width: 99vw;
+    min-width: unset;
+  }
+  .find-friends-left, .find-friends-right, .find-friends-center {
+    min-width: 0;
+    max-width: unset;
+    width: 100%;
+    margin: 0 auto 0 auto;
+    height: auto;
+    min-height: 420px;
+  }
+  .center-card-fixed {
+    min-height: 300px;
+    height: 300px;
+  }
+}

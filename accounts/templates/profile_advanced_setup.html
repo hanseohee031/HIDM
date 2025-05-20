@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title|default:"Advanced Profile Setup" }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 새로 만든 CSS 파일 링크 -->
+  <link rel="stylesheet" href="{% static 'css/profile_advanced.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <div class="profile-card">
+      <h2 class="profile-title">{{ title|default:"Advanced Profile Setup" }}</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-row">
+          {{ form.born_year.label_tag }}
+          {{ form.born_year }}
+          <span class="form-check">{{ form.show_born_year }} Public</span>
+        </div>
+        <div class="form-row">
+          {{ form.nationality.label_tag }}
+          {{ form.nationality }}
+          <span class="form-check">{{ form.show_nationality }} Public</span>
+        </div>
+        <div class="form-row">
+          {{ form.major.label_tag }}
+          {{ form.major }}
+          <span class="form-check">{{ form.show_major }} Public</span>
+        </div>
+        <div class="form-row">
+          {{ form.instagram_id.label_tag }}
+          {{ form.instagram_id }}
+          <span class="form-check">{{ form.show_instagram }} Public</span>
+        </div>
+        <div class="form-row">
+          {{ form.personality.label_tag }}
+          {{ form.personality }}
+          <span class="form-check">{{ form.show_personality }} Public</span>
+        </div>
+        <div class="form-row">
+          {{ form.bio.label_tag }}
+          {{ form.bio }}
+          <span class="form-check">{{ form.show_bio }} Public</span>
+        </div>
+        <button type="submit" class="btn-login">Save</button>
+      </form>
+      <div class="profile-link">
+        <a href="{% url 'home' %}">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+  <!-- jQuery & select2 JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('select').select2({
+        width: '100%',
+        placeholder: "Search or select",
+        allowClear: true
+      });
+    });
+  </script>
+</body>
+</html>

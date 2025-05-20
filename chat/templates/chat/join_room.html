@@ -1,0 +1,8 @@
+<h2>방 입장하기</h2>
+{% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+<form method="post" action="{% url 'join_room' %}">
+  {% csrf_token %}
+  <label>방 이름: <input type="text" name="room_name"></label><br/>
+  <label>비밀번호: <input type="password" name="password"></label><br/>
+  <button type="submit">입장</button>
+</form>

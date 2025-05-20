@@ -1,0 +1,30 @@
+<!-- django_chat/chat/templates/chat.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>채팅방: {{ room_name }}</title>
+</head>
+<body>
+  <h2>채팅방: {{ room_name }}</h2>
+  <!-- WebSocket 및 메시지 입출력 스크립트가 들어갈 자리 -->
+  <div id="chat-log"></div>
+  <input id="msg" autocomplete="off"/><button onclick="send()">전송</button>
+  <script>
+    const roomName = "{{ room_name }}";
+    const ws = new WebSocket(
+      `ws://${window.location.host}/ws/chat/${roomName}/`
+    );
+    ws.onmessage = e => {
+      const data = JSON.parse(e.data);
+      document.getElementById('chat-log')
+        .innerHTML += `<p><strong>${data.sender}:</strong> ${data.message}</p>`;
+    };
+    function send() {
+      const input = document.getElementById('msg');
+      ws.send(JSON.stringify({ message: input.value, sender: "{{ user.username }}" }));
+      input.value = '';
+    }
+  </script>
+</body>
+</html>

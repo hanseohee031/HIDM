@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title|default:"Update Basic Profile" }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 새로운 CSS 파일 연결 -->
+  <link rel="stylesheet" href="{% static 'css/profile_basic.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <div class="profile-card">
+      <h2 class="profile-title">{{ title|default:"Update Basic Profile" }}</h2>
+      <form method="post">
+        {% csrf_token %}
+        <!-- Nickname -->
+        <div class="form-row">
+          <label for="{{ form.nickname.id_for_label }}">Nickname</label>
+          {{ form.nickname }}
+          {% if form.nickname.errors %}
+            <ul class="errorlist">
+              {% for err in form.nickname.errors %}
+                <li>{{ err }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+        <!-- Gender -->
+        <div class="form-row">
+          <label for="{{ form.gender.id_for_label }}">Gender</label>
+          {{ form.gender }}
+          {% if form.gender.errors %}
+            <ul class="errorlist">
+              {% for err in form.gender.errors %}
+                <li>{{ err }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+        <!-- Native Language -->
+        <div class="form-row">
+          <label for="{{ form.native_language.id_for_label }}">Native Language</label>
+          {{ form.native_language }}
+          {% if form.native_language.errors %}
+            <ul class="errorlist">
+              {% for err in form.native_language.errors %}
+                <li>{{ err }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+        <button type="submit" class="btn-login">Save</button>
+      </form>
+      <div class="profile-link">
+        <a href="{% url 'home' %}">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+  <!-- jQuery & Select2 JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('select').select2({
+        width: '100%',
+        placeholder: "Select",
+        allowClear: true
+      });
+    });
+  </script>
+</body>
+</html>

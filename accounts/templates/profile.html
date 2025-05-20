@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}?v=plain">
+
+<div class="profile-2col-wrap">
+  <!-- LEFT: Public Profile (visible to others) -->
+  <section class="profile-card public-profile-card">
+    <h2 class="profile-title">Public Profile</h2>
+    <ul class="profile-info-list">
+      <li><b>Name (Nickname):</b> {{ profile.nickname }}</li>
+      <li><b>Gender:</b> {{ profile.get_gender_display }}</li>
+      <li><b>Native Language:</b> {{ profile.get_native_language_display }}</li>
+      {% if profile.show_nationality %}<li><b>Nationality:</b> {{ profile.nationality }}</li>{% endif %}
+      {% if profile.show_major %}<li><b>Major:</b> {{ profile.major }}</li>{% endif %}
+      {% if profile.show_personality %}<li><b>Personality (MBTI):</b> {{ profile.personality }}</li>{% endif %}
+      {% if profile.show_purpose %}<li><b>Purpose:</b> {{ profile.purpose }}</li>{% endif %}
+      {% if profile.show_bio %}<li><b>Bio:</b> {{ profile.bio }}</li>{% endif %}
+      {% if profile.show_instagram %}<li><b>Instagram:</b> {{ profile.instagram_id }}</li>{% endif %}
+      {% if profile.show_born_year %}<li><b>Born Year:</b> {{ profile.born_year }}</li>{% endif %}
+    </ul>
+  </section>
+
+  <!-- RIGHT: My Profile (full details) -->
+  <section class="profile-card my-profile-card">
+    <h2 class="profile-title">My Profile</h2>
+    <ul class="profile-info-list">
+      <li><b>Student ID Number:</b> {{ user.username }}</li>
+      <li><b>Name (Nickname):</b> {{ profile.nickname }}</li>
+      <li><b>Gender:</b> {{ profile.get_gender_display }}</li>
+      <li><b>Native Language:</b> {{ profile.get_native_language_display }}</li>
+    </ul>
+    <h3 class="profile-section-title">Advanced Profile</h3>
+    <ul class="profile-info-list">
+      {% if profile.born_year %}
+        <li>
+          <b>Born Year:</b> {{ profile.born_year }}
+          <span class="profile-privacy">
+            ({{ profile.show_born_year|yesno:"Public,Private" }})
+          </span>
+        </li>
+      {% endif %}
+      {% if profile.nationality %}
+        <li>
+          <b>Nationality:</b> {{ profile.nationality }}
+          <span class="profile-privacy">
+            ({{ profile.show_nationality|yesno:"Public,Private" }})
+          </span>
+        </li>
+      {% endif %}
+      {% if profile.major %}
+        <li>
+          <b>Major:</b> {{ profile.major }}
+          <span class="profile-privacy">
+            ({{ profile.show_major|yesno:"Public,Private" }})
+          </span>
+        </li>
+      {% endif %}
+      {% if profile.personality %}
+        <li>
+          <b>Personality (MBTI):</b> {{ profile.personality }}
+          <span class="profile-privacy">
+            ({{ profile.show_personality|yesno:"Public,Private" }})
+          </span>
+        </li>
+      {% endif %}
+      {% if profile.purpose %}
+        <li>
+          <b>Purpose:</b> {{ profile.purpose }}
+          <span class="profile-privacy">
+            ({{ profile.show_purpose|yesno:"Public,Private" }})
+          </span>
+        </li>
+      {% endif %}
+      {% if profile.bio %}
+        <li>
+          <b>Bio:</b> {{ profile.bio }}
+          <span class="profile-privacy">
+            ({{ profile.show_bio|yesno:"Public,Private" }})
+          </span>
+        </li>
+      {% endif %}
+      {% if profile.instagram_id %}
+        <li>
+          <b>Instagram ID:</b> {{ profile.instagram_id }}
+          <span class="profile-privacy">
+            ({{ profile.show_instagram|yesno:"Public,Private" }})
+          </span>
+        </li>
+      {% endif %}
+    </ul>
+    <div class="profile-btn-row">
+      <a href="{% url 'waiting' %}"><button class="profile-btn">Start 1:1 Random Match</button></a>
+      <a href="{% url 'profile_update' %}"><button class="profile-btn">Update Profile</button></a>
+      <a href="{% url 'profile_advanced' %}"><button class="profile-btn">Advanced Profile</button></a>
+    </div>
+    <div class="profile-delete-row">
+      <form method="POST" action="{% url 'delete_account' %}" onsubmit="return confirm('Are you sure you want to delete your account?');">
+        {% csrf_token %}
+        <button type="submit" class="profile-delete-btn">Delete Account</button>
+      </form>
+      <a href="{% url 'logout' %}" class="profile-logout-link">Logout</a>
+    </div>
+  </section>
+</div>
+{% endblock %}

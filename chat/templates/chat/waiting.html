@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><title>매칭 대기 중…</title></head>
+<body>
+  <h2>매칭 대기 중입니다…</h2>
+  <p>다른 사용자가 들어올 때까지 잠시만 기다려주세요.</p>
+  <form method="post" action="{% url 'cancel_waiting' %}">
+    {% csrf_token %}
+    <button type="submit">❌ 매칭 취소</button>
+  </form>
+  <script>
+    const matchUrl = "{% url 'match' %}";
+    setInterval(async () => {
+      try {
+        const res  = await fetch(matchUrl);
+        const data = await res.json();
+        if (data.room_url) {
+          window.location.href = data.room_url;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }, 3000);
+   
+
+    window.addEventListener('beforeunload', () => {
+       // navigator.sendBeacon: unload 중에도 POST를 보낼 수 있도록 해 줌
+       navigator.sendBeacon("{% url 'cancel_waiting' %}");
+      });
+
+  </script>
+</body>
+</html>

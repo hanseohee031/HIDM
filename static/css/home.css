@@ -1,0 +1,87 @@
+/* 전체 네비게이션바 스타일 */
+.navbar {
+  background-color: #f8f9fa; /* 배경을 살짝 회색톤으로 구분 */
+  padding: 15px 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 로고 이미지 스타일 (크기 확대) */
+.navbar-logo img {
+  height: 70px; /* 기존 50px → 70px로 확대 */
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+/* 네비게이션 줄 컨테이너 */
+.nav-row-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 각 네비게이션 줄 공통 스타일 */
+.nav-row {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 40px; /* 간격을 넓혀 여유 확보 */
+  justify-content: center;
+}
+
+/* 첫 번째 줄 링크 스타일 (크게 강조) */
+.first-row li a {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #222;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+  padding-bottom: 4px;
+}
+
+.first-row li a:hover {
+  color: #007bff;
+  border-bottom: 2px solid #007bff; /* 호버 시 밑줄 효과 추가 */
+}
+
+/* 두 번째 줄 링크 스타일 (조금 작게) */
+.second-row li a {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #444;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+  padding-bottom: 3px;
+}
+
+.second-row li a:hover {
+  color: #0056b3;
+  border-bottom: 2px solid #0056b3; /* 호버 시 밑줄 효과 추가 */
+}
+
+/* 두 줄 사이 구분선 (점선 스타일로 변경) */
+.first-row {
+  border-bottom: 2px dashed #ccc;
+  padding-bottom: 10px;
+}
+
+.second-row {
+  padding-top: 10px;
+}
+
+/* 활성 페이지 표시 스타일 (옵션, 필요한 페이지에서 클래스 추가 사용 가능) */
+.nav-row li a.active {
+  color: #007bff;
+  border-bottom: 3px solid #007bff;
+}
+
+/* 모든 요소의 모서리를 완전 직각으로 설정 */
+* {
+  border-radius: 0 !important;
+}

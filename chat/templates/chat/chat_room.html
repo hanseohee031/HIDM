@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>채팅방: {{ room_name }}</h2>
+  <div id="chat-log" style="border:1px solid #ccc; height:300px; overflow-y:scroll;"></div>
+  <input id="chat-message-input" type="text" size="80"/>
+  <button id="chat-message-submit">전송</button>
+
+  <script>
+    const roomName = "{{ room_name }}";
+    const chatSocket = new WebSocket(
+      'ws://' + window.location.host +
+      '/ws/chat/' + roomName + '/'
+    );
+
+    chatSocket.onmessage = function(e) {
+      const d = JSON.parse(e.data);
+      const log = document.querySelector('#chat-log');
+      log.innerHTML += `<div><b>${d.user}</b>: ${d.message}</div>`;
+      log.scrollTop = log.scrollHeight;
+    };
+
+    document.querySelector('#chat-message-submit').onclick = () => {
+      const input = document.querySelector('#chat-message-input');
+      chatSocket.send(JSON.stringify({message: input.value}));
+      input.value = '';
+    };
+  </script>
+{% endblock %}
