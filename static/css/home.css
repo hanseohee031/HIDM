@@ -1,14 +1,13 @@
-/* 전체 네비게이션바 스타일 */
 .navbar {
   background-color: #f8f9fa; 
-  padding: 15px 30px;
+  padding: 20px 30px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  font-family: 'Montserrat', sans-serif; /* 폰트 적용 */
 }
-
 /* 로고 이미지 스타일 */
 .navbar-logo img {
   height: 70px;
@@ -37,10 +36,10 @@
 
 /* 첫 번째 줄 링크 스타일 (bold 제거, underline 제거) */
 .first-row li a {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 500; /* bold → 일반 폰트로 변경 */
   text-decoration: none; /* underline 제거 */
-  color: #222;
+  color: #444;
   transition: color 0.2s ease;
 }
 
@@ -58,9 +57,9 @@
   color: #0056b3;
 }
 
-/* 두 줄 사이 구분선 (점선 유지) */
+/* 두 줄 사이 구분선 (실선 유지) */
 .first-row {
-  border-bottom: 2px dashed #ccc;
+  border-bottom: 2px solid black;
   padding-bottom: 10px;
 }
 
