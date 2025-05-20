@@ -1,6 +1,6 @@
 /* 전체 네비게이션바 스타일 */
 .navbar {
-  background-color: #f8f9fa; /* 배경을 살짝 회색톤으로 구분 */
+  background-color: #f8f9fa; 
   padding: 15px 30px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   display: flex;
@@ -9,9 +9,9 @@
   justify-content: center;
 }
 
-/* 로고 이미지 스타일 (크기 확대) */
+/* 로고 이미지 스타일 */
 .navbar-logo img {
-  height: 70px; /* 기존 50px → 70px로 확대 */
+  height: 70px;
   cursor: pointer;
   margin-bottom: 15px;
 }
@@ -31,41 +31,34 @@
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 40px; /* 간격을 넓혀 여유 확보 */
+  gap: 40px;
   justify-content: center;
 }
 
-/* 첫 번째 줄 링크 스타일 (크게 강조) */
+/* 첫 번째 줄 링크 스타일 (bold 제거, underline 제거) */
 .first-row li a {
   font-size: 1.4rem;
-  font-weight: bold;
-  text-decoration: none;
+  font-weight: 500; /* bold → 일반 폰트로 변경 */
+  text-decoration: none; /* underline 제거 */
   color: #222;
-  transition: color 0.2s ease, border-bottom 0.2s ease;
-  padding-bottom: 4px;
+  transition: color 0.2s ease;
 }
 
-.first-row li a:hover {
-  color: #007bff;
-  border-bottom: 2px solid #007bff; /* 호버 시 밑줄 효과 추가 */
-}
-
-/* 두 번째 줄 링크 스타일 (조금 작게) */
+/* 두 번째 줄 링크 스타일 (underline 제거) */
 .second-row li a {
   font-size: 1.2rem;
   font-weight: 500;
-  text-decoration: none;
+  text-decoration: none; /* underline 제거 */
   color: #444;
-  transition: color 0.2s ease, border-bottom 0.2s ease;
-  padding-bottom: 3px;
+  transition: color 0.2s ease;
 }
 
-.second-row li a:hover {
+/* 호버 효과: 밑줄 완전 제거, 색상만 변경 */
+.nav-row li a:hover {
   color: #0056b3;
-  border-bottom: 2px solid #0056b3; /* 호버 시 밑줄 효과 추가 */
 }
 
-/* 두 줄 사이 구분선 (점선 스타일로 변경) */
+/* 두 줄 사이 구분선 (점선 유지) */
 .first-row {
   border-bottom: 2px dashed #ccc;
   padding-bottom: 10px;
@@ -75,10 +68,9 @@
   padding-top: 10px;
 }
 
-/* 활성 페이지 표시 스타일 (옵션, 필요한 페이지에서 클래스 추가 사용 가능) */
+/* 활성 페이지 표시 스타일 (선택적으로 사용 가능) */
 .nav-row li a.active {
   color: #007bff;
-  border-bottom: 3px solid #007bff;
 }
 
 /* 모든 요소의 모서리를 완전 직각으로 설정 */

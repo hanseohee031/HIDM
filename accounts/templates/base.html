@@ -17,9 +17,9 @@
       <div class="nav-row-container">
         <ul class="nav-row first-row">
           <li><a href="/ai-matching/">AI Matching</a></li>
-          <li><a href="/announcement/">Announcement</a></li>
-          <li><a href="/hidm-court/">HIDM Court</a></li>
-          <li><a href="{% url 'profile' %}">My Profile</a></li>
+          <li><a href="/earn-points/">Earn Points</a></li>
+          <li><a href="/find-topics/">Find Topics</a></li>
+          <li><a href="{% url 'find_friends' %}">Find Friends</a></li>
           {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
@@ -27,10 +27,10 @@
           {% endif %}
         </ul>
         <ul class="nav-row second-row">
-          <li><a href="/earn-points/">Earn Points</a></li>
-          <li><a href="/find-topics/">Find Topics</a></li>
-          <li><a href="{% url 'find_friends' %}">Find Friends</a></li>
+          <li><a href="/announcement/">Announcement</a></li>
           <li><a href="/boomerang/">Boomerang</a></li>
+          <li><a href="/hidm-court/">HIDM Court</a></li>
+          <li><a href="{% url 'profile' %}">My Profile</a></li>
         </ul>
       </div>
     </nav>
