@@ -116,12 +116,14 @@ def home_view(request):
     # 🔽 여기 추가
     total_users = User.objects.count()
     recent_users = User.objects.order_by('-date_joined')[:5]
+    recent_announcements = Announcement.objects.order_by('-created_at')[:5]
 
     context = {
         'profiles': profiles,
         'active_user_ids': active_user_ids,
         'total_users': total_users,
         'recent_users': recent_users,
+        'recent_announcements': recent_announcements,
     }
 
     if request.user.is_authenticated:
