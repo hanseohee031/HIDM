@@ -1,16 +1,106 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-<h2>{{ announcement.title }}</h2>
-<p>작성자: {{ announcement.author.username }}</p>
-<p>등록일: {{ announcement.created_at|date:"Y-m-d H:i" }}</p>
-<p>조회수: {{ announcement.views }}</p>
-<hr>
-<div>{{ announcement.content|linebreaks }}</div>
+<style>
+.detail-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 50px auto 0 auto;
+    padding: 0 18px;
+    box-sizing: border-box;
+}
+.notice-detail-card {
+    border: 1.5px solid #254e91;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(50,90,170,0.04);
+    padding: 38px 42px 32px 42px;
+    margin-bottom: 30px;
+    min-height: 260px;
+}
+.notice-detail-title {
+    font-size: 1.65rem;
+    font-weight: bold;
+    color: #192752;
+    margin-bottom: 13px;
+    word-break: break-all;
+}
+.notice-detail-meta {
+    color: #4d5873;
+    font-size: 1rem;
+    display: flex;
+    gap: 24px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+.notice-detail-meta span {
+    font-weight: 500;
+}
+.notice-detail-date {
+    color: #6c7890;
+    font-size: 0.97rem;
+}
+.notice-detail-views {
+    color: #6c7890;
+    font-size: 0.97rem;
+}
+.notice-detail-divider {
+    border-bottom: 1px solid #e3e8f3;
+    margin: 18px 0 24px 0;
+}
+.notice-detail-content {
+    font-size: 1.11rem;
+    color: #23242b;
+    min-height: 80px;
+    margin-bottom: 36px;
+    white-space: pre-line;
+    word-break: break-word;
+}
+.notice-detail-bottom {
+    text-align: right;
+}
+.notice-detail-list-btn {
+    display: inline-block;
+    background: #254e91;
+    color: #fff;
+    padding: 8px 25px;
+    border-radius: 7px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: 18px;
+    transition: background 0.15s;
+}
+.notice-detail-list-btn:hover {
+    background: #193d68;
+}
+@media (max-width: 600px) {
+    .detail-container {
+        max-width: 99vw;
+        padding: 0 2vw;
+    }
+    .notice-detail-card {
+        padding: 20px 6vw 18px 6vw;
+    }
+    .notice-detail-title {
+        font-size: 1.2rem;
+    }
+}
+</style>
 
-{% if user.is_authenticated and user.username in allowed_users %}
-  <a href="{% url 'announcement_edit' announcement.pk %}">수정</a> |
-  <a href="{% url 'announcement_delete' announcement.pk %}">삭제</a>
-{% endif %}
-
-<a href="{% url 'announcement_list' %}">목록</a>
+<div class="detail-container">
+    <div class="notice-detail-card">
+        <div class="notice-detail-title">{{ announcement.title }}</div>
+        <div class="notice-detail-meta">
+            <span>Author: {{ announcement.author.username }}</span>
+            <span class="notice-detail-date">Date: {{ announcement.created_at|date:"Y-m-d H:i" }}</span>
+            <span class="notice-detail-views">Views: {{ announcement.views }}</span>
+        </div>
+        <div class="notice-detail-divider"></div>
+        <div class="notice-detail-content">{{ announcement.content|linebreaksbr }}</div>
+        <div class="notice-detail-bottom">
+            <a href="{% url 'announcement_list' %}" class="notice-detail-list-btn">Back to List</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

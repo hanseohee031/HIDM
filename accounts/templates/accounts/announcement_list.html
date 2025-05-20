@@ -1,33 +1,214 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-<h2>공지사항</h2>
+<style>
+.notice-page-outer {
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px auto 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+.notice-whole-box {
+    border: 1.5px solid #254e91;
+    border-radius: 8px;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 0; /* 여백 없앰 */
+}
 
-{% if user.is_authenticated and user.username in allowed_users %}
-  <a href="{% url 'announcement_create' %}">글쓰기</a>
-{% endif %}
+.notice-search-bar {
+    display: flex;
+    align-items: center;
+    width: 98%;
+    margin: 8px auto 0 auto;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-sizing: border-box;
+    min-height: 44px;
+    height: 44px;
+}
 
-<table>
-  <thead>
-    <tr>
-      <th>번호</th>
-      <th>제목</th>
-      <th>작성자</th>
-      <th>등록일</th>
-      <th>조회수</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for announcement in announcements %}
-    <tr>
-      <td>{{ forloop.counter }}</td>
-      <td><a href="{% url 'announcement_detail' announcement.pk %}">{{ announcement.title }}</a></td>
-      <td>{{ announcement.author.username }}</td>
-      <td>{{ announcement.created_at|date:"Y-m-d" }}</td>
-      <td>{{ announcement.views }}</td>
-    </tr>
-    {% empty %}
-    <tr><td colspan="5">공지사항이 없습니다.</td></tr>
-    {% endfor %}
-  </tbody>
-</table>
+.notice-search-bar select,
+.notice-search-bar input[type="text"],
+.notice-search-bar button {
+    height: 36px;
+    font-size: 1rem;
+}
+
+.notice-search-bar select {
+    border: 1.3px solid #254e91;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    padding: 0 15px;
+    background: #fff;
+    color: #2a3240;
+    min-width: 120px;
+    box-sizing: border-box;
+    margin-right: -1.3px;
+}
+
+.notice-search-bar input[type="text"] {
+    border: 1.3px solid #254e91;
+    border-left: none;
+    outline: none;
+    padding: 0 15px;
+    flex: 1;
+    background: #fff;
+    color: #2a3240;
+    border-radius: 0;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.notice-search-bar button {
+    border: 1.3px solid #254e91;
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    background: #254e91;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.16s;
+    margin-left: -1.3px;
+    min-width: 90px;
+    padding: 0 20px;
+}
+.notice-search-bar button:hover {
+    background: #003366;
+}
+
+@media (max-width: 800px) {
+    .notice-search-bar {
+        flex-direction: column;
+        width: 100%;
+        margin: 7px 0 10px 0;
+        gap: 7px;
+        min-height: unset;
+        height: unset;
+    }
+    .notice-search-bar select,
+    .notice-search-bar input[type="text"],
+    .notice-search-bar button {
+        width: 100%;
+        border-radius: 8px !important;
+        margin: 0 !important;
+        border-left: 1.3px solid #254e91 !important;
+        height: 36px !important;
+    }
+    .notice-search-bar select {
+        border-radius: 8px 8px 0 0 !important;
+    }
+    .notice-search-bar button {
+        border-radius: 0 0 8px 8px !important;
+    }
+}
+.notice-search-divider {
+    height: 0;
+    border-bottom: 2px solid #254e91;
+    margin: 0 0 0 0;
+}
+.notice-table-area {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: #fff;
+    box-sizing: border-box;
+}
+.notice-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    background: #fff;
+}
+.notice-table thead tr {
+    background: #f3f6fb;
+    border-bottom: 2px solid #254e91;
+}
+.notice-table th, .notice-table td {
+    text-align: center;
+    padding: 13px 8px;
+}
+.notice-table th {
+    font-weight: 700;
+    color: #254e91;
+    font-size: 1.08rem;
+    border-bottom: 1.5px solid #b6c8e2;
+}
+.notice-table tbody tr {
+    border-bottom: 1px solid #e0e6eb;
+    transition: background 0.13s;
+}
+.notice-table tbody tr:hover {
+    background: #f7faff;
+}
+.notice-table td {
+    color: #2d3646;
+}
+.notice-table td.title-cell {
+    text-align: left;
+    padding-left: 18px;
+}
+@media (max-width: 700px) {
+    .notice-page-outer {
+        max-width: 98vw;
+        padding: 0 4vw;
+    }
+    .notice-table th, .notice-table td {
+        padding: 8px 4px;
+        font-size: 0.98rem;
+    }
+}
+</style>
+
+<div class="notice-page-outer">
+    <div class="notice-whole-box">
+        <form class="notice-search-bar" method="get" action="{% url 'announcement_list' %}">
+            <select name="search_type">
+                <option value="title" {% if request.GET.search_type == "title" %}selected{% endif %}>Title</option>
+                <option value="content" {% if request.GET.search_type == "content" %}selected{% endif %}>Content</option>
+                <option value="all" {% if request.GET.search_type == "all" %}selected{% endif %}>Title + Content</option>
+            </select>
+            <input type="text" name="q" placeholder="Enter keyword..." value="{{ request.GET.q|default_if_none:'' }}">
+            <button type="submit">Search</button>
+        </form>
+        <div class="notice-search-divider"></div>
+        <div class="notice-table-area">
+            <table class="notice-table">
+                <thead>
+                    <tr>
+                        <th style="width:7%;">No.</th>
+                        <th>Title</th>
+                        <th style="width:16%;">Author</th>
+                        <th style="width:16%;">Date</th>
+                        <th style="width:11%;">Views</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for announcement in announcements %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="title-cell">
+                            <a href="{% url 'announcement_detail' announcement.pk %}">
+                                {{ announcement.title }}
+                            </a>
+                        </td>
+                        <td>{{ announcement.author.username }}</td>
+                        <td>{{ announcement.created_at|date:"Y-m-d" }}</td>
+                        <td>{{ announcement.views }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" style="text-align:center; color:#7a869a; padding:34px 0;">
+                            There are no notices yet.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}

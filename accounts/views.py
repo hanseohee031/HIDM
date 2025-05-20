@@ -354,12 +354,34 @@ def is_allowed_user(user):
 
 
 def announcement_list(request):
-    announcements = Announcement.objects.all()
     allowed_users = ['admin', 'HID', '개발자']
+
+    # 추가: 검색어, 검색타입 받기
+    q = request.GET.get('q', '').strip()
+    search_type = request.GET.get('search_type', 'title')
+
+    announcements = Announcement.objects.all()
+
+    # 추가: 검색 필터 적용
+    if q:
+        if search_type == 'title':
+            announcements = announcements.filter(title__icontains=q)
+        elif search_type == 'content':
+            announcements = announcements.filter(content__icontains=q)
+        elif search_type == 'all':
+            announcements = announcements.filter(
+                Q(title__icontains=q) | Q(content__icontains=q)
+            )
+
+    # 추가: 최신순 정렬
+    announcements = announcements.order_by('-created_at')
+
     return render(request, 'accounts/announcement_list.html', {
         'announcements': announcements,
         'allowed_users': allowed_users,
     })
+
+
 def announcement_detail(request, pk):
     announcement = get_object_or_404(Announcement, pk=pk)
     announcement.views += 1
