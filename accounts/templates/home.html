@@ -2,179 +2,189 @@
 {% load static %}
 
 {% block content %}
-<!--
-  메인 레이아웃 컨테이너
-  - .main-container: 전체 페이지의 가운데 정렬 및 박스 간격/레이아웃을 담당
--->
 <style>
-  /* 메인 컨테이너: 화면 중앙에 고정된 너비 안에서 유연한 레이아웃 */
+  html, body {
+    font-size: 18px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
   .main-container {
     display: flex;
     justify-content: center;
-    align-items: stretch;
-    gap: 32px;
-    padding: 40px 0 0 0;
-    max-width: 1400px;
+    align-items: flex-start;
+    gap: 42px;
+    padding: 46px 0 0 0;
+    max-width: 1700px;
     margin: 0 auto;
-    min-height: 510px;
+    min-height: 0;
+    height: calc(100vh - 180px); /* 네비+헤더 높이만큼 빼줌 */
+    box-sizing: border-box;
   }
 
-  /* 기본 박스 스타일 */
-  .main-box {
-    background: #fff;
-    border: 1.5px solid #e0e0e0;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-    flex: 1 1 0;
-    min-width: 330px;
-    max-width: 430px;
-    padding: 34px 24px 28px 24px;
+  /* 왼쪽 섹션: 배경, 테두리, 그림자 전부 없음! */
+  .side-box {
+    max-width: 460px;
+    min-width: 320px;
+    height: 100%;           /* 이미지 높이와 맞추기 */
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: flex-start;
-    position: relative;
-    min-height: 430px;
-  }
-
-  /* 사이드 박스: 가입/공지 합쳐진 섹션용 컨테이너 */
-  .side-box {
-    max-width: 410px;
-    min-width: 320px;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0;
   }
   .side-box-inner {
-    background: #fff;
-    border-radius: 16px;
-    padding: 30px 22px 20px 22px;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
   }
-
-  /* 회원가입 요약 영역 */
-  .signup-section {
+  .signup-section, .announcement-section {
     width: 100%;
-    border-bottom: 1.5px solid #e6e6e6;
-    padding-bottom: 18px;
+    background: none !important;
+    border: none !important;
+    padding-bottom: 0;
+    margin-bottom: 0;
     text-align: center;
   }
-  /* 공지사항 영역 */
-  .announcement-section {
-    width: 100%;
-    margin-top: 10px;
-    padding-top: 8px;
-    text-align: center;
-  }
-
-  /* 섹션 제목 스타일 */
   .section-title {
     color: #254e91;
-    font-size: 1.18rem;
+    font-size: 1.21rem;
     font-weight: bold;
-    margin: 0 0 14px;
-  }
-
-  /* About 섹션 제목 */
-  .about-title {
-    color: #254e91;
-    font-size: 1.18rem;
-    font-weight: bold;
-    margin: 0 0 18px;
+    margin: 0 0 13px;
     text-align: center;
   }
-  .about-text {
-    font-size: 1.11rem;
-    color: #222;
-    text-align: center;
-    line-height: 1.55;
-    max-width: 92%;
-    margin: 0 auto;
-  }
-
-  /* 회원 정보 센터 정렬 */
   .signup-stats {
     text-align: center;
-    font-size: 1.03rem;
-    margin-bottom: 11px;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
   }
-
-  /* 리스트 스타일 */
   .signup-list, .announcement-list {
     list-style: none;
     padding-left: 0;
     margin: 0;
-    font-size: 1.03rem;
+    font-size: 1.04rem;
   }
   .signup-list li, .announcement-list li {
-    margin-bottom: 7px;
-    line-height: 1.44;
+    margin-bottom: 8px;
+    line-height: 1.5;
   }
-
-  /* 공지사항 제목 스타일 */
   .announcement-title {
     color: #254e91;
     text-decoration: none;
-    font-weight: 500;
-    max-width: 170px;
+    font-weight: 600;
+    max-width: 220px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 1.01rem;
+    font-size: 1.07rem;
   }
   .announcement-title:hover {
     text-decoration: underline;
   }
   .announcement-date {
     color: #888;
-    font-size: 0.92em;
-    margin-left: 4px;
+    font-size: 0.95em;
+    margin-left: 6px;
+  }
+  /* 왼쪽 내용이 너무 길면 스크롤 안 나오게 height 제한 */
+  .side-box-inner {
+    overflow: hidden;
+    height: 100%;
+  }
+  .signup-section, .announcement-section {
+    overflow: hidden;
   }
 
-  /* About 섹션 확장 (중앙 박스) */
-  .about-box {
-    flex: 2 1 0;
-    max-width: 700px; /* 가로 폭을 이전 600px에서 700px으로 확대 */
+  /* 중앙 이미지 */
+  .center-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 580px;
+    min-width: 300px;
+    width: 100%;
+    height: 580px;
+    background: none;
+    box-sizing: border-box;
+  }
+  .center-image-wrapper img {
+    max-width: 100%;
+    max-height: 580px;
+    width: auto;
+    height: 100%;
+    border-radius: 16px;
+    display: block;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.09);
+    background: #fff;
+    object-fit: contain;
   }
 
-  /* Hallym Links 섹션: 카드 제거, 깔끔하게 */
-  .links-section {
+  /* 오른쪽 섹션 */
+  .links-section.links-box {
+    max-width: 460px;
+    min-width: 320px;
+    height: 580px;     /* 중앙 이미지와 높이 딱 맞춤 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     background: none !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
   }
-  /* 링크 박스 너비 조정 */
-  .links-box {
-    max-width: 410px;
-    min-width: 320px;
-    padding: 0;
+  .section-title {
+    margin-bottom: 16px;
   }
-
-  /* 이미지만 보이도록 버튼 스타일 제거 및 간격 확대 */
+  .link-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 17px;
+  }
   .link-buttons a {
-    display: block;
-    margin: 16px auto; /* 세로 간격을 8px에서 16px로 확대 */
-    padding: 0;
-    background: none;
-    border-radius: 0;
-    box-shadow: none;
-    width: auto;
-    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
   }
   .link-buttons img {
+    max-width: 250px;
     width: 100%;
     height: auto;
+    display: block;
+    margin: 0 auto;
     object-fit: contain;
     filter: none;
-    max-width: 270px;
-    max-height: 62px;
   }
 
-  /* 반응형 */
+  /* 한 화면에 다 들어오게: 화면이 작아지면 자동 줄어듦 */
+  @media (max-width: 1600px) {
+    .main-container { max-width: 98vw; }
+    .center-image-wrapper, .links-section.links-box, .side-box { max-width: 420px; }
+    .center-image-wrapper { height: 420px; }
+    .links-section.links-box, .side-box { height: 420px; }
+    .center-image-wrapper img { max-height: 420px; }
+    .link-buttons img { max-width: 180px; }
+  }
   @media (max-width: 1200px) {
-    .main-container { flex-direction: column; gap: 24px; }
-    .about-box, .links-box, .side-box { max-width: 100%; }
-    .link-buttons img { max-width: 200px; }
+    html, body { font-size: 15px; }
+    .main-container { flex-direction: column; align-items: center; gap: 18px; }
+    .center-image-wrapper, .links-section.links-box, .side-box { max-width: 98vw; min-width: 0; }
+    .center-image-wrapper { height: 280px; }
+    .links-section.links-box, .side-box { height: 280px; }
+    .center-image-wrapper img { max-height: 280px; }
+    .link-buttons img { max-width: 120px; }
   }
 </style>
 
@@ -184,7 +194,6 @@
     <div class="side-box-inner">
       <div class="signup-section">
         <div class="section-title">Signup Overview</div>
-        <!-- 센터 정렬 적용 -->
         <div class="signup-stats">
           <div><strong>Total members:</strong> {{ total_users }}</div>
         </div>
@@ -214,12 +223,13 @@
     </div>
   </div>
 
-  <!-- 가운데: About HIDM 섹션 확장 적용 -->
-  <div class="main-box about-box">
+  <!-- 가운데: 이미지만 중앙에! -->
+  <div class="center-image-wrapper">
+    <img src="{% static 'images/banner1.png' %}" alt="HIDM Banner">
   </div>
 
-  <!-- 오른쪽: Hallym Links 섹션 배경 제거 및 너비 축소 -->
-  <div class="main-box links-section links-box">
+  <!-- 오른쪽: Hallym Links 섹션 -->
+  <div class="links-section links-box">
     <div class="section-title">Hallym Links</div>
     <div class="link-buttons">
       <a href="https://www.hallym.ac.kr/" target="_blank">
