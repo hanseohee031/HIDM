@@ -355,6 +355,8 @@ def is_allowed_user(user):
 
 
 
+
+
 def announcement_list(request):
     allowed_users = ['admin', 'HID', '개발자']
 
@@ -382,6 +384,21 @@ def announcement_list(request):
         'announcements': announcements,
         'allowed_users': allowed_users,
     })
+
+
+from django.core.exceptions import PermissionDenied
+
+def is_allowed_user(user):
+    allowed_nicknames = ['admin', '개발자', 'HID']
+    # user가 인증된 상태인지, userprofile이 있는지 등도 체크 가능
+    if not user.is_authenticated:
+        return False
+    # 닉네임이 allowed_nicknames 목록에 있으면 True 반환
+    try:
+        return user.userprofile.nickname in allowed_nicknames
+    except AttributeError:
+        # userprofile이 없으면 권한 없음 처리
+        return False
 
 
 def announcement_detail(request, pk):
