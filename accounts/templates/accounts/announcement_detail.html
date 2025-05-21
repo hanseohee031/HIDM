@@ -3,104 +3,114 @@
 {% block content %}
 <style>
 .detail-container {
-    width: 100%;
     max-width: 900px;
     margin: 50px auto 0 auto;
-    padding: 0 18px;
+    padding: 20px 30px;
     box-sizing: border-box;
-}
-.notice-detail-card {
-    border: 1.5px solid #254e91;
-    border-radius: 10px;
     background: #fff;
-    box-shadow: 0 2px 10px rgba(50,90,170,0.04);
-    padding: 38px 42px 32px 42px;
-    margin-bottom: 30px;
-    min-height: 260px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
 }
+
 .notice-detail-title {
-    font-size: 1.65rem;
-    font-weight: bold;
-    color: #192752;
-    margin-bottom: 13px;
-    word-break: break-all;
-}
-.notice-detail-meta {
-    color: #4d5873;
-    font-size: 1rem;
-    display: flex;
-    gap: 24px;
-    margin-bottom: 8px;
-    flex-wrap: wrap;
-}
-.notice-detail-meta span {
-    font-weight: 500;
-}
-.notice-detail-date {
-    color: #6c7890;
-    font-size: 0.97rem;
-}
-.notice-detail-views {
-    color: #6c7890;
-    font-size: 0.97rem;
-}
-.notice-detail-divider {
-    border-bottom: 1px solid #e3e8f3;
-    margin: 18px 0 24px 0;
-}
-.notice-detail-content {
-    font-size: 1.11rem;
-    color: #23242b;
-    min-height: 80px;
-    margin-bottom: 36px;
-    white-space: pre-line;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #254e91;
+    margin-bottom: 12px;
     word-break: break-word;
 }
-.notice-detail-bottom {
-    text-align: right;
+
+.notice-detail-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
 }
-.notice-detail-list-btn {
-    display: inline-block;
-    background: #254e91;
-    color: #fff;
-    padding: 8px 25px;
+
+.notice-detail-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+    white-space: pre-line;
+    word-break: break-word;
+    margin-bottom: 36px;
+    border-top: 1px solid #e5e9f0;
+    padding-top: 24px;
+}
+
+.detail-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.detail-buttons a,
+.detail-buttons button {
+    background-color: #254e91;
+    color: white;
+    border: none;
     border-radius: 7px;
+    padding: 10px 24px;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
+    cursor: pointer;
     text-decoration: none;
-    margin-top: 18px;
-    transition: background 0.15s;
+    box-shadow: 0 2px 8px rgba(37, 78, 145, 0.3);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
-.notice-detail-list-btn:hover {
-    background: #193d68;
+
+.detail-buttons a:hover,
+.detail-buttons button:hover {
+    background-color: #193d68;
+    box-shadow: 0 4px 12px rgba(25, 61, 104, 0.5);
 }
+
+.detail-buttons button {
+    display: inline-block;
+}
+
 @media (max-width: 600px) {
     .detail-container {
-        max-width: 99vw;
-        padding: 0 2vw;
-    }
-    .notice-detail-card {
-        padding: 20px 6vw 18px 6vw;
+        padding: 15px 20px;
+        margin: 30px 10px 0 10px;
     }
     .notice-detail-title {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+    }
+    .detail-buttons {
+        justify-content: center;
+    }
+    .detail-buttons a,
+    .detail-buttons button {
+        padding: 10px 18px;
+        font-size: 0.95rem;
     }
 }
 </style>
 
 <div class="detail-container">
-    <div class="notice-detail-card">
-        <div class="notice-detail-title">{{ announcement.title }}</div>
-        <div class="notice-detail-meta">
-            <span>Author: {{ announcement.author.username }}</span>
-            <span class="notice-detail-date">Date: {{ announcement.created_at|date:"Y-m-d H:i" }}</span>
-            <span class="notice-detail-views">Views: {{ announcement.views }}</span>
-        </div>
-        <div class="notice-detail-divider"></div>
-        <div class="notice-detail-content">{{ announcement.content|linebreaksbr }}</div>
-        <div class="notice-detail-bottom">
-            <a href="{% url 'announcement_list' %}" class="notice-detail-list-btn">Back to List</a>
-        </div>
+    <div class="notice-detail-title">{{ announcement.title }}</div>
+    <div class="notice-detail-meta">
+        <span><strong>Author:</strong> {{ announcement.author.username }}</span>
+        <span><strong>Date:</strong> {{ announcement.created_at|date:"Y-m-d H:i" }}</span>
+        <span><strong>Views:</strong> {{ announcement.views }}</span>
+    </div>
+    <div class="notice-detail-content">{{ announcement.content|linebreaksbr }}</div>
+
+    <div class="detail-buttons">
+        <a href="{% url 'announcement_list' %}">Back to List</a>
+        {% if user.is_authenticated and user == announcement.author %}
+            <a href="{% url 'announcement_edit' announcement.pk %}">Edit</a>
+            <form method="post" action="{% url 'announcement_delete' announcement.pk %}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this notice?');">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
