@@ -187,7 +187,6 @@
         <!-- 센터 정렬 적용 -->
         <div class="signup-stats">
           <div><strong>Total members:</strong> {{ total_users }}</div>
-          <div><strong>Today:</strong> {{ today_visitors|default:0 }}</div>
         </div>
         <ul class="signup-list">
           {% for user in recent_users %}
@@ -217,12 +216,6 @@
 
   <!-- 가운데: About HIDM 섹션 확장 적용 -->
   <div class="main-box about-box">
-    <div class="about-title">About HIDM</div>
-    <p class="about-text">
-      HIDM (Hallym International Direct Message) is a student-driven platform that helps 
-      connect Hallym University students and international exchange students.<br>
-      Chat, share experiences, and build global friendships!
-    </p>
   </div>
 
   <!-- 오른쪽: Hallym Links 섹션 배경 제거 및 너비 축소 -->
