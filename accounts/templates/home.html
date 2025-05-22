@@ -17,15 +17,15 @@
     max-width: 1700px;
     margin: 0 auto;
     min-height: 0;
-    height: calc(100vh - 180px); /* 네비+헤더 높이만큼 빼줌 */
+    height: calc(100vh - 180px);
     box-sizing: border-box;
   }
 
-  /* 왼쪽 섹션: 배경, 테두리, 그림자 전부 없음! */
+  /* 왼쪽 섹션 */
   .side-box {
     max-width: 460px;
     min-width: 320px;
-    height: 100%;           /* 이미지 높이와 맞추기 */
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -44,6 +44,7 @@
     flex-direction: column;
     align-items: center;
     height: 100%;
+    overflow: hidden;
   }
   .signup-section, .announcement-section {
     width: 100%;
@@ -52,6 +53,7 @@
     padding-bottom: 0;
     margin-bottom: 0;
     text-align: center;
+    overflow: hidden;
   }
   .section-title {
     color: #254e91;
@@ -93,14 +95,6 @@
     font-size: 0.95em;
     margin-left: 6px;
   }
-  /* 왼쪽 내용이 너무 길면 스크롤 안 나오게 height 제한 */
-  .side-box-inner {
-    overflow: hidden;
-    height: 100%;
-  }
-  .signup-section, .announcement-section {
-    overflow: hidden;
-  }
 
   /* 중앙 이미지 */
   .center-image-wrapper {
@@ -130,7 +124,7 @@
   .links-section.links-box {
     max-width: 460px;
     min-width: 320px;
-    height: 580px;     /* 중앙 이미지와 높이 딱 맞춤 */
+    height: 580px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -140,7 +134,7 @@
     box-shadow: none !important;
     padding: 0 !important;
   }
-  .section-title {
+  .links-section.links-box .section-title {
     margin-bottom: 16px;
   }
   .link-buttons {
@@ -168,7 +162,7 @@
     filter: none;
   }
 
-  /* 한 화면에 다 들어오게: 화면이 작아지면 자동 줄어듦 */
+  /* 한 화면에 다 들어오게 */
   @media (max-width: 1600px) {
     .main-container { max-width: 98vw; }
     .center-image-wrapper, .links-section.links-box, .side-box { max-width: 420px; }
@@ -185,6 +179,35 @@
     .links-section.links-box, .side-box { height: 280px; }
     .center-image-wrapper img { max-height: 280px; }
     .link-buttons img { max-width: 120px; }
+  }
+
+  /* ——— Your requested tweaks ——— */
+
+  /* 1) Push “Announcement” down a bit */
+  .announcement-section {
+    margin-top: 20px;
+  }
+
+  /* 2) Force announcement text to black */
+  .announcement-list li,
+  .announcement-title,
+  .announcement-date {
+    color: #000 !important;
+  }
+
+  /* 3) Add extra vertical padding in the links box */
+  .links-section.links-box {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  /* 4) Increase gap and let logos fill their container */
+  .link-buttons {
+    gap: 24px;
+  }
+  .link-buttons img {
+    max-width: 100%;
+    height: auto;
   }
 </style>
 
@@ -223,12 +246,12 @@
     </div>
   </div>
 
-  <!-- 가운데: 이미지만 중앙에! -->
+  <!-- 가운데: Banner 이미지 -->
   <div class="center-image-wrapper">
     <img src="{% static 'images/banner1.png' %}" alt="HIDM Banner">
   </div>
 
-  <!-- 오른쪽: Hallym Links 섹션 -->
+  <!-- 오른쪽: Hallym Links -->
   <div class="links-section links-box">
     <div class="section-title">Hallym Links</div>
     <div class="link-buttons">
