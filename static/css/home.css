@@ -1,80 +1,73 @@
-/* 네비게이션 전체 컨테이너 스타일 */
+/* ─── 네비 전체 컨테이너 ─── */
 .navbar {
   background-color: #f8f9fa;
   padding: 20px 30px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   display: flex;
+  flex-direction: column;      /* 로고 위, 메뉴 아래 */
   align-items: center;
-  flex-direction: column;
-  justify-content: center;
   font-family: 'Montserrat', sans-serif;
 }
 
-/* 로고 이미지 스타일 */
+/* ─── 로고 ─── */
 .navbar-logo img {
   height: 75px;
   cursor: pointer;
   margin-bottom: 15px;
 }
 
-/* 네비게이션 줄 컨테이너 스타일 (기존 border 제거) */
+/* ─── 메뉴 묶음(container) ─── */
 .nav-row-container {
   width: 100%;
+  max-width: 1200px;           /* 전체 최대 넓이 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding-bottom: 0;
-  border-bottom: none; /* 기존 잘못된 border 제거 */
 }
 
-/* 네비게이션 줄 스타일 공통 */
+/* ─── 두 줄 모두에 공통 ─── */
 .nav-row {
+  display: flex;
   list-style: none;
-  padding: 0;
   margin: 0;
-  display: flex;
-  gap: 40px;
+  padding: 0;
+  gap: 40px;                   /* 메뉴 아이템 간격 */
   justify-content: center;
 }
 
-/* 첫 번째 줄 링크 스타일 */
-.first-row li a {
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: #444;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-
+/* ─── 첫 번째 줄 ─── */
 .first-row {
-  width: 50%; /* 가로길이를 원하는 만큼 조정 (현재 화면보다 짧게 설정) */
-  display: flex;
-  justify-content: center;
-  gap: 40px;
+  width: 100%;
+  max-width: 800px;            /* 원하는 만큼 조정 */
   padding-bottom: 10px;
   border-bottom: 2px dashed gray;
-  margin: 0 auto; /* 중앙 정렬을 위한 스타일 추가 */
 }
 
+/* ─── 두 번째 줄 ─── */
+.second-row {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 10px;
+}
 
-/* 두 번째 줄 링크 스타일 */
-.second-row li a {
+/* ─── 링크 스타일 ─── */
+.nav-row li a {
   font-size: 1.3rem;
   font-weight: 400;
   color: #444;
   text-decoration: none;
   transition: color 0.2s ease;
-  padding-top: 10px; /* 실선과 간격 확보 */
 }
-
-/* 호버 효과 */
 .nav-row li a:hover {
   color: #0056b3;
 }
 
-/* 모든 요소의 모서리를 완전 직각으로 설정 */
+/* ─── 콘텐츠 여백 ─── */
+.content {
+  padding: 20px;
+}
+
+/* ─── 직각으로 통일 ─── */
 * {
   border-radius: 0 !important;
 }
