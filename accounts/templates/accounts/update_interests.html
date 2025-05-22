@@ -1,22 +1,27 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
+
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/update_interests.css' %}">
+
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.category .toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const group = btn.closest('.category');
-        group.classList.toggle('open');
-        const list = group.querySelector('.interests-list');
-        list.style.display = list.style.display === 'none' ? 'block' : 'none';
-        btn.textContent = btn.textContent.endsWith('▼')
-          ? btn.textContent.replace('▼', '▲')
-          : btn.textContent.replace('▲', '▼');
-      });
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.category .toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const list = btn.nextElementSibling;
+      const icon = btn.querySelector('.icon');
+      if (list.style.display === 'none') {
+        list.style.display = 'block';
+        icon.textContent = '▲';
+      } else {
+        list.style.display = 'none';
+        icon.textContent = '▼';
+      }
     });
   });
+});
 </script>
 
 <div class="container mt-4">
@@ -26,16 +31,21 @@
     {{ form.non_field_errors }}
 
     {% for category, items in grouped_interests.items %}
-      <div class="category mb-3">
-        <h3 class="toggle">{{ category }} ▼</h3>
-        <div class="interests-list" style="display:none; padding-left:1rem;">
+      <div class="category mb-4">
+        <h3 class="toggle" style="cursor: pointer;">
+          {{ category }} <span class="icon">▼</span>
+        </h3>
+        <div class="interests-list" style="display: none; padding-left: 1rem;">
           {% for interest in items %}
             <div class="form-check">
-              <input class="form-check-input" type="checkbox"
-                     id="interest_{{ interest.pk }}"
-                     name="interests"
-                     value="{{ interest.pk }}"
-                     {% if interest.pk|stringformat:"s" in form.interests.value %}checked{% endif %}>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="interest_{{ interest.pk }}"
+                name="interests"
+                value="{{ interest.pk }}"
+                {% if interest in form.instance.interests.all %}checked{% endif %}
+              >
               <label class="form-check-label" for="interest_{{ interest.pk }}">
                 {{ interest.name }}
               </label>
@@ -45,8 +55,13 @@
       </div>
     {% endfor %}
 
-    <button type="submit" class="btn btn-success">Save</button>
-    <a href="{% url 'profile' %}" class="btn btn-secondary ms-2">Cancel</a>
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-success">Save</button>
+      <button type="submit" name="reset" value="1" class="btn btn-warning">
+        Reset All
+      </button>
+      <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
+    </div>
   </form>
 </div>
 {% endblock %}

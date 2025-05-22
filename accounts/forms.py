@@ -92,19 +92,12 @@ class InterestForm(forms.ModelForm):
         queryset=Interest.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         label="Select Your Interests",
-        help_text="최소 5개 이상 선택해주세요."
+        required=False,      # 0개 이상 선택 가능
     )
 
     class Meta:
         model = UserProfile
         fields = ['interests']
-
-    def clean_interests(self):
-        data = self.cleaned_data['interests']
-        if len(data) < 5:
-            raise forms.ValidationError("최소 5개 이상 선택해주세요.")
-        return data
-
 
 class AnnouncementForm(forms.ModelForm):
     class Meta:

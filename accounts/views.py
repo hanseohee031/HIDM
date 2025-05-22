@@ -452,16 +452,21 @@ def announcement_delete(request, pk):
 
 @login_required
 def update_interests_view(request):
-    # 1) 현재 사용자 프로필 가져오기
     profile = get_object_or_404(UserProfile, user=request.user)
 
-    # ─── 카테고리별로 Interest 객체 묶기 ───
+    # 카테고리별로 Interest 객체 묶기
     interests = Interest.objects.order_by('category', 'id')
     grouped_interests = {}
     for interest in interests:
         grouped_interests.setdefault(interest.category, []).append(interest)
 
     if request.method == 'POST':
+        # Reset All 눌렀을 때
+        if 'reset' in request.POST:
+            profile.interests.clear()
+            messages.success(request, "모든 관심사가 초기화되었습니다.")
+            return redirect('update_interests')
+
         form = InterestForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
@@ -473,5 +478,5 @@ def update_interests_view(request):
     return render(request, 'accounts/update_interests.html', {
         'form': form,
         'title': 'Update Your Interests',
-        'grouped_interests': grouped_interests,  # 토글용 데이터 전달
+        'grouped_interests': grouped_interests,
     })
