@@ -96,6 +96,8 @@
       <a href="{% url 'waiting' %}"><button class="profile-btn">Start 1:1 Random Match</button></a>
       <a href="{% url 'profile_update' %}"><button class="profile-btn">Update Profile</button></a>
       <a href="{% url 'profile_advanced' %}"><button class="profile-btn">Advanced Profile</button></a>
+      <!-- 추가된 Update Interests 버튼 -->
+      <a href="{% url 'update_interests' %}"><button class="profile-btn">Update Interests</button></a>
     </div>
     <div class="profile-delete-row">
       <form method="POST" action="{% url 'delete_account' %}" onsubmit="return confirm('Are you sure you want to delete your account?');">

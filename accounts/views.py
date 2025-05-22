@@ -17,7 +17,10 @@ from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 from .models import Announcement
 from .forms import AnnouncementForm
-
+from .forms import InterestForm, Interest
+from .models import UserProfile
+from django.contrib import messages
+from django.shortcuts import get_object_or_404
 
 
 # 1. Signup View (uses Student ID, Email Verification)
@@ -445,3 +448,30 @@ def announcement_delete(request, pk):
         announcement.delete()
         return redirect('announcement_list')
     return render(request, 'accounts/announcement_confirm_delete.html', {'announcement': announcement})
+
+
+@login_required
+def update_interests_view(request):
+    # 1) 현재 사용자 프로필 가져오기
+    profile = get_object_or_404(UserProfile, user=request.user)
+
+    # ─── 카테고리별로 Interest 객체 묶기 ───
+    interests = Interest.objects.order_by('category', 'id')
+    grouped_interests = {}
+    for interest in interests:
+        grouped_interests.setdefault(interest.category, []).append(interest)
+
+    if request.method == 'POST':
+        form = InterestForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "관심사가 성공적으로 업데이트되었습니다.")
+            return redirect('profile')
+    else:
+        form = InterestForm(instance=profile)
+
+    return render(request, 'accounts/update_interests.html', {
+        'form': form,
+        'title': 'Update Your Interests',
+        'grouped_interests': grouped_interests,  # 토글용 데이터 전달
+    })

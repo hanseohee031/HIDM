@@ -2,6 +2,42 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+# ─── 1) 새 모델 추가: Interest ───
+class Interest(models.Model):
+    CATEGORY_CHOICES = [
+        ('Hobbies', 'Hobbies & Leisure'),
+        ('Travel', 'Travel & Adventure'),
+        ('Food', 'Food & Drink'),
+        ('Music', 'Music'),
+        ('Sports', 'Sports'),
+        ('Entertainment', 'Entertainment & Media'),
+        ('Beauty', 'Beauty & Fashion'),
+        ('Science', 'Science & IT'),
+        ('Social', 'Social & Community'),
+        ('Creative', 'Creative & Arts'),
+        ('Pets', 'Pets & Animals'),
+        ('Language', 'Languages'),
+        ('Auto', 'Automotive & Motorsports'),
+        ('Culture', 'Arts & Culture'),
+    ]
+    category = models.CharField(
+        max_length=20,
+        choices=CATEGORY_CHOICES,
+        verbose_name='Interest Category'
+    )
+    name = models.CharField(
+        max_length=100,
+        verbose_name='Interest Name'
+    )
+
+    class Meta:
+        verbose_name = 'Interest'
+        verbose_name_plural = 'Interests'
+
+    def __str__(self):
+        return f'{self.name} ({self.get_category_display()})'
+
+
 class UserProfile(models.Model):
     # One-to-one link with Django User (username stores Student ID Number)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -207,6 +243,13 @@ class UserProfile(models.Model):
     show_bio = models.BooleanField(
         default=False,
         verbose_name='Show Bio'
+    )
+
+    interests = models.ManyToManyField(
+        Interest,
+        blank=True,
+        related_name='profiles',
+        verbose_name='User-selected Interests'
     )
 
     def __str__(self):

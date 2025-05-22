@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import UserProfile
 from .models import Announcement  # 맨 위 import 추가 필요
-
+from .models import Interest
 
 ### 1. 회원가입용 SignupForm
 class SignupForm(UserCreationForm):
@@ -84,6 +84,26 @@ class AdvancedProfileForm(forms.ModelForm):
             'nationality': forms.Select(attrs={'class': 'form-select'}),
             # 여기에 더 필요한 필드 widget 옵션 추가 가능
         }
+
+
+### 4. 관심사 선택용 폼 ###
+class InterestForm(forms.ModelForm):
+    interests = forms.ModelMultipleChoiceField(
+        queryset=Interest.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        label="Select Your Interests",
+        help_text="최소 5개 이상 선택해주세요."
+    )
+
+    class Meta:
+        model = UserProfile
+        fields = ['interests']
+
+    def clean_interests(self):
+        data = self.cleaned_data['interests']
+        if len(data) < 5:
+            raise forms.ValidationError("최소 5개 이상 선택해주세요.")
+        return data
 
 
 class AnnouncementForm(forms.ModelForm):
