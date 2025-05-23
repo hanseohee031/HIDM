@@ -27,6 +27,14 @@ urlpatterns = [
     path('announcement/<int:pk>/', views.announcement_detail, name='announcement_detail'),
     path('announcement/<int:pk>/edit/', views.announcement_edit, name='announcement_edit'),
     path('announcement/<int:pk>/delete/', views.announcement_delete, name='announcement_delete'),
+    # Find Topics feature
+    path('find-topics/', views.find_topics, name='find_topics'),
+    path(
+        'topic/<int:topic_id>/vote/<str:vote_type>/',
+        views.vote_topic,
+        name='vote_topic'
+    ),
+
 ]
 
 

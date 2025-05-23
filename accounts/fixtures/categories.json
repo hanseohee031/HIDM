@@ -1,0 +1,18 @@
+[
+  {"model": "accounts.category", "pk": 1, "fields": {"name": "Health/Fitness/Wellness",    "slug": "health-fitness-wellness"}},
+  {"model": "accounts.category", "pk": 2, "fields": {"name": "Food/Cooking/Cafe",           "slug": "food-cooking-cafe"}},
+  {"model": "accounts.category", "pk": 3, "fields": {"name": "Travel/Outdoor/Leisure",      "slug": "travel-outdoor-leisure"}},
+  {"model": "accounts.category", "pk": 4, "fields": {"name": "Pets",                       "slug": "pets"}},
+  {"model": "accounts.category", "pk": 5, "fields": {"name": "School/Academics",           "slug": "school-academics"}},
+  {"model": "accounts.category", "pk": 6, "fields": {"name": "Daily Life/Shopping/Home Life", "slug": "daily-life-shopping"}},
+  {"model": "accounts.category", "pk": 7, "fields": {"name": "Entertainment/Hobbies",      "slug": "entertainment-hobbies"}},
+  {"model": "accounts.category", "pk": 8, "fields": {"name": "Sports/Leisure",            "slug": "sports-leisure"}},
+  {"model": "accounts.category", "pk": 9, "fields": {"name": "Fashion/Beauty",            "slug": "fashion-beauty"}},
+  {"model": "accounts.category", "pk": 10,"fields": {"name": "Relationships/Dating",       "slug": "relationships-dating"}},
+  {"model": "accounts.category", "pk": 11,"fields": {"name": "Self-Development/Career",    "slug": "self-development-career"}},
+  {"model": "accounts.category", "pk": 12,"fields": {"name": "Society/Current Issues/Politics","slug":"society-politics"}},
+  {"model": "accounts.category", "pk": 13,"fields": {"name": "Digital/Tech/Development",  "slug": "digital-tech-development"}},
+  {"model": "accounts.category", "pk": 14,"fields": {"name": "Arts/Creation/DIY",         "slug": "arts-creation-diy"}},
+  {"model": "accounts.category", "pk": 15,"fields": {"name": "Music/Instruments",         "slug": "music-instruments"}},
+  {"model": "accounts.category", "pk": 16,"fields": {"name": "Reading/Writing",           "slug": "reading-writing"}}
+]

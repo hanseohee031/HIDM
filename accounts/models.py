@@ -38,6 +38,49 @@ class Interest(models.Model):
         return f'{self.name} ({self.get_category_display()})'
 
 
+
+
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Topic(models.Model):
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='topics'
+    )
+    title = models.CharField(max_length=200)
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True, blank=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    upvotes = models.ManyToManyField(
+        User,
+        related_name='upvoted_topics',
+        blank=True
+    )
+    downvotes = models.ManyToManyField(
+        User,
+        related_name='downvoted_topics',
+        blank=True
+    )
+
+    @property
+    def score(self):
+        return self.upvotes.count() - self.downvotes.count()
+
+    def __str__(self):
+        return self.title
+
 class UserProfile(models.Model):
     # One-to-one link with Django User (username stores Student ID Number)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -251,6 +294,17 @@ class UserProfile(models.Model):
         related_name='profiles',
         verbose_name='User-selected Interests'
     )
+
+    # ─── 새로 담은(선택된) 토픽을 저장할 필드 ───
+    selected_topics = models.ManyToManyField(
+        Topic,
+        blank=True,
+        related_name='selected_by',
+        verbose_name='User-selected Topics'
+    )
+
+
+
 
     def __str__(self):
         return f'{self.user.username} - {self.nickname}'

@@ -21,7 +21,8 @@ from .forms import InterestForm, Interest
 from .models import UserProfile
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
-
+from .models import Category, Topic
+from .forms  import TopicForm
 
 # 1. Signup View (uses Student ID, Email Verification)
 def signup_view(request):
@@ -290,6 +291,52 @@ def find_friends_view(request):
         "friends_ids": list(friends_ids),
         "sent_requests_ids": sent_requests_ids,
     })
+
+@login_required
+def find_topics(request):
+    # fetch all categories with their topics
+    categories   = Category.objects.prefetch_related('topics').all()
+    user_topics  = request.user.userprofile.selected_topics.all()
+
+    if request.method == 'POST':
+        # Select / Deselect toggles
+        topic = get_object_or_404(Topic, id=request.POST.get('topic_id'))
+        if 'select_topic'   in request.POST:
+            request.user.userprofile.selected_topics.add(topic)
+        elif 'deselect_topic' in request.POST:
+            request.user.userprofile.selected_topics.remove(topic)
+        # Clear all selections
+        elif 'clear_all' in request.POST:
+            request.user.userprofile.selected_topics.clear()
+        # Add a new custom topic
+        elif 'add_topic' in request.POST:
+            form = TopicForm(request.POST)
+            if form.is_valid():
+                new_topic = form.save(commit=False)
+                new_topic.created_by = request.user
+                new_topic.save()
+        return redirect('find_topics')
+
+    # GET
+    form = TopicForm()
+    return render(request, 'topics/find_topics.html', {
+        'categories':  categories,
+        'user_topics': user_topics,
+        'form':        form,
+    })
+@login_required
+def vote_topic(request, topic_id, vote_type):
+    topic = get_object_or_404(Topic, id=topic_id)
+    if vote_type == 'up':
+        topic.upvotes.add(request.user)
+        topic.downvotes.remove(request.user)
+    else:
+        topic.downvotes.add(request.user)
+        topic.upvotes.remove(request.user)
+    return redirect('find_topics')
+
+
+
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 

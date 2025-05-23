@@ -1,201 +1,2258 @@
 [
-  {"model": "accounts.interest", "pk": 1, "fields": {"category": "Hobbies & Leisure", "name": "Reading"}},
-  {"model": "accounts.interest", "pk": 2, "fields": {"category": "Hobbies & Leisure", "name": "Traveling"}},
-  {"model": "accounts.interest", "pk": 3, "fields": {"category": "Hobbies & Leisure", "name": "Socializing & Chatting"}},
-  {"model": "accounts.interest", "pk": 4, "fields": {"category": "Hobbies & Leisure", "name": "Listening to Music"}},
-  {"model": "accounts.interest", "pk": 5, "fields": {"category": "Hobbies & Leisure", "name": "PC Gaming"}},
-  {"model": "accounts.interest", "pk": 6, "fields": {"category": "Hobbies & Leisure", "name": "Movie Watching"}},
-  {"model": "accounts.interest", "pk": 7, "fields": {"category": "Hobbies & Leisure", "name": "Cooking"}},
-  {"model": "accounts.interest", "pk": 8, "fields": {"category": "Hobbies & Leisure", "name": "Board Games"}},
-  {"model": "accounts.interest", "pk": 9, "fields": {"category": "Hobbies & Leisure", "name": "Mobile Gaming"}},
-  {"model": "accounts.interest", "pk": 10, "fields": {"category": "Hobbies & Leisure", "name": "Fitness Workouts"}},
-  {"model": "accounts.interest", "pk": 11, "fields": {"category": "Hobbies & Leisure", "name": "Yoga & Meditation"}},
-  {"model": "accounts.interest", "pk": 12, "fields": {"category": "Hobbies & Leisure", "name": "Photography"}},
-  {"model": "accounts.interest", "pk": 13, "fields": {"category": "Hobbies & Leisure", "name": "Blogging & Vlogging"}},
-  {"model": "accounts.interest", "pk": 14, "fields": {"category": "Hobbies & Leisure", "name": "Puzzle Solving"}},
-  {"model": "accounts.interest", "pk": 15, "fields": {"category": "Hobbies & Leisure", "name": "Baking"}},
-  {"model": "accounts.interest", "pk": 16, "fields": {"category": "Hobbies & Leisure", "name": "Gardening"}},
-  {"model": "accounts.interest", "pk": 17, "fields": {"category": "Hobbies & Leisure", "name": "Painting & Drawing"}},
-  {"model": "accounts.interest", "pk": 18, "fields": {"category": "Hobbies & Leisure", "name": "Podcast Listening"}},
-  {"model": "accounts.interest", "pk": 19, "fields": {"category": "Hobbies & Leisure", "name": "Knitting & Crocheting"}},
-  {"model": "accounts.interest", "pk": 20, "fields": {"category": "Hobbies & Leisure", "name": "Birdwatching & Fishing"}},
-  {"model": "accounts.interest", "pk": 21, "fields": {"category": "Hobbies & Leisure", "name": "Napping"}},
-
-  {"model": "accounts.interest", "pk": 22, "fields": {"category": "Travel & Adventure", "name": "Spontaneous Travel"}},
-  {"model": "accounts.interest", "pk": 23, "fields": {"category": "Travel & Adventure", "name": "Luxury Travel"}},
-  {"model": "accounts.interest", "pk": 24, "fields": {"category": "Travel & Adventure", "name": "Hotel Vacations"}},
-  {"model": "accounts.interest", "pk": 25, "fields": {"category": "Travel & Adventure", "name": "Road Trips"}},
-  {"model": "accounts.interest", "pk": 26, "fields": {"category": "Travel & Adventure", "name": "Backpacking"}},
-  {"model": "accounts.interest", "pk": 27, "fields": {"category": "Travel & Adventure", "name": "Cultural Tourism"}},
-  {"model": "accounts.interest", "pk": 28, "fields": {"category": "Travel & Adventure", "name": "Camping & Glamping"}},
-  {"model": "accounts.interest", "pk": 29, "fields": {"category": "Travel & Adventure", "name": "Eco-tourism"}},
-  {"model": "accounts.interest", "pk": 30, "fields": {"category": "Travel & Adventure", "name": "Mountain Climbing"}},
-  {"model": "accounts.interest", "pk": 31, "fields": {"category": "Travel & Adventure", "name": "Scuba Diving"}},
-
-  {"model": "accounts.interest", "pk": 32, "fields": {"category": "Food & Drink", "name": "Coffee"}},
-  {"model": "accounts.interest", "pk": 33, "fields": {"category": "Food & Drink", "name": "Tea"}},
-  {"model": "accounts.interest", "pk": 34, "fields": {"category": "Food & Drink", "name": "Korean Cuisine"}},
-  {"model": "accounts.interest", "pk": 35, "fields": {"category": "Food & Drink", "name": "Beer"}},
-  {"model": "accounts.interest", "pk": 36, "fields": {"category": "Food & Drink", "name": "Wine"}},
-  {"model": "accounts.interest", "pk": 37, "fields": {"category": "Food & Drink", "name": "Desserts (Cakes, Cookies, Ice Cream)"}},
-  {"model": "accounts.interest", "pk": 38, "fields": {"category": "Food & Drink", "name": "Italian Cuisine"}},
-  {"model": "accounts.interest", "pk": 39, "fields": {"category": "Food & Drink", "name": "Japanese Cuisine"}},
-  {"model": "accounts.interest", "pk": 40, "fields": {"category": "Food & Drink", "name": "Chinese Cuisine"}},
-  {"model": "accounts.interest", "pk": 41, "fields": {"category": "Food & Drink", "name": "Western Cuisine"}},
-  {"model": "accounts.interest", "pk": 42, "fields": {"category": "Food & Drink", "name": "Indian Cuisine"}},
-  {"model": "accounts.interest", "pk": 43, "fields": {"category": "Food & Drink", "name": "Mexican Cuisine"}},
-  {"model": "accounts.interest", "pk": 44, "fields": {"category": "Food & Drink", "name": "Bread & Pastries"}},
-  {"model": "accounts.interest", "pk": 45, "fields": {"category": "Food & Drink", "name": "Cocktails & Mocktails"}},
-  {"model": "accounts.interest", "pk": 46, "fields": {"category": "Food & Drink", "name": "Smoothies & Juices"}},
-  {"model": "accounts.interest", "pk": 47, "fields": {"category": "Food & Drink", "name": "Soju & Spirits"}},
-
-  {"model": "accounts.interest", "pk": 48, "fields": {"category": "Music", "name": "Pop"}},
-  {"model": "accounts.interest", "pk": 49, "fields": {"category": "Music", "name": "K-pop"}},
-  {"model": "accounts.interest", "pk": 50, "fields": {"category": "Music", "name": "Hip Hop"}},
-  {"model": "accounts.interest", "pk": 51, "fields": {"category": "Music", "name": "EDM"}},
-  {"model": "accounts.interest", "pk": 52, "fields": {"category": "Music", "name": "Rock"}},
-  {"model": "accounts.interest", "pk": 53, "fields": {"category": "Music", "name": "R&B"}},
-  {"model": "accounts.interest", "pk": 54, "fields": {"category": "Music", "name": "Indie"}},
-  {"model": "accounts.interest", "pk": 55, "fields": {"category": "Music", "name": "Jazz"}},
-  {"model": "accounts.interest", "pk": 56, "fields": {"category": "Music", "name": "Classical"}},
-  {"model": "accounts.interest", "pk": 57, "fields": {"category": "Music", "name": "Blues & Soul"}},
-  {"model": "accounts.interest", "pk": 58, "fields": {"category": "Music", "name": "Country"}},
-  {"model": "accounts.interest", "pk": 59, "fields": {"category": "Music", "name": "Reggae"}},
-  {"model": "accounts.interest", "pk": 60, "fields": {"category": "Music", "name": "Metal"}},
-
-  {"model": "accounts.interest", "pk": 61, "fields": {"category": "Sports", "name": "Soccer"}},
-  {"model": "accounts.interest", "pk": 62, "fields": {"category": "Sports", "name": "Basketball"}},
-  {"model": "accounts.interest", "pk": 63, "fields": {"category": "Sports", "name": "Baseball"}},
-  {"model": "accounts.interest", "pk": 64, "fields": {"category": "Sports", "name": "Tennis"}},
-  {"model": "accounts.interest", "pk": 65, "fields": {"category": "Sports", "name": "Running"}},
-  {"model": "accounts.interest", "pk": 66, "fields": {"category": "Sports", "name": "Swimming"}},
-  {"model": "accounts.interest", "pk": 67, "fields": {"category": "Sports", "name": "Cycling"}},
-  {"model": "accounts.interest", "pk": 68, "fields": {"category": "Sports", "name": "Hiking & Trekking"}},
-  {"model": "accounts.interest", "pk": 69, "fields": {"category": "Sports", "name": "Table Tennis"}},
-  {"model": "accounts.interest", "pk": 70, "fields": {"category": "Sports", "name": "Badminton"}},
-  {"model": "accounts.interest", "pk": 71, "fields": {"category": "Sports", "name": "Volleyball"}},
-  {"model": "accounts.interest", "pk": 72, "fields": {"category": "Sports", "name": "Golf"}},
-  {"model": "accounts.interest", "pk": 73, "fields": {"category": "Sports", "name": "Yoga & Pilates"}},
-  {"model": "accounts.interest", "pk": 74, "fields": {"category": "Sports", "name": "Skiing & Snowboarding"}},
-  {"model": "accounts.interest", "pk": 75, "fields": {"category": "Sports", "name": "Surfing"}},
-  {"model": "accounts.interest", "pk": 76, "fields": {"category": "Sports", "name": "Kayaking & Canoeing"}},
-  {"model": "accounts.interest", "pk": 77, "fields": {"category": "Sports", "name": "Paragliding"}},
-  {"model": "accounts.interest", "pk": 78, "fields": {"category": "Sports", "name": "Rock Climbing"}},
-  {"model": "accounts.interest", "pk": 79, "fields": {"category": "Sports", "name": "Horseback Riding"}},
-  {"model": "accounts.interest", "pk": 80, "fields": {"category": "Sports", "name": "Archery"}},
-  {"model": "accounts.interest", "pk": 81, "fields": {"category": "Sports", "name": "Boxing"}},
-  {"model": "accounts.interest", "pk": 82, "fields": {"category": "Sports", "name": "Martial Arts (Taekwondo, Judo, Muay Thai)"}},
-  {"model": "accounts.interest", "pk": 83, "fields": {"category": "Sports", "name": "Rugby"}},
-  {"model": "accounts.interest", "pk": 84, "fields": {"category": "Sports", "name": "American Football"}},
-  {"model": "accounts.interest", "pk": 85, "fields": {"category": "Sports", "name": "Handball"}},
-  {"model": "accounts.interest", "pk": 86, "fields": {"category": "Sports", "name": "Squash"}},
-  {"model": "accounts.interest", "pk": 87, "fields": {"category": "Sports", "name": "CrossFit"}},
-  {"model": "accounts.interest", "pk": 88, "fields": {"category": "Sports", "name": "Dance Sports (Salsa, Tango, etc.)"}},
-  {"model": "accounts.interest", "pk": 89, "fields": {"category": "Sports", "name": "Skating & Skateboarding"}},
-
-  {"model": "accounts.interest", "pk": 90, "fields": {"category": "Entertainment & Media", "name": "YouTube & Streaming"}},
-  {"model": "accounts.interest", "pk": 91, "fields": {"category": "Entertainment & Media", "name": "Movies & TV Series"}},
-  {"model": "accounts.interest", "pk": 92, "fields": {"category": "Entertainment & Media", "name": "Podcasts & Radio"}},
-  {"model": "accounts.interest", "pk": 93, "fields": {"category": "Entertainment & Media", "name": "Social Media Trends"}},
-  {"model": "accounts.interest", "pk": 94, "fields": {"category": "Entertainment & Media", "name": "Comics & Manga"}},
-
-  {"model": "accounts.interest", "pk": 95, "fields": {"category": "Beauty & Fashion", "name": "Skincare"}},
-  {"model": "accounts.interest", "pk": 96, "fields": {"category": "Beauty & Fashion", "name": "Makeup"}},
-  {"model": "accounts.interest", "pk": 97, "fields": {"category": "Beauty & Fashion", "name": "Streetwear"}},
-  {"model": "accounts.interest", "pk": 98, "fields": {"category": "Beauty & Fashion", "name": "Luxury Brands"}},
-  {"model": "accounts.interest", "pk": 99, "fields": {"category": "Beauty & Fashion", "name": "Sustainable Fashion"}},
-  {"model": "accounts.interest", "pk": 100, "fields": {"category": "Beauty & Fashion", "name": "Hairstyling & Cuts"}},
-  {"model": "accounts.interest", "pk": 101, "fields": {"category": "Beauty & Fashion", "name": "Accessories & Jewelry"}},
-  {"model": "accounts.interest", "pk": 102, "fields": {"category": "Beauty & Fashion", "name": "Fashion Photography"}},
-
-  {"model": "accounts.interest", "pk": 103, "fields": {"category": "Science & IT", "name": "Artificial Intelligence"}},
-  {"model": "accounts.interest", "pk": 104, "fields": {"category": "Science & IT", "name": "Machine Learning"}},
-  {"model": "accounts.interest", "pk": 105, "fields": {"category": "Science & IT", "name": "Data Science & Big Data"}},
-  {"model": "accounts.interest", "pk": 106, "fields": {"category": "Science & IT", "name": "Cybersecurity"}},
-  {"model": "accounts.interest", "pk": 107, "fields": {"category": "Science & IT", "name": "Blockchain & FinTech"}},
-  {"model": "accounts.interest", "pk": 108, "fields": {"category": "Science & IT", "name": "Robotics"}},
-  {"model": "accounts.interest", "pk": 109, "fields": {"category": "Science & IT", "name": "Internet of Things (IoT)"}},
-  {"model": "accounts.interest", "pk": 110, "fields": {"category": "Science & IT", "name": "Virtual Reality (VR) & Augmented Reality (AR)"}},
-  {"model": "accounts.interest", "pk": 111, "fields": {"category": "Science & IT", "name": "Game Development"}},
-  {"model": "accounts.interest", "pk": 112, "fields": {"category": "Science & IT", "name": "3D Printing"}},
-  {"model": "accounts.interest", "pk": 113, "fields": {"category": "Science & IT", "name": "Quantum Computing"}},
-  {"model": "accounts.interest", "pk": 114, "fields": {"category": "Science & IT", "name": "Bioinformatics"}},
-  {"model": "accounts.interest", "pk": 115, "fields": {"category": "Science & IT", "name": "Cloud Computing & DevOps"}},
-  {"model": "accounts.interest", "pk": 116, "fields": {"category": "Science & IT", "name": "Data Structures & Algorithms"}},
-  {"model": "accounts.interest", "pk": 117, "fields": {"category": "Science & IT", "name": "Operating Systems"}},
-  {"model": "accounts.interest", "pk": 118, "fields": {"category": "Science & IT", "name": "Hardware & Semiconductors"}},
-  {"model": "accounts.interest", "pk": 119, "fields": {"category": "Science & IT", "name": "Chemistry"}},
-  {"model": "accounts.interest", "pk": 120, "fields": {"category": "Science & IT", "name": "Physics"}},
-  {"model": "accounts.interest", "pk": 121, "fields": {"category": "Science & IT", "name": "Biology"}},
-  {"model": "accounts.interest", "pk": 122, "fields": {"category": "Science & IT", "name": "Earth Sciences"}},
-  {"model": "accounts.interest", "pk": 123, "fields": {"category": "Science & IT", "name": "Medicine"}},
-  {"model": "accounts.interest", "pk": 124, "fields": {"category": "Science & IT", "name": "Pharmacy"}},
-  {"model": "accounts.interest", "pk": 125, "fields": {"category": "Science & IT", "name": "Mathematics"}},
-
-  {"model": "accounts.interest", "pk": 126, "fields": {"category": "Social & Community", "name": "Volunteering"}},
-  {"model": "accounts.interest", "pk": 127, "fields": {"category": "Social & Community", "name": "Environmental Conservation"}},
-  {"model": "accounts.interest", "pk": 128, "fields": {"category": "Social & Community", "name": "Animal Welfare"}},
-  {"model": "accounts.interest", "pk": 129, "fields": {"category": "Social & Community", "name": "History"}},
-  {"model": "accounts.interest", "pk": 130, "fields": {"category": "Social & Community", "name": "Politics"}},
-  {"model": "accounts.interest", "pk": 131, "fields": {"category": "Social & Community", "name": "Human Rights"}},
-  {"model": "accounts.interest", "pk": 132, "fields": {"category": "Social & Community", "name": "Community Service"}},
-  {"model": "accounts.interest", "pk": 133, "fields": {"category": "Social & Community", "name": "Debate & Public Speaking"}},
-  {"model": "accounts.interest", "pk": 134, "fields": {"category": "Social & Community", "name": "Economics & Sociology"}},
-  {"model": "accounts.interest", "pk": 135, "fields": {"category": "Social & Community", "name": "Cultural Studies"}},
-  {"model": "accounts.interest", "pk": 136, "fields": {"category": "Social & Community", "name": "Social Entrepreneurship"}},
-  {"model": "accounts.interest", "pk": 137, "fields": {"category": "Social & Community", "name": "Urban Development"}},
-  {"model": "accounts.interest", "pk": 138, "fields": {"category": "Social & Community", "name": "Philanthropy"}},
-
-  {"model": "accounts.interest", "pk": 139, "fields": {"category": "Creative & Arts", "name": "Songwriting & Composition"}},
-  {"model": "accounts.interest", "pk": 140, "fields": {"category": "Creative & Arts", "name": "Lyric Writing"}},
-  {"model": "accounts.interest", "pk": 141, "fields": {"category": "Creative & Arts", "name": "Poetry & Creative Writing"}},
-  {"model": "accounts.interest", "pk": 142, "fields": {"category": "Creative & Arts", "name": "Digital Art & Illustration"}},
-  {"model": "accounts.interest", "pk": 143, "fields": {"category": "Creative & Arts", "name": "Graphic Design"}},
-  {"model": "accounts.interest", "pk": 144, "fields": {"category": "Creative & Arts", "name": "Video Production & Editing"}},
-  {"model": "accounts.interest", "pk": 145, "fields": {"category": "Creative & Arts", "name": "Animation & Motion Graphics"}},
-  {"model": "accounts.interest", "pk": 146, "fields": {"category": "Creative & Arts", "name": "Filmmaking & Directing"}},
-  {"model": "accounts.interest", "pk": 147, "fields": {"category": "Creative & Arts", "name": "3D Modeling & Sculpting"}},
-  {"model": "accounts.interest", "pk": 148, "fields": {"category": "Creative & Arts", "name": "Calligraphy & Typography"}},
-  {"model": "accounts.interest", "pk": 149, "fields": {"category": "Creative & Arts", "name": "Creative Coding & Generative Art"}},
-  {"model": "accounts.interest", "pk": 150, "fields": {"category": "Creative & Arts", "name": "Game Design & Development"}},
-  {"model": "accounts.interest", "pk": 151, "fields": {"category": "Creative & Arts", "name": "Podcast Creation & Editing"}},
-  {"model": "accounts.interest", "pk": 152, "fields": {"category": "Creative & Arts", "name": "UX/UI Design"}},
-
-  {"model": "accounts.interest", "pk": 153, "fields": {"category": "Pets & Animals", "name": "Dogs"}},
-  {"model": "accounts.interest", "pk": 154, "fields": {"category": "Pets & Animals", "name": "Cats"}},
-  {"model": "accounts.interest", "pk": 155, "fields": {"category": "Pets & Animals", "name": "Fish (Freshwater & Saltwater)"}},
-  {"model": "accounts.interest", "pk": 156, "fields": {"category": "Pets & Animals", "name": "Birds (Parrots, Finches)"}},
-  {"model": "accounts.interest", "pk": 157, "fields": {"category": "Pets & Animals", "name": "Small Mammals (Rabbits, Hamsters)"}},
-  {"model": "accounts.interest", "pk": 158, "fields": {"category": "Pets & Animals", "name": "Reptiles (Turtles, Lizards)"}},
-  {"model": "accounts.interest", "pk": 159, "fields": {"category": "Pets & Animals", "name": "Exotic Pets (Ferrets, Hedgehogs)"}},
-
-  {"model": "accounts.interest", "pk": 160, "fields": {"category": "Languages", "name": "English"}},
-  {"model": "accounts.interest", "pk": 161, "fields": {"category": "Languages", "name": "Korean"}},
-  {"model": "accounts.interest", "pk": 162, "fields": {"category": "Languages", "name": "Japanese"}},
-  {"model": "accounts.interest", "pk": 163, "fields": {"category": "Languages", "name": "Chinese"}},
-  {"model": "accounts.interest", "pk": 164, "fields": {"category": "Languages", "name": "Spanish"}},
-  {"model": "accounts.interest", "pk": 165, "fields": {"category": "Languages", "name": "French"}},
-  {"model": "accounts.interest", "pk": 166, "fields": {"category": "Languages", "name": "German"}},
-  {"model": "accounts.interest", "pk": 167, "fields": {"category": "Languages", "name": "Russian"}},
-  {"model": "accounts.interest", "pk": 168, "fields": {"category": "Languages", "name": "Arabic"}},
-  {"model": "accounts.interest", "pk": 169, "fields": {"category": "Languages", "name": "Portuguese"}},
-  {"model": "accounts.interest", "pk": 170, "fields": {"category": "Languages", "name": "Italian"}},
-  {"model": "accounts.interest", "pk": 171, "fields": {"category": "Languages", "name": "Hindi"}},
-  {"model": "accounts.interest", "pk": 172, "fields": {"category": "Languages", "name": "Vietnamese"}},
-  {"model": "accounts.interest", "pk": 173, "fields": {"category": "Languages", "name": "Thai"}},
-
-  {"model": "accounts.interest", "pk": 174, "fields": {"category": "Automotive & Motorsports", "name": "Car Enthusiasts"}},
-  {"model": "accounts.interest", "pk": 175, "fields": {"category": "Automotive & Motorsports", "name": "Electric Vehicles (EV)"}},
-  {"model": "accounts.interest", "pk": 176, "fields": {"category": "Automotive & Motorsports", "name": "Motorcycles"}},
-  {"model": "accounts.interest", "pk": 177, "fields": {"category": "Automotive & Motorsports", "name": "Formula 1"}},
-  {"model": "accounts.interest", "pk": 178, "fields": {"category": "Automotive & Motorsports", "name": "Rally Racing"}},
-  {"model": "accounts.interest", "pk": 179, "fields": {"category": "Automotive & Motorsports", "name": "Car Restoration & Tuning"}},
-  {"model": "accounts.interest", "pk": 180, "fields": {"category": "Automotive & Motorsports", "name": "Motorsport Sim Racing"}},
-  {"model": "accounts.interest", "pk": 181, "fields": {"category": "Automotive & Motorsports", "name": "Automotive Tech & Innovation"}},
-
-  {"model": "accounts.interest", "pk": 182, "fields": {"category": "Arts & Culture", "name": "Film & Cinema"}},
-  {"model": "accounts.interest", "pk": 183, "fields": {"category": "Arts & Culture", "name": "Literature & Poetry"}},
-  {"model": "accounts.interest", "pk": 184, "fields": {"category": "Arts & Culture", "name": "Museums & Exhibitions"}},
-  {"model": "accounts.interest", "pk": 185, "fields": {"category": "Arts & Culture", "name": "Fashion & Design"}},
-  {"model": "accounts.interest", "pk": 186, "fields": {"category": "Arts & Culture", "name": "Theatre & Dance"}}
+  {
+    "model": "accounts.interestcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Health/Fitness/Wellness",
+      "order": 1
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "name": "hospital"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "name": "treatment"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "name": "vaccination"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 4,
+    "fields": {
+      "category": 1,
+      "name": "cold"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 5,
+    "fields": {
+      "category": 1,
+      "name": "medicine"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 6,
+    "fields": {
+      "category": 1,
+      "name": "pediatrics"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 7,
+    "fields": {
+      "category": 1,
+      "name": "clinic"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 8,
+    "fields": {
+      "category": 1,
+      "name": "back pain"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 9,
+    "fields": {
+      "category": 1,
+      "name": "dentist"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 10,
+    "fields": {
+      "category": 1,
+      "name": "stress management"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 11,
+    "fields": {
+      "category": 1,
+      "name": "fatigue"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 12,
+    "fields": {
+      "category": 1,
+      "name": "nutrition supplement"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 13,
+    "fields": {
+      "category": 1,
+      "name": "health checkup"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 14,
+    "fields": {
+      "category": 1,
+      "name": "gym workout"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 15,
+    "fields": {
+      "category": 1,
+      "name": "swimming"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 16,
+    "fields": {
+      "category": 1,
+      "name": "hiking"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 17,
+    "fields": {
+      "category": 1,
+      "name": "yoga"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 18,
+    "fields": {
+      "category": 1,
+      "name": "pilates"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 19,
+    "fields": {
+      "category": 1,
+      "name": "running"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 20,
+    "fields": {
+      "category": 1,
+      "name": "marathon"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 21,
+    "fields": {
+      "category": 1,
+      "name": "crossfit"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 22,
+    "fields": {
+      "category": 1,
+      "name": "cycling"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 23,
+    "fields": {
+      "category": 1,
+      "name": "trail hiking"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 24,
+    "fields": {
+      "category": 1,
+      "name": "plogging"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Food/Cooking/Cafe",
+      "order": 2
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 25,
+    "fields": {
+      "category": 2,
+      "name": "meal"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 26,
+    "fields": {
+      "category": 2,
+      "name": "cooking"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 27,
+    "fields": {
+      "category": 2,
+      "name": "snack"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 28,
+    "fields": {
+      "category": 2,
+      "name": "snack foods"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 29,
+    "fields": {
+      "category": 2,
+      "name": "ramen noodles"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 30,
+    "fields": {
+      "category": 2,
+      "name": "kimchi"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 31,
+    "fields": {
+      "category": 2,
+      "name": "sushi"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 32,
+    "fields": {
+      "category": 2,
+      "name": "pasta"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 33,
+    "fields": {
+      "category": 2,
+      "name": "cold noodles"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 34,
+    "fields": {
+      "category": 2,
+      "name": "desserts"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 35,
+    "fields": {
+      "category": 2,
+      "name": "chocolate"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 36,
+    "fields": {
+      "category": 2,
+      "name": "coffee shop"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 37,
+    "fields": {
+      "category": 2,
+      "name": "brewing coffee"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 38,
+    "fields": {
+      "category": 2,
+      "name": "brunch"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 39,
+    "fields": {
+      "category": 2,
+      "name": "espresso"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 40,
+    "fields": {
+      "category": 2,
+      "name": "baking"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 41,
+    "fields": {
+      "category": 2,
+      "name": "home cafe"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 42,
+    "fields": {
+      "category": 2,
+      "name": "restaurant hopping"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 43,
+    "fields": {
+      "category": 2,
+      "name": "food review"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 44,
+    "fields": {
+      "category": 2,
+      "name": "cooking classes"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Travel/Outdoor/Leisure",
+      "order": 3
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 45,
+    "fields": {
+      "category": 3,
+      "name": "flight"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 46,
+    "fields": {
+      "category": 3,
+      "name": "airport"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 47,
+    "fields": {
+      "category": 3,
+      "name": "hotel"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 48,
+    "fields": {
+      "category": 3,
+      "name": "overseas travel"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 49,
+    "fields": {
+      "category": 3,
+      "name": "domestic travel"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 50,
+    "fields": {
+      "category": 3,
+      "name": "car rental"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 51,
+    "fields": {
+      "category": 3,
+      "name": "map reading"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 52,
+    "fields": {
+      "category": 3,
+      "name": "sightseeing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 53,
+    "fields": {
+      "category": 3,
+      "name": "Saipan trip"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 54,
+    "fields": {
+      "category": 3,
+      "name": "Osaka trip"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 55,
+    "fields": {
+      "category": 3,
+      "name": "night view sightseeing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 56,
+    "fields": {
+      "category": 3,
+      "name": "nature exploration"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 57,
+    "fields": {
+      "category": 3,
+      "name": "camping"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 58,
+    "fields": {
+      "category": 3,
+      "name": "backpacking"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 59,
+    "fields": {
+      "category": 3,
+      "name": "snorkeling"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 60,
+    "fields": {
+      "category": 3,
+      "name": "trail trekking"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 61,
+    "fields": {
+      "category": 3,
+      "name": "healing travel"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 62,
+    "fields": {
+      "category": 3,
+      "name": "cultural experience"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 63,
+    "fields": {
+      "category": 3,
+      "name": "world tour"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 64,
+    "fields": {
+      "category": 3,
+      "name": "airbnb stays"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Pets",
+      "order": 4
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 65,
+    "fields": {
+      "category": 4,
+      "name": "dog care"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 66,
+    "fields": {
+      "category": 4,
+      "name": "cat care"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 67,
+    "fields": {
+      "category": 4,
+      "name": "pet food"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 68,
+    "fields": {
+      "category": 4,
+      "name": "dog walking"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 69,
+    "fields": {
+      "category": 4,
+      "name": "pet adoption"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 70,
+    "fields": {
+      "category": 4,
+      "name": "pet training"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 71,
+    "fields": {
+      "category": 4,
+      "name": "pet hotel"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 72,
+    "fields": {
+      "category": 4,
+      "name": "pet insurance"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 73,
+    "fields": {
+      "category": 4,
+      "name": "hedgehog care"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 74,
+    "fields": {
+      "category": 4,
+      "name": "rabbit care"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 75,
+    "fields": {
+      "category": 4,
+      "name": "fish tank"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 76,
+    "fields": {
+      "category": 4,
+      "name": "animal hospital"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 77,
+    "fields": {
+      "category": 4,
+      "name": "pet cafe"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 78,
+    "fields": {
+      "category": 4,
+      "name": "grooming"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 79,
+    "fields": {
+      "category": 4,
+      "name": "bathing pets"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 5,
+    "fields": {
+      "name": "School/Academics",
+      "order": 5
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 80,
+    "fields": {
+      "category": 5,
+      "name": "college admission"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 81,
+    "fields": {
+      "category": 5,
+      "name": "graduation"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 82,
+    "fields": {
+      "category": 5,
+      "name": "major studies"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 83,
+    "fields": {
+      "category": 5,
+      "name": "attending classes"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 84,
+    "fields": {
+      "category": 5,
+      "name": "writing reports"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 85,
+    "fields": {
+      "category": 5,
+      "name": "online courses"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 86,
+    "fields": {
+      "category": 5,
+      "name": "study group"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 87,
+    "fields": {
+      "category": 5,
+      "name": "exam preparation"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 88,
+    "fields": {
+      "category": 5,
+      "name": "professor consultation"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 89,
+    "fields": {
+      "category": 5,
+      "name": "campus life"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 90,
+    "fields": {
+      "category": 5,
+      "name": "tuition fees"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 91,
+    "fields": {
+      "category": 5,
+      "name": "scholarships"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 92,
+    "fields": {
+      "category": 5,
+      "name": "double major"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 93,
+    "fields": {
+      "category": 5,
+      "name": "exchange student life"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 94,
+    "fields": {
+      "category": 5,
+      "name": "certification exams"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 6,
+    "fields": {
+      "name": "Daily Life/Shopping/Home Life",
+      "order": 6
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 95,
+    "fields": {
+      "category": 6,
+      "name": "shopping"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 96,
+    "fields": {
+      "category": 6,
+      "name": "parcel delivery"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 97,
+    "fields": {
+      "category": 6,
+      "name": "household items"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 98,
+    "fields": {
+      "category": 6,
+      "name": "cleaning"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 99,
+    "fields": {
+      "category": 6,
+      "name": "laundry"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 100,
+    "fields": {
+      "category": 6,
+      "name": "organizing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 101,
+    "fields": {
+      "category": 6,
+      "name": "home interior design"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 102,
+    "fields": {
+      "category": 6,
+      "name": "room tour"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 103,
+    "fields": {
+      "category": 6,
+      "name": "furniture shopping"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 104,
+    "fields": {
+      "category": 6,
+      "name": "air conditioner"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 105,
+    "fields": {
+      "category": 6,
+      "name": "heating systems"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 106,
+    "fields": {
+      "category": 6,
+      "name": "comforter"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 107,
+    "fields": {
+      "category": 6,
+      "name": "kitchen supplies"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 108,
+    "fields": {
+      "category": 6,
+      "name": "credit card management"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 109,
+    "fields": {
+      "category": 6,
+      "name": "bank errands"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 110,
+    "fields": {
+      "category": 6,
+      "name": "transportation card"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 111,
+    "fields": {
+      "category": 6,
+      "name": "convenience store trends"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 112,
+    "fields": {
+      "category": 6,
+      "name": "home workout"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 7,
+    "fields": {
+      "name": "Entertainment/Hobbies",
+      "order": 7
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 113,
+    "fields": {
+      "category": 7,
+      "name": "watching movies"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 114,
+    "fields": {
+      "category": 7,
+      "name": "binge-watching dramas"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 115,
+    "fields": {
+      "category": 7,
+      "name": "Netflix shows"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 116,
+    "fields": {
+      "category": 7,
+      "name": "Disney+ shows"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 117,
+    "fields": {
+      "category": 7,
+      "name": "concert attendance"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 118,
+    "fields": {
+      "category": 7,
+      "name": "board games"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 119,
+    "fields": {
+      "category": 7,
+      "name": "TRPG games"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 120,
+    "fields": {
+      "category": 7,
+      "name": "VR gaming"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 121,
+    "fields": {
+      "category": 7,
+      "name": "Nintendo Switch games"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 122,
+    "fields": {
+      "category": 7,
+      "name": "PlayStation 5 games"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 123,
+    "fields": {
+      "category": 7,
+      "name": "XBOX gaming"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 124,
+    "fields": {
+      "category": 7,
+      "name": "musical theater"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 125,
+    "fields": {
+      "category": 7,
+      "name": "comedy shows"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 126,
+    "fields": {
+      "category": 7,
+      "name": "fan meetings"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 127,
+    "fields": {
+      "category": 7,
+      "name": "animation watching"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 128,
+    "fields": {
+      "category": 7,
+      "name": "YouTube creator"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 129,
+    "fields": {
+      "category": 7,
+      "name": "TikTok browsing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 130,
+    "fields": {
+      "category": 7,
+      "name": "League of Legends"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 131,
+    "fields": {
+      "category": 7,
+      "name": "Steam games"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 8,
+    "fields": {
+      "name": "Sports/Leisure",
+      "order": 8
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 132,
+    "fields": {
+      "category": 8,
+      "name": "soccer"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 133,
+    "fields": {
+      "category": 8,
+      "name": "basketball"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 134,
+    "fields": {
+      "category": 8,
+      "name": "baseball"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 135,
+    "fields": {
+      "category": 8,
+      "name": "tennis"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 136,
+    "fields": {
+      "category": 8,
+      "name": "badminton"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 137,
+    "fields": {
+      "category": 8,
+      "name": "table tennis"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 138,
+    "fields": {
+      "category": 8,
+      "name": "squash"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 139,
+    "fields": {
+      "category": 8,
+      "name": "skateboarding"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 140,
+    "fields": {
+      "category": 8,
+      "name": "snowboarding"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 141,
+    "fields": {
+      "category": 8,
+      "name": "surfing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 142,
+    "fields": {
+      "category": 8,
+      "name": "rock climbing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 143,
+    "fields": {
+      "category": 8,
+      "name": "horseback riding"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 144,
+    "fields": {
+      "category": 8,
+      "name": "yacht sailing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 145,
+    "fields": {
+      "category": 8,
+      "name": "golf"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 146,
+    "fields": {
+      "category": 8,
+      "name": "bowling"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 147,
+    "fields": {
+      "category": 8,
+      "name": "billiards"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 148,
+    "fields": {
+      "category": 8,
+      "name": "waterskiing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 149,
+    "fields": {
+      "category": 8,
+      "name": "paragliding"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 9,
+    "fields": {
+      "name": "Fashion/Beauty",
+      "order": 9
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 150,
+    "fields": {
+      "category": 9,
+      "name": "fashion trends"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 151,
+    "fields": {
+      "category": 9,
+      "name": "street fashion"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 152,
+    "fields": {
+      "category": 9,
+      "name": "vintage fashion"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 153,
+    "fields": {
+      "category": 9,
+      "name": "outfit coordination"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 154,
+    "fields": {
+      "category": 9,
+      "name": "clothing shopping"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 155,
+    "fields": {
+      "category": 9,
+      "name": "sneaker collection"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 156,
+    "fields": {
+      "category": 9,
+      "name": "accessories shopping"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 157,
+    "fields": {
+      "category": 9,
+      "name": "hairstyling"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 158,
+    "fields": {
+      "category": 9,
+      "name": "makeup tutorials"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 159,
+    "fields": {
+      "category": 9,
+      "name": "lipstick reviews"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 160,
+    "fields": {
+      "category": 9,
+      "name": "sunscreen recommendations"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 161,
+    "fields": {
+      "category": 9,
+      "name": "perfume collecting"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 162,
+    "fields": {
+      "category": 9,
+      "name": "cosmetic reviews"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 163,
+    "fields": {
+      "category": 9,
+      "name": "nail art"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 10,
+    "fields": {
+      "name": "Relationships/Dating",
+      "order": 10
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 164,
+    "fields": {
+      "category": 10,
+      "name": "dating life"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 165,
+    "fields": {
+      "category": 10,
+      "name": "crush stories"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 166,
+    "fields": {
+      "category": 10,
+      "name": "blind dates"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 167,
+    "fields": {
+      "category": 10,
+      "name": "flirting"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 168,
+    "fields": {
+      "category": 10,
+      "name": "date course planning"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 169,
+    "fields": {
+      "category": 10,
+      "name": "breakup recovery"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 170,
+    "fields": {
+      "category": 10,
+      "name": "making new friends"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 171,
+    "fields": {
+      "category": 10,
+      "name": "social networking"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 172,
+    "fields": {
+      "category": 10,
+      "name": "managing connections"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 173,
+    "fields": {
+      "category": 10,
+      "name": "family relationships"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 174,
+    "fields": {
+      "category": 10,
+      "name": "siblings relationship"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 175,
+    "fields": {
+      "category": 10,
+      "name": "wedding preparation"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 176,
+    "fields": {
+      "category": 10,
+      "name": "married life"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 177,
+    "fields": {
+      "category": 10,
+      "name": "finding a mentor"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 178,
+    "fields": {
+      "category": 10,
+      "name": "asking for advice"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 11,
+    "fields": {
+      "name": "Self-Development/Career",
+      "order": 11
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 179,
+    "fields": {
+      "category": 11,
+      "name": "job hunting"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 180,
+    "fields": {
+      "category": 11,
+      "name": "career change"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 181,
+    "fields": {
+      "category": 11,
+      "name": "certification acquisition"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 182,
+    "fields": {
+      "category": 11,
+      "name": "language tests"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 183,
+    "fields": {
+      "category": 11,
+      "name": "self-development reading"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 184,
+    "fields": {
+      "category": 11,
+      "name": "study planning"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 185,
+    "fields": {
+      "category": 11,
+      "name": "leadership development"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 186,
+    "fields": {
+      "category": 11,
+      "name": "performance management"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 187,
+    "fields": {
+      "category": 11,
+      "name": "mentoring others"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 188,
+    "fields": {
+      "category": 11,
+      "name": "internship experience"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 189,
+    "fields": {
+      "category": 11,
+      "name": "interview preparation"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 190,
+    "fields": {
+      "category": 11,
+      "name": "portfolio building"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 191,
+    "fields": {
+      "category": 11,
+      "name": "career transition"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 192,
+    "fields": {
+      "category": 11,
+      "name": "startup entrepreneurship"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 12,
+    "fields": {
+      "name": "Society/Current Issues/Politics",
+      "order": 12
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 193,
+    "fields": {
+      "category": 12,
+      "name": "presidential elections"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 194,
+    "fields": {
+      "category": 12,
+      "name": "political news"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 195,
+    "fields": {
+      "category": 12,
+      "name": "environmental protection"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 196,
+    "fields": {
+      "category": 12,
+      "name": "global warming"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 197,
+    "fields": {
+      "category": 12,
+      "name": "inflation"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 198,
+    "fields": {
+      "category": 12,
+      "name": "international news"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 199,
+    "fields": {
+      "category": 12,
+      "name": "protests"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 200,
+    "fields": {
+      "category": 12,
+      "name": "law reforms"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 201,
+    "fields": {
+      "category": 12,
+      "name": "economic crises"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 202,
+    "fields": {
+      "category": 12,
+      "name": "social issues"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 203,
+    "fields": {
+      "category": 12,
+      "name": "media criticism"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 204,
+    "fields": {
+      "category": 12,
+      "name": "human rights"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 205,
+    "fields": {
+      "category": 12,
+      "name": "feminism"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 206,
+    "fields": {
+      "category": 12,
+      "name": "gender issues"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 207,
+    "fields": {
+      "category": 12,
+      "name": "minority rights"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 13,
+    "fields": {
+      "name": "Digital/Tech/Development",
+      "order": 13
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 208,
+    "fields": {
+      "category": 13,
+      "name": "programming"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 209,
+    "fields": {
+      "category": 13,
+      "name": "web development"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 210,
+    "fields": {
+      "category": 13,
+      "name": "app development"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 211,
+    "fields": {
+      "category": 13,
+      "name": "artificial intelligence"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 212,
+    "fields": {
+      "category": 13,
+      "name": "chatbot development"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 213,
+    "fields": {
+      "category": 13,
+      "name": "machine learning"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 214,
+    "fields": {
+      "category": 13,
+      "name": "robotics"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 215,
+    "fields": {
+      "category": 13,
+      "name": "virtual reality (VR)"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 216,
+    "fields": {
+      "category": 13,
+      "name": "augmented reality (AR)"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 217,
+    "fields": {
+      "category": 13,
+      "name": "blockchain technology"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 218,
+    "fields": {
+      "category": 13,
+      "name": "NFT trading"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 219,
+    "fields": {
+      "category": 13,
+      "name": "smart home technology"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 220,
+    "fields": {
+      "category": 13,
+      "name": "digital nomad lifestyle"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 221,
+    "fields": {
+      "category": 13,
+      "name": "startup trends"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 222,
+    "fields": {
+      "category": 13,
+      "name": "new IT technologies"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 14,
+    "fields": {
+      "name": "Arts/Creation/DIY",
+      "order": 14
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 223,
+    "fields": {
+      "category": 14,
+      "name": "digital drawing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 224,
+    "fields": {
+      "category": 14,
+      "name": "watercolor painting"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 225,
+    "fields": {
+      "category": 14,
+      "name": "acrylic painting"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 226,
+    "fields": {
+      "category": 14,
+      "name": "illustration"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 227,
+    "fields": {
+      "category": 14,
+      "name": "calligraphy"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 228,
+    "fields": {
+      "category": 14,
+      "name": "art exhibitions"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 229,
+    "fields": {
+      "category": 14,
+      "name": "handcrafts"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 230,
+    "fields": {
+      "category": 14,
+      "name": "floristry"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 231,
+    "fields": {
+      "category": 14,
+      "name": "leather crafting"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 232,
+    "fields": {
+      "category": 14,
+      "name": "woodworking"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 233,
+    "fields": {
+      "category": 14,
+      "name": "bead crafts"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 234,
+    "fields": {
+      "category": 14,
+      "name": "DIY home decor"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 235,
+    "fields": {
+      "category": 14,
+      "name": "dancing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 236,
+    "fields": {
+      "category": 14,
+      "name": "music composing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 237,
+    "fields": {
+      "category": 14,
+      "name": "lyric writing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 238,
+    "fields": {
+      "category": 14,
+      "name": "fashion design"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 15,
+    "fields": {
+      "name": "Music/Instruments",
+      "order": 15
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 239,
+    "fields": {
+      "category": 15,
+      "name": "listening to music"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 240,
+    "fields": {
+      "category": 15,
+      "name": "indie music"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 241,
+    "fields": {
+      "category": 15,
+      "name": "classical music"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 242,
+    "fields": {
+      "category": 15,
+      "name": "jazz music"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 243,
+    "fields": {
+      "category": 15,
+      "name": "hip-hop music"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 244,
+    "fields": {
+      "category": 15,
+      "name": "K-pop fandom"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 245,
+    "fields": {
+      "category": 15,
+      "name": "guitar playing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 246,
+    "fields": {
+      "category": 15,
+      "name": "piano playing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 247,
+    "fields": {
+      "category": 15,
+      "name": "drumming"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 248,
+    "fields": {
+      "category": 15,
+      "name": "violin playing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 249,
+    "fields": {
+      "category": 15,
+      "name": "flute playing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 250,
+    "fields": {
+      "category": 15,
+      "name": "band activities"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 251,
+    "fields": {
+      "category": 15,
+      "name": "songwriting"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 252,
+    "fields": {
+      "category": 15,
+      "name": "busking performances"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 253,
+    "fields": {
+      "category": 15,
+      "name": "karaoke sessions"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 254,
+    "fields": {
+      "category": 15,
+      "name": "choir singing"
+    }
+  },
+  {
+    "model": "accounts.interestcategory",
+    "pk": 16,
+    "fields": {
+      "name": "Reading/Writing",
+      "order": 16
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 255,
+    "fields": {
+      "category": 16,
+      "name": "reading novels"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 256,
+    "fields": {
+      "category": 16,
+      "name": "self-help books"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 257,
+    "fields": {
+      "category": 16,
+      "name": "book clubs"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 258,
+    "fields": {
+      "category": 16,
+      "name": "running a blog"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 259,
+    "fields": {
+      "category": 16,
+      "name": "writing essays"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 260,
+    "fields": {
+      "category": 16,
+      "name": "poetry writing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 261,
+    "fields": {
+      "category": 16,
+      "name": "web novel writing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 262,
+    "fields": {
+      "category": 16,
+      "name": "book reviews"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 263,
+    "fields": {
+      "category": 16,
+      "name": "column writing"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 264,
+    "fields": {
+      "category": 16,
+      "name": "publishing preparation"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 265,
+    "fields": {
+      "category": 16,
+      "name": "scrapbooking"
+    }
+  },
+  {
+    "model": "accounts.interest",
+    "pk": 266,
+    "fields": {
+      "category": 16,
+      "name": "note-taking"
+    }
+  }
 ]

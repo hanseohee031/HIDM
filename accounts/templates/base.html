@@ -20,7 +20,9 @@
         <ul class="nav-row first-row">
           <li><a href="/ai-matching/">AI Matching</a></li>
           <li><a href="/earn-points/">Earn Points</a></li>
-          <li><a href="/find-topics/">Find Topics</a></li>
+
+          <li><a href="{% url 'find_topics' %}">Find Topics</a></li>
+
           <li><a href="{% url 'find_friends' %}">Find Friends</a></li>
           {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Logout</a></li>

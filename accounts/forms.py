@@ -99,6 +99,26 @@ class InterestForm(forms.ModelForm):
         model = UserProfile
         fields = ['interests']
 
+
+from .models import Topic  # add this import at the top
+
+# ─── 5. 토픽 추가용 폼 ───
+class TopicForm(forms.ModelForm):
+    class Meta:
+        model = Topic
+        fields = ['category', 'title']
+        widgets = {
+            'category': forms.Select(attrs={'class': 'form-select'}),
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Add a new topic…'
+            }),
+        }
+        labels = {
+            'category': 'Topic Category',
+            'title': 'Topic Title',
+        }
+
 class AnnouncementForm(forms.ModelForm):
     class Meta:
         model = Announcement
