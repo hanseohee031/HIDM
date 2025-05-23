@@ -1,150 +1,118 @@
-{# templates/accounts/topics/find_topics.html #}
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
-<div class="container mt-5">
-  <h1 class="mb-4">Find Topics</h1>
+{# base.html 안에 <head>에 block head가 있다면 아래처럼 추가하면 됩니다 #}
+{% block head %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/find_topics.css' %}">
+{% endblock %}
 
-  <div class="row">
-    <!-- 왼쪽: 전체 토픽 -->
-    <div class="col-md-8">
-      <!-- Clear All -->
-      <form action="{% url 'find_topics' %}" method="post" class="mb-3 text-end">
+{% block content %}
+<div class="find-topics-container">
+  <h1>Find Topics</h1>
+
+  {# --- Clear All Selections --- #}
+  <form action="{% url 'find_topics' %}" method="post" class="btn-clear-all text-end">
+    {% csrf_token %}
+    <button type="submit" name="clear_all" class="btn btn-warning">
+      Clear All
+    </button>
+  </form>
+
+  {# --- Add a New Topic --- #}
+  <div class="add-topic-card">
+    <div class="card-header">
+      <h5>Add a New Topic</h5>
+    </div>
+    <div class="card-body">
+      <form action="{% url 'find_topics' %}" method="post">
         {% csrf_token %}
-        <button type="submit" name="clear_all" class="btn btn-sm btn-warning">
-          <i class="bi bi-x-circle"></i> Clear All
+        {{ form.as_p }}
+        <button type="submit" name="add_topic" class="btn btn-success">
+          Add
         </button>
       </form>
-
-      <!-- Add a New Topic -->
-      <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-primary text-white">
-          <h5 class="mb-0">Add a New Topic</h5>
-        </div>
-        <div class="card-body">
-          <form action="{% url 'find_topics' %}" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" name="add_topic"
-                    class="btn btn-success">
-              Add
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Accordion: 카테고리별 토픽 -->
-      <div class="accordion" id="topicsAccordion">
-        {% for category in categories %}
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="heading{{ forloop.counter }}">
-              <button class="accordion-button collapsed" type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapse{{ forloop.counter }}"
-                      aria-expanded="false"
-                      aria-controls="collapse{{ forloop.counter }}">
-                {{ category.name }}
-              </button>
-            </h2>
-            <div id="collapse{{ forloop.counter }}"
-                 class="accordion-collapse collapse"
-                 aria-labelledby="heading{{ forloop.counter }}"
-                 data-bs-parent="#topicsAccordion">
-              <div class="accordion-body p-0">
-                <ul class="list-group list-group-flush">
-                  {% for topic in category.topics.all|dictsortreversed:"score" %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      <div>
-                        <strong>{{ topic.title }}</strong><br>
-                        <small class="text-muted">
-                          by
-                          {% if topic.created_by %}
-                            {{ topic.created_by.userprofile.nickname }}
-                          {% else %}
-                            <span class="badge bg-secondary">basic</span>
-                          {% endif %}
-                        </small>
-                      </div>
-                      <div class="btn-group btn-group-sm">
-                        <!-- Select/Remove -->
-                        <form action="{% url 'find_topics' %}" method="post" class="me-1">
-                          {% csrf_token %}
-                          <input type="hidden" name="topic_id" value="{{ topic.id }}">
-                          {% if topic in user_topics %}
-                            <button type="submit" name="deselect_topic"
-                                    class="btn btn-outline-danger">
-                              Remove
-                            </button>
-                          {% else %}
-                            <button type="submit" name="select_topic"
-                                    class="btn btn-outline-success">
-                              Select
-                            </button>
-                          {% endif %}
-                        </form>
-                        <!-- Delete (작성자만) -->
-                        {% if topic.created_by == request.user %}
-                          <form action="{% url 'find_topics' %}" method="post" class="me-1">
-                            {% csrf_token %}
-                            <input type="hidden" name="topic_id" value="{{ topic.id }}">
-                            <button type="submit" name="delete_topic"
-                                    class="btn btn-outline-danger">
-                              Delete
-                            </button>
-                          </form>
-                        {% endif %}
-                        <!-- Up/Down votes -->
-                        <a href="{% url 'vote_topic' topic.id 'up' %}"
-                           class="btn btn-outline-success">
-                          👍 {{ topic.upvotes.count }}
-                        </a>
-                        <a href="{% url 'vote_topic' topic.id 'down' %}"
-                           class="btn btn-outline-danger">
-                          👎 {{ topic.downvotes.count }}
-                        </a>
-                      </div>
-                    </li>
-                  {% empty %}
-                    <li class="list-group-item text-center text-muted py-3">
-                      No topics in this category.
-                    </li>
-                  {% endfor %}
-                </ul>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
     </div>
+  </div>
 
-    <!-- 오른쪽: My Topics -->
-    <div class="col-md-4">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-secondary text-white">
-          <h5 class="mb-0">My Topics ({{ user_topics|length }})</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          {% for topic in user_topics %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span>{{ topic.title }}</span>
-              <form action="{% url 'find_topics' %}" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="topic_id" value="{{ topic.id }}">
-                <button type="submit" name="deselect_topic"
-                        class="btn btn-sm btn-outline-danger">
+  {# --- List Topics by Category --- #}
+  {% for category in categories %}
+    <h3>{{ category.name }}</h3>
+    <ul>
+      {% for topic in category.topics.all|dictsortreversed:"score" %}
+        <li class="topic-item">
+          <div class="topic-info">
+            <strong>{{ topic.title }}</strong>
+            <span class="topic-author">
+              by
+              {% if topic.created_by %}
+                {{ topic.created_by.userprofile.nickname }}
+              {% else %}
+                basic
+              {% endif %}
+            </span>
+          </div>
+          <div class="topic-actions">
+            {# Select / Remove #}
+            <form action="{% url 'find_topics' %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <input type="hidden" name="topic_id" value="{{ topic.id }}">
+              {% if topic in user_topics %}
+                <button type="submit" name="deselect_topic" class="btn btn-outline-danger btn-sm">
                   Remove
                 </button>
+              {% else %}
+                <button type="submit" name="select_topic" class="btn btn-outline-success btn-sm">
+                  Select
+                </button>
+              {% endif %}
+            </form>
+
+            {# Delete (작성자만) #}
+            {% if topic.created_by == request.user %}
+              <form action="{% url 'find_topics' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <input type="hidden" name="topic_id" value="{{ topic.id }}">
+                <button type="submit" name="delete_topic" class="btn btn-outline-danger btn-sm">
+                  Delete
+                </button>
               </form>
-            </li>
-          {% empty %}
-            <li class="list-group-item text-center text-muted">
-              아직 선택된 토픽이 없습니다.
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
+            {% endif %}
+
+            {# Up/Down votes #}
+            <a href="{% url 'vote_topic' topic.id 'up' %}" class="btn btn-outline-success btn-sm">
+              👍 {{ topic.upvotes.count }}
+            </a>
+            <a href="{% url 'vote_topic' topic.id 'down' %}" class="btn btn-outline-danger btn-sm">
+              👎 {{ topic.downvotes.count }}
+            </a>
+          </div>
+        </li>
+      {% empty %}
+        <li class="text-center text-muted">No topics in this category.</li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+
+  {# --- My Topics --- #}
+  <div class="my-topics-card">
+    <h5>My Topics ({{ user_topics|length }})</h5>
+    <ul>
+      {% for topic in user_topics %}
+        <li class="topic-item">
+          <span>{{ topic.title }}</span>
+          <form action="{% url 'find_topics' %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <input type="hidden" name="topic_id" value="{{ topic.id }}">
+            <button type="submit" name="deselect_topic" class="btn btn-outline-danger btn-sm">
+              Remove
+            </button>
+          </form>
+        </li>
+      {% empty %}
+        <li class="text-center text-muted">아직 선택된 토픽이 없습니다.</li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
 {% endblock %}
