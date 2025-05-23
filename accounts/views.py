@@ -292,38 +292,52 @@ def find_friends_view(request):
         "sent_requests_ids": sent_requests_ids,
     })
 
+
+
 @login_required
 def find_topics(request):
-    # fetch all categories with their topics
-    categories   = Category.objects.prefetch_related('topics').all()
-    user_topics  = request.user.userprofile.selected_topics.all()
+    # 1) 모든 카테고리와 연관된 토픽을 한 번에 가져옵니다.
+    categories  = Category.objects.prefetch_related('topics').all()
+    # 2) 현재 사용자가 선택한 토픽을 가져옵니다.
+    user_topics = request.user.userprofile.selected_topics.all()
 
     if request.method == 'POST':
-        # Select / Deselect toggles
-        topic = get_object_or_404(Topic, id=request.POST.get('topic_id'))
-        if 'select_topic'   in request.POST:
+        # a) 토픽 선택
+        if 'select_topic' in request.POST:
+            topic = get_object_or_404(Topic, id=request.POST.get('topic_id'))
             request.user.userprofile.selected_topics.add(topic)
+
+        # b) 토픽 선택 해제
         elif 'deselect_topic' in request.POST:
+            topic = get_object_or_404(Topic, id=request.POST.get('topic_id'))
             request.user.userprofile.selected_topics.remove(topic)
-        # Clear all selections
+
+        # c) 전체 선택 해제
         elif 'clear_all' in request.POST:
             request.user.userprofile.selected_topics.clear()
-        # Add a new custom topic
+
+        # d) 새 토픽 추가
         elif 'add_topic' in request.POST:
             form = TopicForm(request.POST)
             if form.is_valid():
                 new_topic = form.save(commit=False)
                 new_topic.created_by = request.user
                 new_topic.save()
+
+        # 모든 POST 처리 후에는 리스트 페이지로 리다이렉트
         return redirect('find_topics')
 
-    # GET
+    # GET 요청 시: 폼과 리스트를 렌더링
     form = TopicForm()
-    return render(request, 'topics/find_topics.html', {
-        'categories':  categories,
-        'user_topics': user_topics,
-        'form':        form,
-    })
+    return render(request,
+                  'topics/find_topics.html',
+                  {
+                      'categories':  categories,
+                      'user_topics': user_topics,
+                      'form':        form,
+                  })
+
+
 @login_required
 def vote_topic(request, topic_id, vote_type):
     topic = get_object_or_404(Topic, id=topic_id)

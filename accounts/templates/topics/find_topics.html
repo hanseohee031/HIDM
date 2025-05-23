@@ -1,3 +1,4 @@
+{# templates/accounts/topics/find_topics.html #}
 {% extends 'base.html' %}
 {% load static %}
 
@@ -5,24 +6,29 @@
 <div class="container mt-4">
   <h1>Find Topics</h1>
 
-  <!-- Clear All Selections -->
-  <form method="post" class="mb-3">
+  {# --- Clear All Selections --- #}
+  <form action="{% url 'find_topics' %}" method="post" class="mb-3">
     {% csrf_token %}
-    <button name="clear_all" class="btn btn-warning">Clear All Selections</button>
+    <button type="submit" name="clear_all" class="btn btn-warning">
+      Clear All Selections
+    </button>
   </form>
 
+  {# --- Add a New Topic --- #}
   <div class="card mb-4">
     <div class="card-body">
       <h2>Add a New Topic</h2>
-      <form method="post">
+      <form action="{% url 'find_topics' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" name="add_topic" class="btn btn-primary">Add</button>
+        <button type="submit" name="add_topic" class="btn btn-primary">
+          Add
+        </button>
       </form>
     </div>
   </div>
 
-  <!-- Category & Topic Lists -->
+  {# --- List Topics by Category --- #}
   {% for category in categories %}
     <div class="mb-4">
       <h3>{{ category.name }}</h3>
@@ -31,17 +37,23 @@
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <span>{{ topic.title }}</span>
             <span class="btn-group" role="group">
-              <!-- Select / Remove -->
-              <form method="post" class="d-inline">
+
+              {# Select / Remove Topic #}
+              <form action="{% url 'find_topics' %}" method="post" class="d-inline">
                 {% csrf_token %}
                 <input type="hidden" name="topic_id" value="{{ topic.id }}">
                 {% if topic in user_topics %}
-                  <button name="deselect_topic" class="btn btn-sm btn-outline-danger">Remove</button>
+                  <button type="submit" name="deselect_topic" class="btn btn-sm btn-outline-danger">
+                    Remove
+                  </button>
                 {% else %}
-                  <button name="select_topic" class="btn btn-sm btn-outline-success">Select</button>
+                  <button type="submit" name="select_topic" class="btn btn-sm btn-outline-success">
+                    Select
+                  </button>
                 {% endif %}
               </form>
-              <!-- Upvote / Downvote -->
+
+              {# Upvote / Downvote Links #}
               <a href="{% url 'vote_topic' topic.id 'up' %}" class="btn btn-sm btn-outline-success">
                 👍 {{ topic.upvotes.count }}
               </a>
@@ -51,7 +63,9 @@
             </span>
           </li>
         {% empty %}
-          <li class="list-group-item text-muted">No topics in this category.</li>
+          <li class="list-group-item text-muted">
+            No topics in this category.
+          </li>
         {% endfor %}
       </ul>
     </div>
