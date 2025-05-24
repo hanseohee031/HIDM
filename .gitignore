@@ -1,1 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 가상환경
 venv/
+env/
+.venv/
+
+# IDE 설정
+.vscode/
+.idea/
+
+# 데이터 디렉터리
+/data/
+/datasets/
+/logs/
+
+# 모델 가중치
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.pb
+REC_SYS_SBERT.tar
+
+# 출력 폴더
+/output/
+/results/
+/checkpoints/
+
+# Mac, Windows 임시파일
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook 체크포인트
+.ipynb_checkpoints/
+
+# 환경 변수 파일
+.env
