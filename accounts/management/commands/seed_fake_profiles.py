@@ -1,3 +1,5 @@
+# accounts/management/commands/seed_fake_profiles.py
+
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from accounts.models import UserProfile, Category
@@ -55,11 +57,11 @@ MAJORS = [
 ]
 
 class Command(BaseCommand):
-    help = 'Create fake profiles: 400 Koreans, 100 foreigners, with interests'
+    help = 'Create fake profiles: 500 Koreans, 300 foreigners, with interests'
 
     def add_arguments(self, parser):
-        parser.add_argument('--kor', type=int, default=400, help='Number of Korean profiles')
-        parser.add_argument('--for', dest='forn', type=int, default=100, help='Number of foreign profiles')
+        parser.add_argument('--kor', type=int, default=500, help='Number of Korean profiles')
+        parser.add_argument('--for', dest='forn', type=int, default=300, help='Number of foreign profiles')
         parser.add_argument('--pw', type=str, default='Test@1234', help='Raw password for all users')
 
     def handle(self, *args, **options):
@@ -72,10 +74,8 @@ class Command(BaseCommand):
         # Faker 인스턴스 세팅
         faker_kr = Faker('ko_KR')
         faker_kr.unique.clear()
-        # 영어 bio 생성을 위한 Faker
         faker_en = Faker('en_US')
         faker_en.unique.clear()
-        # 외국인 faker unique clear
         for loc in FOREIGN_LOCALES.values():
             Faker(loc).unique.clear()
 
@@ -86,7 +86,7 @@ class Command(BaseCommand):
                 sid = str(random.randint(20210000, 20249999))
 
             user = User.objects.create_user(username=sid, password=raw_pw)
-            bio_text = faker_en.sentence(nb_words=10)  # 항상 영어 bio
+            bio_text = faker_en.sentence(nb_words=10)
             profile = UserProfile.objects.create(
                 user=user,
                 nickname=faker_kr.unique.user_name(),
@@ -112,14 +112,13 @@ class Command(BaseCommand):
                 sid = str(random.randint(20250000, 20259999))
 
             user = User.objects.create_user(username=sid, password=raw_pw)
-            # 예외 확률에 따라 native_language 설정
             if random.random() < EXCEPTION_RATE:
                 possible = [lang for lang in ALL_LANG_CODES if lang != NAT_TO_LANG[nat]]
                 native_lang = random.choice(possible)
             else:
                 native_lang = NAT_TO_LANG[nat]
 
-            bio_text = faker_en.sentence(nb_words=10)  # 항상 영어 bio
+            bio_text = faker_en.sentence(nb_words=10)
             profile = UserProfile.objects.create(
                 user=user,
                 nickname=fake.unique.user_name(),

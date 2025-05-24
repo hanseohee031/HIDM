@@ -30,22 +30,41 @@ from recommendation.recommend import recommend_similar_users
 
 @login_required
 def ai_matching(request):
-    me = request.user.username
+    me_user = request.user
+    me = me_user.username
 
-    # 1) 모든 프로필에서 빈 리스트가 아닌 경우만 수집
-    user_profiles = {}
+    # 0) 후보군 필터링: “한국인은 교환학생만, 교환학생은 한국인만”
+    me_profile = UserProfile.objects.get(user=me_user)
+    my_nat = me_profile.nationality  # e.g. 'KR'
+
+    candidates = []
     for prof in UserProfile.objects.prefetch_related('favorite_categories').all():
+        # 자신 제외
+        if prof.user_id == me_user.id:
+            continue
+        # 한국인인 경우 → 상대는 교환학생만
+        if my_nat == 'KR' and prof.nationality == 'KR':
+            continue
+        # 교환학생인 경우 → 상대는 한국인만
+        if my_nat != 'KR' and prof.nationality != 'KR':
+            continue
+        candidates.append(prof)
+
+    # 1) 필터링된 후보군 중 관심사(cats)가 있는 사용자만 수집
+    user_profiles = {}
+    for prof in candidates:
         cats = [c.name for c in prof.favorite_categories.all()]
         if cats:
             user_profiles[prof.user.username] = cats
+    # 내 프로필도 포함
+    my_cats = [c.name for c in me_profile.favorite_categories.all()]
+    user_profiles[me] = my_cats
 
     # 2) 내 관심사가 없으면 안내
-    if me not in user_profiles:
+    if me not in user_profiles or not user_profiles[me]:
         return render(request, 'accounts/ai_matching.html', {
             'error': '먼저 프로필에서 관심사를 하나 이상 설정해 주세요.'
         })
-
-    # ↓ pool 관련 코드 제거 완료 ↓
 
     # 3) SBERT 추천 수행 (top 3)
     raw_recs = recommend_similar_users(
@@ -67,7 +86,6 @@ def ai_matching(request):
     return render(request, 'accounts/ai_matching.html', {
         'recommendations': recommendations
     })
-
 
 # 1. Signup View (uses Student ID, Email Verification)
 def signup_view(request):
