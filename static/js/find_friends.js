@@ -16,17 +16,15 @@ const currentUserId     = window.currentUserId;
 // 4) 검색 입력 이벤트: nickname 필터링
 nicknameSearch.addEventListener("input", function() {
   const value = nicknameSearch.value.trim().toLowerCase();
-  document.querySelectorAll(".nickname-item").forEach(function(item) {
-    const nickname = item.dataset.nickname.toLowerCase();
-    item.style.display = nickname.includes(value) ? "" : "none";
+  document.querySelectorAll(".nickname-item").forEach(item => {
+    item.style.display = item.dataset.nickname.toLowerCase().includes(value) ? "" : "none";
   });
 });
 
 // 5) 리스트 클릭 이벤트: View Profile 버튼
 nicknameList.addEventListener("click", function(e) {
   if (e.target.classList.contains("view-profile-btn")) {
-    const userid = e.target.dataset.userid;
-    showProfile(userid);
+    showProfile(e.target.dataset.userid);
   }
 });
 
@@ -88,28 +86,17 @@ function showProfile(userid) {
   // 1) 버튼 결정 로직
   let btnHtml = "";
   if (friendsIds.includes(parseInt(userid))) {
-    btnHtml = `<button class="remove-friend-btn" data-userid="${userid}"
-                     style="background:#3cb371;color:white;">
-                 Remove Friend
-               </button>`;
+    btnHtml = `<button class="remove-friend-btn" data-userid="${userid}" style="background:#3cb371;color:white;">Remove Friend</button>`;
   } else if (sentRequestsIds.includes(parseInt(userid))) {
-    btnHtml = `<button class="cancel-request-btn" data-userid="${userid}"
-                     style="background:#fd7e14;color:white;">
-                 Cancel Request
-               </button>`;
+    btnHtml = `<button class="cancel-request-btn" data-userid="${userid}" style="background:#fd7e14;color:white;">Cancel Request</button>`;
   } else {
-    btnHtml = `<button class="add-friend-btn" data-userid="${userid}"
-                     style="background:#007bff;color:white;">
-                 Add Friend
-               </button>`;
+    btnHtml = `<button class="add-friend-btn" data-userid="${userid}" style="background:#007bff;color:white;">Add Friend</button>`;
   }
 
   // 2) 카드 HTML 조립
   let html = `
     <div class="public-profile-card">
-      <div class="public-profile-title">
-        ${data.nickname}'s Public Profile
-      </div>
+      <div class="public-profile-title">${data.nickname}'s Public Profile</div>
       <ul class="public-info-list">
         <li><b>Name (Nickname):</b> ${data.nickname}</li>
         <li><b>Gender:</b> ${data.gender}</li>
@@ -121,16 +108,14 @@ function showProfile(userid) {
   if (data.personality)   html += `<li><b>Personality (MBTI):</b> ${data.personality}</li>`;
   if (data.born_year)     html += `<li><b>Born Year:</b> ${data.born_year}</li>`;
 
-  // Interests
+  // ★ Interests 추가
   if (data.interests && data.interests.length) {
     html += `<li><b>Interests:</b> ${data.interests.join(', ')}</li>`;
   }
 
   html += `
       </ul>
-      <div class="friend-action-area">
-        ${btnHtml}
-      </div>
+      <div class="friend-action-area">${btnHtml}</div>
     </div>`;
 
   profileCardArea.innerHTML = html;
@@ -141,7 +126,6 @@ function showProfile(userid) {
  */
 function handleFriendRequest(userid, action) {
   let url = "";
-  const method    = "POST";
   const csrftoken = getCookie('csrftoken');
 
   if (action === "add")    url = "/accounts/friend-request/";
@@ -150,19 +134,13 @@ function handleFriendRequest(userid, action) {
   else return;
 
   fetch(url, {
-    method: method,
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRFToken": csrftoken
-    },
-    body: JSON.stringify({ userid: userid })
+    method: "POST",
+    headers: {"Content-Type":"application/json","X-CSRFToken":csrftoken},
+    body: JSON.stringify({ userid })
   })
   .then(r => r.json())
-  .then(data => {
-    if (data.success) window.location.reload();
-    else alert(data.msg || "Failed. Please try again.");
-  })
-  .catch(err => alert("Error: " + err));
+  .then(data => data.success ? window.location.reload() : alert(data.msg || "Failed"))
+  .catch(err => alert("Error: "+err));
 }
 
 /**
@@ -176,18 +154,12 @@ function handleFriendRequestAction(userid, action) {
 
   fetch(url, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRFToken": getCookie('csrftoken')
-    },
-    body: JSON.stringify({ userid: userid })
+    headers: {"Content-Type":"application/json","X-CSRFToken":getCookie('csrftoken')},
+    body: JSON.stringify({ userid })
   })
   .then(r => r.json())
-  .then(data => {
-    if (data.success) window.location.reload();
-    else alert(data.msg || "Failed. Please try again.");
-  })
-  .catch(err => alert("Error: " + err));
+  .then(data => data.success ? window.location.reload() : alert(data.msg || "Failed"))
+  .catch(err => alert("Error: "+err));
 }
 
 /**
@@ -195,15 +167,13 @@ function handleFriendRequestAction(userid, action) {
  */
 function getCookie(name) {
   let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    const cookies = document.cookie.split(';');
-    for (const cookie of cookies) {
-      const c = cookie.trim();
+  if (document.cookie) {
+    document.cookie.split(';').forEach(c => {
+      c = c.trim();
       if (c.startsWith(name + '=')) {
-        cookieValue = decodeURIComponent(c.substring(name.length + 1));
-        break;
+        cookieValue = decodeURIComponent(c.substring(name.length+1));
       }
-    }
+    });
   }
   return cookieValue;
 }
