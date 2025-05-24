@@ -271,43 +271,53 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def find_friends_view(request):
-    # 친구 요청을 보낸 유저 id 리스트
+    # 1) 내가 보낸 친구 요청 ID 리스트
     sent_requests_ids = list(
-        Friendship.objects.filter(from_user=request.user, status='requested')
+        Friendship.objects
+        .filter(from_user=request.user, status='requested')
         .values_list('to_user_id', flat=True)
     )
 
-    # 친구 id 리스트
-    friends_ids = list(
-        Friendship.objects.filter(
-            (Q(from_user=request.user) | Q(to_user=request.user)), 
-            status='accepted'
-        )
-        .values_list('from_user_id', 'to_user_id')
-    )
-    # 중복제거, 자기자신 제외
-    friends_ids = set([i for pair in friends_ids for i in pair if i != request.user.id])
+    # 2) 친구 관계(accepted)인 서로의 ID 쌍을 풀고, 자기 자신 제외
+    raw_pairs = Friendship.objects.filter(
+        (Q(from_user=request.user) | Q(to_user=request.user)),
+        status='accepted'
+    ).values_list('from_user_id', 'to_user_id')
+    friends_ids = set(i for pair in raw_pairs for i in pair if i != request.user.id)
 
-    # 친구(User 객체)
+    # 3) User 객체 리스트로 변환
     friends = User.objects.filter(id__in=friends_ids)
 
-    # 나에게 온 친구 요청(Friendship 객체)
+    # 4) 나에게 온 친구 요청(Friendship 객체)
     friend_requests_received = Friendship.objects.filter(
         to_user=request.user, status='requested'
     ).select_related('from_user__userprofile')
 
-    profiles = UserProfile.objects.exclude(user=request.user)
-    public_profiles_json = {}
+    # 5) 모든 다른 유저 프로필 (나 자신 제외)
+    profiles = UserProfile.objects.exclude(user=request.user) \
+                                  .prefetch_related('favorite_categories')
+
+    # 6) Public Profile 카드용 JSON 데이터 생성
+    public_profiles = {}
     for prof in profiles:
-        public_profiles_json[prof.user.id] = {
+        public_profiles[prof.user.id] = {
             "nickname": prof.nickname,
             "gender": prof.get_gender_display(),
             "native_language": prof.get_native_language_display(),
-            # ... 기타 필드 ...
-        }
-    public_profiles_json = json.dumps(public_profiles_json)
 
-    return render(request, "find_friends.html", {
+            # 고급 필드는 공개 플래그 체크 후 포함
+            "nationality": prof.show_nationality and prof.nationality or None,
+            "major":       prof.show_major and prof.major or None,
+            "personality": prof.show_personality and prof.personality or None,
+            "born_year":   prof.show_born_year and prof.born_year or None,
+
+            # interests
+            "interests": [cat.name for cat in prof.favorite_categories.all()],
+        }
+    public_profiles_json = json.dumps(public_profiles)
+
+    # 7) 템플릿에 모든 컨텍스트 전달
+    return render(request, "accounts/find_friends.html", {
         "profiles": profiles,
         "public_profiles_json": public_profiles_json,
         "friends": friends,
@@ -315,8 +325,6 @@ def find_friends_view(request):
         "friends_ids": list(friends_ids),
         "sent_requests_ids": sent_requests_ids,
     })
-
-
 
 @login_required
 def find_topics(request):
