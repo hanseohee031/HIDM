@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from .views import ai_matching
 urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('login/', views.login_view, name='login'),
@@ -37,6 +37,8 @@ urlpatterns = [
         views.vote_topic,
         name='vote_topic'
     ),
+    path('ai-matching/', ai_matching, name='ai_matching'),
+
 
 ]
 

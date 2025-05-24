@@ -566,3 +566,6 @@ def select_categories_view(request):
         form = CategorySelectionForm()
 
     return render(request, 'accounts/select_categories.html', {'form': form})
+def ai_matching(request):
+    # 템플릿만 렌더링할 거니까, 비어있어도 상관없습니다.
+    return render(request, 'accounts/ai_matching.html')

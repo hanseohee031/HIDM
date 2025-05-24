@@ -1,0 +1,19 @@
+/* static/css/ai_matching.css */
+
+.card.h-100 {
+  border-radius: 0.75rem;
+  transition: transform 0.2s;
+}
+
+.card.h-100:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-text {
+  font-size: 0.95rem;
+}
