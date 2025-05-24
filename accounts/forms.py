@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, Category
 from .models import Announcement  # 맨 위 import 추가 필요
 from .models import Interest
 
@@ -89,15 +89,23 @@ class AdvancedProfileForm(forms.ModelForm):
 ### 4. 관심사 선택용 폼 ###
 class InterestForm(forms.ModelForm):
     interests = forms.ModelMultipleChoiceField(
-        queryset=Interest.objects.all(),
+        queryset=Interest.objects.all().order_by('category', 'name'),
         widget=forms.CheckboxSelectMultiple,
         label="Select Your Interests",
-        required=False,      # 0개 이상 선택 가능
+        required=True,
     )
 
     class Meta:
         model = UserProfile
         fields = ['interests']
+
+    def clean_interests(self):
+        interests = self.cleaned_data.get('interests')
+        if not interests or interests.count() != 5:
+            raise forms.ValidationError("Please select exactly 5 interests.")
+        return interests
+
+
 
 
 from .models import Topic  # add this import at the top
@@ -123,3 +131,22 @@ class AnnouncementForm(forms.ModelForm):
     class Meta:
         model = Announcement
         fields = ['title', 'content']
+
+
+class CategorySelectionForm(forms.ModelForm):
+    favorite_categories = forms.ModelMultipleChoiceField(
+        queryset=Category.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        label="관심 카테고리 (정확히 5개 선택)"
+    )
+
+    class Meta:
+        model = UserProfile
+        fields = ['favorite_categories']
+
+    def clean_favorite_categories(self):
+        cats = self.cleaned_data.get('favorite_categories')
+        count = cats.count() if cats is not None else 0
+        if count != 5:
+            raise forms.ValidationError("정확히 5개를 선택해야 합니다.")
+        return cats

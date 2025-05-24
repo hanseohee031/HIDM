@@ -10,7 +10,10 @@ urlpatterns = [
     path('setup-profile/', views.profile_setup_view, name='profile_setup'),
     path('update-profile/', views.profile_update_view, name='profile_update'),
     path('advanced-profile/', views.advanced_profile_setup_view, name='profile_advanced'),
+    path('signup/categories/', views.select_categories_view, name='select_categories'),
+
     path('interests/update/', views.update_interests_view, name='update_interests'),
+
     # Email verification for student ID
     path('send-verification-code/', views.send_verification_code_view, name='send_verification_code'),
     path('verify-code/', views.verify_code_ajax, name='verify_code_ajax'), 

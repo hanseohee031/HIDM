@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 from .models import UserProfile
-from .forms import SignupForm, UserProfileForm, AdvancedProfileForm
+from .forms import SignupForm, UserProfileForm, AdvancedProfileForm, CategorySelectionForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.sessions.models import Session
 from django.utils import timezone
@@ -17,42 +17,52 @@ from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 from .models import Announcement
 from .forms import AnnouncementForm
-from .forms import InterestForm, Interest
 from .models import UserProfile
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from .models import Category, Topic
 from .forms  import TopicForm
 
+from .forms import CategorySelectionForm  # InterestForm 대신 이걸 import
+
+
 # 1. Signup View (uses Student ID, Email Verification)
 def signup_view(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         session_code = request.session.get('email_verification_code')
-        user_code = request.POST.get('email_code', '')
-        student_id = request.POST.get('student_id', '').strip()
-        email_verified = (session_code and user_code and str(session_code) == str(user_code))
+        user_code     = request.POST.get('email_code', '').strip()
+        email_verified = (
+            session_code and
+            user_code and
+            str(session_code) == str(user_code)
+        )
 
-        # 디버깅용 로그
         print("SESSION CODE:", session_code)
-        print("USER CODE:", user_code)
+        print("USER CODE:",    user_code)
         print("email_verified:", email_verified)
-        print("form.is_valid():", form.is_valid())
-        print("form.errors:", form.errors)   # <=== ★★이 줄만 추가하세요!
 
         if form.is_valid() and email_verified:
             user = form.save()
             login(request, user)
-            if 'email_verification_code' in request.session:
-                del request.session['email_verification_code']
-            return redirect('home')
+
+            profile, _ = UserProfile.objects.get_or_create(user=user)
+            basic_topics = Topic.objects.filter(created_by__isnull=True)
+            profile.selected_topics.add(*basic_topics)
+
+            request.session.pop('email_verification_code', None)
+
+            # ← 이 부분만 select_categories로 변경
+            return redirect('select_categories')
         else:
             if not email_verified:
                 form.add_error(None, "Email verification code does not match.")
     else:
-        form = SignupForm()  # GET 요청일 때는 여기만 실행됨
+        form = SignupForm()
 
     return render(request, 'signup.html', {'form': form})
+
+
 
 
 
@@ -204,9 +214,23 @@ def delete_account_view(request):
 
 
 
+@login_required
+def update_interests_view(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
 
+    if request.method == 'POST':
+        form = CategorySelectionForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "관심 카테고리가 업데이트되었습니다.")
+            return redirect('profile')
+    else:
+        form = CategorySelectionForm(instance=profile)
 
-
+    return render(request, 'accounts/update_interests.html', {
+        'form': form,
+        'title': 'Update Interests',
+    })
 
 @csrf_exempt
 def verify_code_ajax(request):
@@ -511,33 +535,26 @@ def announcement_delete(request, pk):
     return render(request, 'accounts/announcement_confirm_delete.html', {'announcement': announcement})
 
 
-@login_required
-def update_interests_view(request):
-    profile = get_object_or_404(UserProfile, user=request.user)
 
-    # 카테고리별로 Interest 객체 묶기
-    interests = Interest.objects.order_by('category', 'id')
-    grouped_interests = {}
-    for interest in interests:
-        grouped_interests.setdefault(interest.category, []).append(interest)
+
+
+
+
+@login_required
+def select_categories_view(request):
+    # 프로필 가져오기 (없으면 생성)
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    # 이미 선택된 카테고리가 있으면 프로필 페이지로
+    if profile.favorite_categories.exists():
+        return redirect('profile')
 
     if request.method == 'POST':
-        # Reset All 눌렀을 때
-        if 'reset' in request.POST:
-            profile.interests.clear()
-            messages.success(request, "모든 관심사가 초기화되었습니다.")
-            return redirect('update_interests')
-
-        form = InterestForm(request.POST, instance=profile)
+        form = CategorySelectionForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            messages.success(request, "관심사가 성공적으로 업데이트되었습니다.")
             return redirect('profile')
     else:
-        form = InterestForm(instance=profile)
+        form = CategorySelectionForm()
 
-    return render(request, 'accounts/update_interests.html', {
-        'form': form,
-        'title': 'Update Your Interests',
-        'grouped_interests': grouped_interests,
-    })
+    return render(request, 'accounts/select_categories.html', {'form': form})

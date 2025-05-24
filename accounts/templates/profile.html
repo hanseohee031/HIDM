@@ -23,9 +23,6 @@
       {% if profile.show_personality %}
         <li><b>Personality (MBTI):</b> {{ profile.personality }}</li>
       {% endif %}
-      {% if profile.show_purpose %}
-        <li><b>Purpose:</b> {{ profile.purpose }}</li>
-      {% endif %}
       {% if profile.show_bio %}
         <li><b>Bio:</b> {{ profile.bio }}</li>
       {% endif %}
@@ -74,12 +71,6 @@
           <span class="profile-privacy">({{ profile.show_personality|yesno:"Public,Private" }})</span>
         </li>
       {% endif %}
-      {% if profile.purpose %}
-        <li>
-          <b>Purpose:</b> {{ profile.purpose }}
-          <span class="profile-privacy">({{ profile.show_purpose|yesno:"Public,Private" }})</span>
-        </li>
-      {% endif %}
       {% if profile.bio %}
         <li>
           <b>Bio:</b> {{ profile.bio }}
@@ -94,16 +85,20 @@
       {% endif %}
     </ul>
 
-    {# -- My Interests 섹션 추가 -- #}
+    <!-- My Interests 섹션 -->
     <h3 class="profile-section-title">My Interests</h3>
-    <ul class="profile-info-list">
-      {% for interest in profile.interests.all %}
-        <li>({{ interest.category }}) {{ interest.name }}</li>
-      {% empty %}
-        <li>No interests selected.</li>
-      {% endfor %}
-    </ul>
-    {# -- My Interests 섹션 추가 끝 -- #}
+    {% with favs=profile.favorite_categories.all %}
+      {% if favs %}
+        <ul class="profile-info-list">
+          {% for cat in favs %}
+            <li>{{ cat.name }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No interests selected.</p>
+      {% endif %}
+    {% endwith %}
+    <!-- My Interests 섹션 끝 -->
 
     <div class="profile-btn-row">
       <a href="{% url 'waiting' %}">

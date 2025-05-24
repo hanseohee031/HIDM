@@ -240,6 +240,14 @@ class UserProfile(models.Model):
         verbose_name='Show Nationality'
     )
 
+    favorite_categories = models.ManyToManyField(
+        'Category',         # 또는 Category 모델이 같은 파일에 있으면 그냥 Category
+        blank=True,
+        verbose_name='관심 카테고리'
+    )
+
+
+
     major = models.CharField(
         max_length=100,
         blank=True,

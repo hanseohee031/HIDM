@@ -1,118 +1,149 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{# base.html 안에 <head>에 block head가 있다면 아래처럼 추가하면 됩니다 #}
 {% block head %}
   {{ block.super }}
+  {# (You can still keep your external CSS here if you like) #}
   <link rel="stylesheet" href="{% static 'css/find_topics.css' %}">
 {% endblock %}
 
 {% block content %}
+
+{# — inline styles to force a 2-column flex layout — #}
+<style>
+  .find-topics-container {
+    display: flex !important;
+    align-items: flex-start;
+    gap: 24px;
+    margin: 1.5rem 0;
+  }
+  .topics-main {
+    flex: 3;
+  }
+  .topics-sidebar {
+    flex: 1;
+    max-width: 300px;
+  }
+  /* optional: give the container a faint background so you see it */
+  /* .find-topics-container { background: rgba(0,0,0,0.05); } */
+</style>
+
 <div class="find-topics-container">
-  <h1>Find Topics</h1>
 
-  {# --- Clear All Selections --- #}
-  <form action="{% url 'find_topics' %}" method="post" class="btn-clear-all text-end">
-    {% csrf_token %}
-    <button type="submit" name="clear_all" class="btn btn-warning">
-      Clear All
-    </button>
-  </form>
+  <!-- Left Column: Browse & Add Topics -->
+  <div class="topics-main">
 
-  {# --- Add a New Topic --- #}
-  <div class="add-topic-card">
-    <div class="card-header">
-      <h5>Add a New Topic</h5>
+    <h1>Find Topics</h1>
+
+    <!-- Clear All Selections -->
+    <form action="{% url 'find_topics' %}" method="post" class="btn-clear-all">
+      {% csrf_token %}
+      <button type="submit" name="clear_all" class="btn btn-warning">
+        Clear All
+      </button>
+    </form>
+
+    <!-- Add a New Topic -->
+    <div class="add-topic-card">
+      <div class="card-header">
+
+        <h5>Add a New Topic</h5>
+      </div>
+      <div class="card-body">
+        <form action="{% url 'find_topics' %}" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" name="add_topic" class="btn btn-success">
+            Add
+          </button>
+        </form>
+      </div>
     </div>
-    <div class="card-body">
-      <form action="{% url 'find_topics' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="add_topic" class="btn btn-success">
-          Add
-        </button>
-      </form>
-    </div>
+
+    <!-- Topics by Category -->
+    {% for category in categories %}
+      <div class="category-block">
+        <h3>{{ category.name }}</h3>
+        <ul>
+          {% for topic in category.topics.all|dictsortreversed:"score" %}
+            <li class="topic-item">
+              <div class="topic-info">
+                <strong>{{ topic.title }}</strong>
+                <span class="topic-author">
+                  by
+                  {% if topic.created_by %}
+                    {{ topic.created_by.userprofile.nickname }}
+                  {% else %}
+                    basic
+                  {% endif %}
+                </span>
+              </div>
+              <div class="topic-actions">
+                <!-- Select / Remove -->
+                <form action="{% url 'find_topics' %}" method="post" class="d-inline">
+                  {% csrf_token %}
+                  <input type="hidden" name="topic_id" value="{{ topic.id }}">
+                  {% if topic in user_topics %}
+                    <button type="submit" name="deselect_topic" class="btn btn-outline-danger btn-sm">
+                      Remove
+                    </button>
+                  {% else %}
+                    <button type="submit" name="select_topic" class="btn btn-outline-success btn-sm">
+                      Select
+                    </button>
+                  {% endif %}
+                </form>
+                <!-- Delete (author only) -->
+                {% if topic.created_by == request.user %}
+                  <form action="{% url 'find_topics' %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <input type="hidden" name="topic_id" value="{{ topic.id }}">
+                    <button type="submit" name="delete_topic" class="btn btn-outline-danger btn-sm">
+                      Delete
+                    </button>
+                  </form>
+                {% endif %}
+                <!-- Up/Down Votes -->
+                <a href="{% url 'vote_topic' topic.id 'up' %}" class="btn btn-outline-success btn-sm">
+                  👍 {{ topic.upvotes.count }}
+                </a>
+                <a href="{% url 'vote_topic' topic.id 'down' %}" class="btn btn-outline-danger btn-sm">
+                  👎 {{ topic.downvotes.count }}
+                </a>
+              </div>
+            </li>
+          {% empty %}
+            <li class="text-center text-muted">No topics available.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+
   </div>
 
-  {# --- List Topics by Category --- #}
-  {% for category in categories %}
-    <h3>{{ category.name }}</h3>
-    <ul>
-      {% for topic in category.topics.all|dictsortreversed:"score" %}
-        <li class="topic-item">
-          <div class="topic-info">
-            <strong>{{ topic.title }}</strong>
-            <span class="topic-author">
-              by
-              {% if topic.created_by %}
-                {{ topic.created_by.userprofile.nickname }}
-              {% else %}
-                basic
-              {% endif %}
-            </span>
-          </div>
-          <div class="topic-actions">
-            {# Select / Remove #}
+
+  <!-- Right Column: My Topics Sidebar -->
+  <div class="topics-sidebar">
+    <div class="my-topics-card">
+      <h5>My Topics ({{ user_topics|length }})</h5>
+      <ul>
+        {% for topic in user_topics %}
+          <li class="topic-item">
+            <span>{{ topic.title }}</span>
             <form action="{% url 'find_topics' %}" method="post" class="d-inline">
               {% csrf_token %}
               <input type="hidden" name="topic_id" value="{{ topic.id }}">
-              {% if topic in user_topics %}
-                <button type="submit" name="deselect_topic" class="btn btn-outline-danger btn-sm">
-                  Remove
-                </button>
-              {% else %}
-                <button type="submit" name="select_topic" class="btn btn-outline-success btn-sm">
-                  Select
-                </button>
-              {% endif %}
+              <button type="submit" name="deselect_topic" class="btn btn-outline-danger btn-sm">
+                Remove
+              </button>
             </form>
-
-            {# Delete (작성자만) #}
-            {% if topic.created_by == request.user %}
-              <form action="{% url 'find_topics' %}" method="post" class="d-inline">
-                {% csrf_token %}
-                <input type="hidden" name="topic_id" value="{{ topic.id }}">
-                <button type="submit" name="delete_topic" class="btn btn-outline-danger btn-sm">
-                  Delete
-                </button>
-              </form>
-            {% endif %}
-
-            {# Up/Down votes #}
-            <a href="{% url 'vote_topic' topic.id 'up' %}" class="btn btn-outline-success btn-sm">
-              👍 {{ topic.upvotes.count }}
-            </a>
-            <a href="{% url 'vote_topic' topic.id 'down' %}" class="btn btn-outline-danger btn-sm">
-              👎 {{ topic.downvotes.count }}
-            </a>
-          </div>
-        </li>
-      {% empty %}
-        <li class="text-center text-muted">No topics in this category.</li>
-      {% endfor %}
-    </ul>
-  {% endfor %}
-
-  {# --- My Topics --- #}
-  <div class="my-topics-card">
-    <h5>My Topics ({{ user_topics|length }})</h5>
-    <ul>
-      {% for topic in user_topics %}
-        <li class="topic-item">
-          <span>{{ topic.title }}</span>
-          <form action="{% url 'find_topics' %}" method="post" class="d-inline">
-            {% csrf_token %}
-            <input type="hidden" name="topic_id" value="{{ topic.id }}">
-            <button type="submit" name="deselect_topic" class="btn btn-outline-danger btn-sm">
-              Remove
-            </button>
-          </form>
-        </li>
-      {% empty %}
-        <li class="text-center text-muted">아직 선택된 토픽이 없습니다.</li>
-      {% endfor %}
-    </ul>
+          </li>
+        {% empty %}
+          <li class="text-center text-muted">No topics selected.</li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
+
 </div>
 {% endblock %}
