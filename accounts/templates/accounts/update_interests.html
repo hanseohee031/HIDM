@@ -4,24 +4,29 @@
 
 {% block title %}Update Interests{% endblock %}
 
-{% block content %}
-<link rel="stylesheet" href="{% static 'css/update_interests.css' %}">
+{% block head %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/update_interests.css' %}">
+{% endblock %}
 
+{% block content %}
 <div class="container mt-4">
   <h2>Update Your Interests</h2>
   <p>Please choose <strong>exactly 5</strong> categories from the list below.</p>
 
-  <form method="post" onsubmit="return document.querySelectorAll('input[name=interests]:checked').length===5;">
+  <form method="post"
+        onsubmit="return document.querySelectorAll('input[name=&quot;favorite_categories&quot;]:checked').length===5;">
     {% csrf_token %}
-
-    {# -- 폼 전체 에러(선택 개수 벗어날 때) -- #}
     {{ form.non_field_errors }}
 
     <div class="form-group">
-      {# -- interests 체크박스 출력 -- #}
-      {{ form.interests }}
-      {# -- 각 필드 에러 -- #}
-      {{ form.interests.errors }}
+      {% for checkbox in form.favorite_categories %}
+        <div class="form-check">
+          {{ checkbox.tag }}
+          <label class="form-check-label">{{ checkbox.choice_label }}</label>
+        </div>
+      {% endfor %}
+      {{ form.favorite_categories.errors }}
     </div>
 
     <div class="mt-3">
