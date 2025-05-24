@@ -1,3 +1,5 @@
+/* static/css/find_friends.css */
+
 body {
   background: #fff;
 }
@@ -13,7 +15,9 @@ body {
 }
 
 /* 세 개의 사각형 크기를 더 크게/고정 */
-.find-friends-left, .find-friends-right, .find-friends-center {
+.find-friends-left,
+.find-friends-right,
+.find-friends-center {
   background: #fff;
   border: 2.2px solid #2346a2;
   border-radius: 16px;
@@ -24,7 +28,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 540px;
-  height: 540px;         /* 고정 높이! */
+  height: 540px; /* 고정 높이! */
 }
 
 .find-friends-center {
@@ -92,8 +96,8 @@ body {
   margin-right: 8px;
 }
 
+/* 기본 View Profile 버튼 스타일 (클래스별 색은 아래 추가) */
 .view-profile-btn {
-  background: #2249ad;
   color: #fff;
   font-weight: 700;
   border: none;
@@ -227,7 +231,8 @@ body {
   color: #1d2b51;
 }
 
-.accept-friend-btn, .reject-friend-btn {
+.accept-friend-btn,
+.reject-friend-btn {
   border: none;
   border-radius: 6px;
   padding: 4px 13px;
@@ -254,6 +259,7 @@ body {
   background: #a81b1b;
 }
 
+/* 커스텀 스크롤바 */
 #nickname-list::-webkit-scrollbar,
 #friend-requests-list::-webkit-scrollbar,
 #friends-list::-webkit-scrollbar {
@@ -275,11 +281,13 @@ body {
     max-width: 99vw;
     min-width: unset;
   }
-  .find-friends-left, .find-friends-right, .find-friends-center {
+  .find-friends-left,
+  .find-friends-right,
+  .find-friends-center {
     min-width: 0;
     max-width: unset;
     width: 100%;
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
     height: auto;
     min-height: 420px;
   }
@@ -287,4 +295,29 @@ body {
     min-height: 300px;
     height: 300px;
   }
+}
+
+/* ── View Profile 버튼 상태별 색상 ── */
+/* 기본(아직 요청 안 함): 파랑 */
+.view-profile-btn.default {
+  background: #2249ad;
+}
+.view-profile-btn.default:hover {
+  background: #1a3a8c;
+}
+
+/* 요청만 보낸 상태: 주황 */
+.view-profile-btn.requested {
+  background: #fd7e14;
+}
+.view-profile-btn.requested:hover {
+  background: #e56800;
+}
+
+/* 이미 친구인 상태: 초록 */
+.view-profile-btn.friend {
+  background: #3cb371;
+}
+.view-profile-btn.friend:hover {
+  background: #2e8b57;
 }

@@ -13,9 +13,31 @@
     <input type="text" id="nickname-search" placeholder="Type nickname..." autocomplete="off">
     <ul id="nickname-list">
       {% for prof in profiles %}
-        <li class="nickname-item" data-nickname="{{ prof.nickname|escapejs }}" data-userid="{{ prof.user.id }}">
+        <li class="nickname-item"
+            data-nickname="{{ prof.nickname|escapejs }}"
+            data-userid="{{ prof.user.id }}">
           <span class="nickname-text">{{ prof.nickname }}</span>
-          <button class="view-profile-btn" data-userid="{{ prof.user.id }}">View Profile</button>
+
+          {% if prof.user.id in friends_ids %}
+            {# 이미 친구인 상태 (초록) #}
+            <button class="view-profile-btn friend"
+                    data-userid="{{ prof.user.id }}">
+              View Profile
+            </button>
+          {% elif prof.user.id in sent_requests_ids %}
+            {# 요청만 보낸 상태 (주황) #}
+            <button class="view-profile-btn requested"
+                    data-userid="{{ prof.user.id }}">
+              View Profile
+            </button>
+          {% else %}
+            {# 기본(아직 요청 안 함) (파랑) #}
+            <button class="view-profile-btn default"
+                    data-userid="{{ prof.user.id }}">
+              View Profile
+            </button>
+          {% endif %}
+
         </li>
       {% endfor %}
     </ul>
@@ -68,10 +90,10 @@
   {{ public_profiles_json|safe }}
 </script>
 <script>
-  window.isUserLoggedIn = {{ user.is_authenticated|yesno:"true,false" }};
-  window.currentUserId = {{ user.id }};
-  window.friendsIds = {{ friends_ids|safe }};
-  window.sentRequestsIds = {{ sent_requests_ids|safe }};
+  window.isUserLoggedIn   = {{ user.is_authenticated|yesno:"true,false" }};
+  window.currentUserId    = {{ user.id }};
+  window.friendsIds       = {{ friends_ids|safe }};
+  window.sentRequestsIds  = {{ sent_requests_ids|safe }};
 </script>
 <script src="{% static 'js/find_friends.js' %}?v=2"></script>
 {% endblock %}
