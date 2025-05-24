@@ -2,5 +2,20 @@
 {% extends 'base.html' %}
 {% block content %}
   <h1>AI Matching</h1>
-  <p>— 여기에 나중에 AI 매칭 화면을 그려 넣으면 됩니다.</p>
+
+  {% if error %}
+    <p style="color: red;">{{ error }}</p>
+  {% else %}
+    {% if recommendations %}
+      <ul>
+        {% for rec in recommendations %}
+          <li>
+            <strong>{{ rec.nickname }}</strong> — 유사도: {{ rec.score }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>추천할 사용자가 없습니다.</p>
+    {% endif %}
+  {% endif %}
 {% endblock %}
