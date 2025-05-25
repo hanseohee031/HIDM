@@ -3,10 +3,12 @@
 
 {% block head %}
   {{ block.super }}
-  <!-- 홈 메인 컨테이너에만 손글씨체 유지 -->
+  <!-- 홈 메인 컨테이너 내 제목만 손글씨체로 override -->
   <style>
-    .main-container,
-    .main-container * {
+    .main-container .section-title,
+    .main-container h1,
+    .main-container h2,
+    .main-container h3 {
       font-family: 'UhBeeSeulvely', sans-serif !important;
     }
   </style>
@@ -14,9 +16,8 @@
 
 {% block content %}
 <style>
-  /* 기본 설정: 폰트(family)만 전역에서 내려온 정자체 사용 */
+  /* 레이아웃 기본 설정 (폰트는 base.html에서 이미 정자체로 설정됨) */
   html, body {
-    /* font-family 제거 */
     font-size: 18px;
     background-color: #f9f9f7;
     margin: 0;
@@ -24,7 +25,7 @@
     overflow-x: hidden;
   }
 
-  /* 메인 컨테이너: 화면 아래로 넉넉히 띄우기 */
+  /* 메인 컨테이너: 좌우 3단 레이아웃 */
   .main-container {
     display: flex;
     justify-content: space-between;
@@ -57,6 +58,10 @@
     gap: 12px;
     width: 90%;
   }
+  .link-buttons a {
+    width: 100%;
+    display: block;
+  }
   .link-buttons img {
     width: 100%;
     height: auto;
@@ -76,7 +81,7 @@
     opacity: 0.9;
   }
 
-  /* 가운데: 배너 */
+  /* 가운데: 배너 이미지 */
   .center-image-wrapper {
     flex: 1;
     display: flex;
@@ -103,12 +108,15 @@
     font-weight: bold;
     margin-bottom: 8px;
   }
-  .signup-stats, .signup-list, .announcement-list {
+  .signup-stats,
+  .signup-list,
+  .announcement-list {
     color: #666;
     line-height: 1.6;
     font-weight: normal;
   }
-  .signup-list, .announcement-list {
+  .signup-list,
+  .announcement-list {
     list-style: disc inside;
     padding: 0;
     margin: 8px 0 0;
