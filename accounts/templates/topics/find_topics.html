@@ -3,146 +3,181 @@
 
 {% block head %}
   {{ block.super }}
-  {# (You can still keep your external CSS here if you like) #}
-  <link rel="stylesheet" href="{% static 'css/find_topics.css' %}">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f3f6fb;
+      font-size: 16px;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2d3e50;
+      margin-bottom: 24px;
+    }
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #37517e;
+    }
+    h5 {
+      font-size: 1.1rem;
+    }
+    .find-topics-container {
+      display: flex;
+      gap: 36px;
+      align-items: flex-start;
+      margin-top: 40px;
+      padding: 0 5vw;
+    }
+    .topics-main {
+      flex: 1.7;
+    }
+    .topics-sidebar {
+      flex: 1.3;
+      max-width: 420px;
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      max-height: 680px;
+      overflow-y: auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      font-size: 0.96rem;
+      position: sticky;
+      top: 100px;
+    }
+    .topics-sidebar .topic-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .add-topic-card {
+      background: white;
+      border-radius: 18px;
+      padding: 24px 28px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+    .category-block {
+      margin-bottom: 32px;
+    }
+    .topic-item {
+      background: #fff;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      font-size: 0.98rem;
+    }
+    .topic-info strong {
+      font-size: 1rem;
+      color: #333;
+    }
+    .topic-author {
+      font-size: 0.84rem;
+      color: #888;
+    }
+    .topic-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      font-size: 0.87rem;
+      padding: 5px 10px;
+      border-radius: 6px;
+    }
+    .btn-clear-all {
+      text-align: right;
+      margin-bottom: 12px;
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
-
-{# — inline styles to force a 2-column flex layout — #}
-<style>
-  .find-topics-container {
-    display: flex !important;
-    align-items: flex-start;
-    gap: 24px;
-    margin: 1.5rem 0;
-  }
-  .topics-main {
-    flex: 3;
-  }
-  .topics-sidebar {
-    flex: 1;
-    max-width: 300px;
-  }
-  /* optional: give the container a faint background so you see it */
-  /* .find-topics-container { background: rgba(0,0,0,0.05); } */
-</style>
-
 <div class="find-topics-container">
 
-  <!-- Left Column: Browse & Add Topics -->
+  <!-- Left Column -->
   <div class="topics-main">
-
     <h1>Find Topics</h1>
 
-    <!-- Clear All Selections -->
     <form action="{% url 'find_topics' %}" method="post" class="btn-clear-all">
       {% csrf_token %}
-      <button type="submit" name="clear_all" class="btn btn-warning">
+      <button type="submit" name="clear_all" class="btn btn-sm btn-outline-danger">
         Clear All
       </button>
     </form>
 
-    <!-- Add a New Topic -->
     <div class="add-topic-card">
-      <div class="card-header">
-
-        <h5>Add a New Topic</h5>
-      </div>
-      <div class="card-body">
-        <form action="{% url 'find_topics' %}" method="post">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit" name="add_topic" class="btn btn-success">
-            Add
-          </button>
-        </form>
-      </div>
+      <h5>Add a New Topic</h5>
+      <form action="{% url 'find_topics' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="add_topic" class="btn btn-primary btn-sm">Add</button>
+      </form>
     </div>
 
-    <!-- Topics by Category -->
     {% for category in categories %}
       <div class="category-block">
         <h3>{{ category.name }}</h3>
-        <ul>
-          {% for topic in category.topics.all|dictsortreversed:"score" %}
-            <li class="topic-item">
-              <div class="topic-info">
-                <strong>{{ topic.title }}</strong>
-                <span class="topic-author">
-                  by
-                  {% if topic.created_by %}
-                    {{ topic.created_by.userprofile.nickname }}
-                  {% else %}
-                    basic
-                  {% endif %}
-                </span>
-              </div>
-              <div class="topic-actions">
-                <!-- Select / Remove -->
+        {% for topic in category.topics.all|dictsortreversed:"score" %}
+          <div class="topic-item">
+            <div class="topic-info">
+              <strong>{{ topic.title }}</strong>
+              <span class="topic-author">
+                by {{ topic.created_by.userprofile.nickname|default:"basic" }}
+              </span>
+            </div>
+            <div class="topic-actions">
+              <form action="{% url 'find_topics' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <input type="hidden" name="topic_id" value="{{ topic.id }}">
+                {% if topic in user_topics %}
+                  <button type="submit" name="deselect_topic" class="btn btn-outline-danger btn-sm">Remove</button>
+                {% else %}
+                  <button type="submit" name="select_topic" class="btn btn-outline-success btn-sm">Select</button>
+                {% endif %}
+              </form>
+              {% if topic.created_by == request.user %}
                 <form action="{% url 'find_topics' %}" method="post" class="d-inline">
                   {% csrf_token %}
                   <input type="hidden" name="topic_id" value="{{ topic.id }}">
-                  {% if topic in user_topics %}
-                    <button type="submit" name="deselect_topic" class="btn btn-outline-danger btn-sm">
-                      Remove
-                    </button>
-                  {% else %}
-                    <button type="submit" name="select_topic" class="btn btn-outline-success btn-sm">
-                      Select
-                    </button>
-                  {% endif %}
+                  <button type="submit" name="delete_topic" class="btn btn-outline-secondary btn-sm">Delete</button>
                 </form>
-                <!-- Delete (author only) -->
-                {% if topic.created_by == request.user %}
-                  <form action="{% url 'find_topics' %}" method="post" class="d-inline">
-                    {% csrf_token %}
-                    <input type="hidden" name="topic_id" value="{{ topic.id }}">
-                    <button type="submit" name="delete_topic" class="btn btn-outline-danger btn-sm">
-                      Delete
-                    </button>
-                  </form>
-                {% endif %}
-                <!-- Up/Down Votes -->
-                <a href="{% url 'vote_topic' topic.id 'up' %}" class="btn btn-outline-success btn-sm">
-                  👍 {{ topic.upvotes.count }}
-                </a>
-                <a href="{% url 'vote_topic' topic.id 'down' %}" class="btn btn-outline-danger btn-sm">
-                  👎 {{ topic.downvotes.count }}
-                </a>
-              </div>
-            </li>
-          {% empty %}
-            <li class="text-center text-muted">No topics available.</li>
-          {% endfor %}
-        </ul>
+              {% endif %}
+              <a href="{% url 'vote_topic' topic.id 'up' %}" class="btn btn-outline-success btn-sm">👍 {{ topic.upvotes.count }}</a>
+              <a href="{% url 'vote_topic' topic.id 'down' %}" class="btn btn-outline-danger btn-sm">👎 {{ topic.downvotes.count }}</a>
+            </div>
+          </div>
+        {% empty %}
+          <p class="text-muted">No topics in this category.</p>
+        {% endfor %}
       </div>
     {% endfor %}
-
   </div>
 
-
-  <!-- Right Column: My Topics Sidebar -->
+  <!-- Right Column -->
   <div class="topics-sidebar">
-    <div class="my-topics-card">
-      <h5>My Topics ({{ user_topics|length }})</h5>
-      <ul>
-        {% for topic in user_topics %}
-          <li class="topic-item">
-            <span>{{ topic.title }}</span>
-            <form action="{% url 'find_topics' %}" method="post" class="d-inline">
-              {% csrf_token %}
-              <input type="hidden" name="topic_id" value="{{ topic.id }}">
-              <button type="submit" name="deselect_topic" class="btn btn-outline-danger btn-sm">
-                Remove
-              </button>
-            </form>
-          </li>
-        {% empty %}
-          <li class="text-center text-muted">No topics selected.</li>
-        {% endfor %}
-      </ul>
-    </div>
+    <h5>My Topics ({{ user_topics|length }})</h5>
+    <ul style="list-style:none; padding:0;">
+      {% for topic in user_topics %}
+        <li class="topic-item">
+          <span>{{ topic.title }}</span>
+          <form action="{% url 'find_topics' %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <input type="hidden" name="topic_id" value="{{ topic.id }}">
+            <button type="submit" name="deselect_topic" class="btn btn-outline-danger btn-sm">Remove</button>
+          </form>
+        </li>
+      {% empty %}
+        <li class="text-muted">No topics selected.</li>
+      {% endfor %}
+    </ul>
   </div>
 
 </div>
