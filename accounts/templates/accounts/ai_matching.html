@@ -1,3 +1,4 @@
+{# accounts/templates/accounts/ai_matching.html #}
 {% extends 'base.html' %}
 {% load static %}
 
@@ -9,18 +10,17 @@
   <div class="ai-header">
     <h1>AI Matching</h1>
     {% if started %}
-      <a href="{% url 'ai_matching' %}?start=1&refresh=1" class="btn-refresh btn btn-secondary">
+      <a href="{% url 'ai_matching' %}?start=1&refresh=1"
+         class="btn-refresh btn btn-secondary">
         {% if refreshed %}Refreshed{% else %}Refresh Recommendations{% endif %}
       </a>
     {% endif %}
   </div>
 
   <div class="ai-container">
-    {# ── (A) 추천 영역 ── #}
+    <!-- (A) 추천 리스트 -->
     <aside class="ai-sidebar">
       <h2>Recommendations</h2>
-
-      {# 이 컨테이너는 항상 존재해야 JS가 innerHTML로 교체 가능 #}
       <div id="recommendations-container">
         {% if not started %}
           <p>Click “Start AI match” to get recommendations.</p>
@@ -42,7 +42,7 @@
       </div>
     </aside>
 
-    {# ── (B) 중앙 메시지 영역 ── #}
+    <!-- (B) 중앙 슬롯 선택 폼 -->
     <main class="ai-main" id="profile-and-form">
       {% if not started %}
         <p>Press the button on the left to begin.</p>
@@ -51,7 +51,7 @@
       {% endif %}
     </main>
 
-    {# ── (C) 요청·채팅 내역 영역 (항상 보임) ── #}
+    <!-- (C) 요청·채팅 내역 -->
     <section class="ai-requests">
       <h2>Sent Requests</h2>
       <ul class="sent-requests-list">
@@ -92,21 +92,27 @@
             <ul class="slot-list">
               <li>
                 {{ req.slot1 }}
-                <form method="post" action="{% url 'chat_request_confirm' req.pk 0 %}" style="display:inline;">
+                <form method="post"
+                      action="{% url 'chat_request_confirm' req.pk 0 %}"
+                      style="display:inline;">
                   {% csrf_token %}
                   <button type="submit">Confirm</button>
                 </form>
               </li>
               <li>
                 {{ req.slot2 }}
-                <form method="post" action="{% url 'chat_request_confirm' req.pk 1 %}" style="display:inline;">
+                <form method="post"
+                      action="{% url 'chat_request_confirm' req.pk 1 %}"
+                      style="display:inline;">
                   {% csrf_token %}
                   <button type="submit">Confirm</button>
                 </form>
               </li>
               <li>
                 {{ req.slot3 }}
-                <form method="post" action="{% url 'chat_request_confirm' req.pk 2 %}" style="display:inline;">
+                <form method="post"
+                      action="{% url 'chat_request_confirm' req.pk 2 %}"
+                      style="display:inline;">
                   {% csrf_token %}
                   <button type="submit">Confirm</button>
                 </form>
