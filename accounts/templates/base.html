@@ -2,61 +2,60 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}My Chat App{% endblock %}</title>
-    {% load static %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}?v=2">
-    
-    {% block head %}{% endblock %}
+  <meta charset="UTF-8">
+  <title>{% block title %}My Chat App{% endblock %}</title>
+  {% load static %}
+
+  <!-- ✅ 메인 스타일 -->
+  <link rel="stylesheet" href="{% static 'css/home.css' %}?v=2">
+
+  <!-- ✅ 어비 슬기로운생활체 폰트 불러오기 -->
+  <link href="https://webfontworld.github.io/uhbee/UhBeeSeulgiro.css" rel="stylesheet">
+
+  {% block head %}{% endblock %}
 </head>
 
-
-<body>
-    <!-- 네비게이션바 시작 -->
-    <nav class="navbar">
-      <div class="navbar-logo">
-        <a href="/">
-          <img src="{% static 'images/logo.png' %}" alt="HIDM Logo">
-        </a>
-      </div>
-      <div class="nav-row-container">
-        <ul class="nav-row first-row">
-          <li><a href="{% url 'find_friends' %}">AI Matching</a></li>
-          <li><a href="{% url 'my_friends' %}">Direct Message</a></li>  <!-- ← 여기 추가 -->
-          <li><a href="{% url 'find_topics' %}">Find Topics</a></li>
-          <li><a href="{% url 'announcement_list' %}">Announcement</a></li>
-          <li><a href="{% url 'profile' %}">My Profile</a></li>
-
-          {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-          {% else %}
-            <li><a href="{% url 'login' %}">Login</a></li>
-          {% endif %}
-        </ul>
-      </div>
-    </nav>
-    <!-- 네비게이션바 끝 -->
-
-    <div style="padding: 20px;">
-        {% block content %}
-        {% endblock %}
+<body style="font-family: 'UhBeeSeulgiro', sans-serif;">
+  <!-- ✅ 네비게이션바 -->
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <a href="/">
+        <img src="{% static 'images/logo.png' %}" alt="HIDM Logo">
+      </a>
     </div>
+    <div class="nav-row-container">
+      <ul class="nav-row first-row">
+        <li><a href="{% url 'find_friends' %}">AI Matching</a></li>
+        <li><a href="{% url 'my_friends' %}">Direct Message</a></li>
+        <li><a href="{% url 'find_topics' %}">Find Topics</a></li>
+        <li><a href="{% url 'announcement_list' %}">Announcement</a></li>
+        <li><a href="{% url 'profile' %}">My Profile</a></li>
 
-<footer class="site-footer">
-  <div class="footer-info">
-    <p>본 서비스는 한림대학교 교내 국제 교류 활성화를 위한 프로젝트입니다.</p>
-    <p>(우) 강원특별자치도 춘천시 한림대학길 1 한림대학교 공학관</p>
-    <p>Email. 20215267@hallym.ac.kr</p>
-    <p>Copyright © Hanseohee. All Rights Reserved.</p>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ✅ 콘텐츠 영역 -->
+  <div style="padding: 20px;">
+    {% block content %}
+    {% endblock %}
   </div>
-</footer>
 
+  <!-- ✅ 푸터 -->
+  <footer class="site-footer">
+    <div class="footer-info">
+      <p>본 서비스는 한림대학교 교내 국제 교류 활성화를 위한 프로젝트입니다.</p>
+      <p>(우) 강원특별자치도 춘천시 한림대학길 1 한림대학교 공학관</p>
+      <p>Email. 20215267@hallym.ac.kr</p>
+      <p>Copyright © Hanseohee. All Rights Reserved.</p>
+    </div>
+  </footer>
 
-    {# ─── 여기에만 추가 ─── #}
-    {% block extra_js %}{% endblock %}
-
-
-
-
+  {% block extra_js %}{% endblock %}
 </body>
 </html>

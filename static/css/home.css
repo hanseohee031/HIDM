@@ -1,12 +1,25 @@
+/* ─── @font-face 정의 ─── */
+@font-face {
+  font-family: 'UhBeeSeulvely';
+  src: url('../fonts/UhBeeSeulvely.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ─── 전체 기본 폰트 설정 ─── */
+body {
+  font-family: 'UhBeeSeulvely', sans-serif;
+}
+
 /* ─── 네비 전체 컨테이너 ─── */
 .navbar {
-  background-color: #f8f9fa;
+  background-color: #fce0da;
   padding: 20px 30px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   display: flex;
-  flex-direction: column;      /* 로고 위, 메뉴 아래 */
+  flex-direction: column;
   align-items: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'UhBeeSeulvely', sans-serif;
 }
 
 /* ─── 로고 ─── */
@@ -19,7 +32,7 @@
 /* ─── 메뉴 묶음(container) ─── */
 .nav-row-container {
   width: 100%;
-  max-width: 1200px;           /* 전체 최대 넓이 */
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,14 +44,14 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 40px;                   /* 메뉴 아이템 간격 */
+  gap: 40px;
   justify-content: center;
 }
 
 /* ─── 첫 번째 줄 ─── */
 .first-row {
   width: 100%;
-  max-width: 800px;            /* 원하는 만큼 조정 */
+  max-width: 800px;
   padding-bottom: 10px;
   border-bottom: 2px dashed gray;
 }
@@ -52,12 +65,18 @@
 
 /* ─── 링크 스타일 ─── */
 .nav-row li a {
+  font-family: 'UhBeeSeulvely', sans-serif;
   font-size: 1.3rem;
   font-weight: 400;
   color: #444;
   text-decoration: none;
   transition: color 0.2s ease;
+  white-space: nowrap;
+  line-height: 1.6;
+  padding: 4px 0;
+  display: inline-block;
 }
+
 .nav-row li a:hover {
   color: #0056b3;
 }
@@ -72,14 +91,15 @@
   border-radius: 0 !important;
 }
 
-
+/* ─── 푸터 ─── */
 .site-footer {
-  background-color: #000;      /* 검정 배경 */
-  color: #fff;                 /* 흰 글씨 */
+  background-color: #f5eee6;
+  color: #333;
   padding: 40px 20px;
   text-align: center;
   font-size: 0.95rem;
   margin-top: 60px;
+  font-family: 'UhBeeSeulvely', sans-serif;
 }
 
 .site-footer .footer-info p {
