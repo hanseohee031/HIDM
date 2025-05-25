@@ -1,14 +1,97 @@
-{% extends 'base.html' %}
+{% extends 'popup_base.html' %}
+
+{% block head %}
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f6f7;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .chat-header {
+      padding: 12px 16px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ddd;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+
+    .message.me {
+      align-self: flex-end;
+      background-color: #4a6ef5;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.other {
+      align-self: flex-start;
+      background-color: #ffffff;
+      color: black;
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 12px 16px;
+      background-color: #fff;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+    }
+
+    .chat-input button {
+      margin-left: 10px;
+      padding: 10px 16px;
+      background-color: #4a6ef5;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+{% endblock %}
+
 {% block content %}
-<h2>Chat with {{ friend_profile.nickname }}</h2>
-<div id="chat-log"></div>
-<form id="chat-form">
-  <input type="text" id="chat-message-input" autocomplete="off" placeholder="Type your message..."/>
-  <button type="submit">Send</button>
-</form>
+<div class="chat-header">Chat with {{ friend_profile.nickname }}</div>
+<div class="chat-box" id="chat-log"></div>
+
+<div class="chat-input">
+  <input type="text" id="chat-message-input" autocomplete="off" placeholder="Type a message...">
+  <button type="submit" id="chat-submit">Send</button>
+</div>
+
 <script>
-  // JavaScript에서 내 닉네임, 상대 닉네임만 사용할 것
-  // WebSocket 연결 예시:
   const friendNickname = "{{ friend_profile.nickname }}";
   const ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
   const chatSocket = new WebSocket(
@@ -16,22 +99,36 @@
     '/ws/dm/' + friendNickname + '/'
   );
 
+  const chatLog = document.getElementById('chat-log');
+  const inputBox = document.getElementById('chat-message-input');
+
   chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
     const sender = data.sender_nickname;
     const message = data.message;
-    const msgHtml = `<div><b>${sender}:</b> ${message}</div>`;
-    document.getElementById('chat-log').innerHTML += msgHtml;
+    const msgClass = sender === "{{ request.user.userprofile.nickname }}" ? "me" : "other";
+    const msgHtml = `<div class="message ${msgClass}">${message}</div>`;
+    chatLog.innerHTML += msgHtml;
+    chatLog.scrollTop = chatLog.scrollHeight;
   };
 
-  document.getElementById('chat-form').onsubmit = function(e) {
+  document.getElementById('chat-submit').onclick = function(e) {
     e.preventDefault();
-    const input = document.getElementById('chat-message-input');
-    if (input.value.trim()) {
-      chatSocket.send(JSON.stringify({
-        'message': input.value
-      }));
-      input.value = '';
+    sendMessage();
+  };
+
+  inputBox.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  function sendMessage() {
+    const message = inputBox.value.trim();
+    if (message) {
+      chatSocket.send(JSON.stringify({ 'message': message }));
+      inputBox.value = '';
     }
   }
 </script>

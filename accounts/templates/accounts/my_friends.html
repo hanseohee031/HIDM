@@ -46,6 +46,7 @@
       padding: 6px 12px;
       border-radius: 6px;
       text-decoration: none;
+      cursor: pointer;
     }
 
     .btn-dm:hover {
@@ -66,7 +67,7 @@
     <div class="friend-card">
       <div class="friend-header">
         <div class="friend-nickname">{{ friend.userprofile.nickname }}</div>
-        <a href="{% url 'dm_chat_room' friend.userprofile.nickname %}" class="btn-dm">DM</a>
+        <a href="{% url 'dm_chat_room' friend.userprofile.nickname %}" class="btn-dm" onclick="openPopup(event, this.href)">DM</a>
       </div>
       <div class="friend-info">
         <p><strong>Gender:</strong> {{ friend.userprofile.get_gender_display }}</p>
@@ -82,4 +83,11 @@
     <p style="margin-left: 24px; color: #999;">No friends yet.</p>
   {% endfor %}
 </div>
+
+<script>
+  function openPopup(e, url) {
+    e.preventDefault();
+    window.open(url, '_blank', 'width=500,height=600,menubar=no,toolbar=no,location=no,status=no');
+  }
+</script>
 {% endblock %}
