@@ -20,8 +20,8 @@
         <ul class="nav-row first-row">
 
           <li><a href="{% url 'ai_matching' %}">AI Matching</a></li>
-          <li><a href="/earn-points/">Earn Points</a></li>
 
+          <li><a href="{% url 'my_friends' %}">Direct Message</a></li>  <!-- ← 여기 추가 -->
           <li><a href="{% url 'find_topics' %}">Find Topics</a></li>
 
           <li><a href="{% url 'find_friends' %}">Find Friends</a></li>
@@ -33,8 +33,6 @@
         </ul>
         <ul class="nav-row second-row">
           <li><a href="{% url 'announcement_list' %}">Announcement</a></li>
-          <li><a href="/boomerang/">Boomerang</a></li>
-          <li><a href="/hidm-court/">HIDM Court</a></li>
           <li><a href="{% url 'profile' %}">My Profile</a></li>
         </ul>
       </div>

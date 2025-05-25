@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Friends</h2>
+<ul>
+  {% for friend in friends %}
+    <li>
+      {{ friend.userprofile.nickname }} ({{ friend.username }})
+<a href="{% url 'dm_chat_room' friend.userprofile.nickname %}" class="btn btn-primary btn-sm">Direct Message</a>
+
+    </li>
+  {% empty %}
+    <li>No friends yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

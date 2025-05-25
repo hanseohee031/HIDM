@@ -10,6 +10,31 @@ from django.shortcuts import HttpResponse
 from .import matchmaker
 from django.views.decorators.csrf import csrf_exempt
 
+from accounts.models import UserProfile
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, render
+from django.http import Http404
+from accounts.models import User, Friendship
+from django.db.models import Q
+
+
+@login_required
+def dm_chat_room(request, nickname):
+    user = request.user
+    friend_profile = get_object_or_404(UserProfile, nickname=nickname)
+    friend = friend_profile.user
+
+    # 친구 관계 확인
+    if not Friendship.objects.filter(
+        ((Q(from_user=user) & Q(to_user=friend)) | (Q(from_user=friend) & Q(to_user=user))) & Q(status='accepted')
+    ).exists():
+        raise Http404("You are not friends.")
+
+    return render(request, 'chat/dm_chat_room.html', {'friend_profile': friend_profile})
+
+
+
 
 @csrf_exempt
 @login_required

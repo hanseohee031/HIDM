@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Chat with {{ friend_profile.nickname }}</h2>
+<div id="chat-log"></div>
+<form id="chat-form">
+  <input type="text" id="chat-message-input" autocomplete="off" placeholder="Type your message..."/>
+  <button type="submit">Send</button>
+</form>
+<script>
+  // JavaScript에서 내 닉네임, 상대 닉네임만 사용할 것
+  // WebSocket 연결 예시:
+  const friendNickname = "{{ friend_profile.nickname }}";
+  const ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
+  const chatSocket = new WebSocket(
+    ws_scheme + '://' + window.location.host +
+    '/ws/dm/' + friendNickname + '/'
+  );
+
+  chatSocket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    const sender = data.sender_nickname;
+    const message = data.message;
+    const msgHtml = `<div><b>${sender}:</b> ${message}</div>`;
+    document.getElementById('chat-log').innerHTML += msgHtml;
+  };
+
+  document.getElementById('chat-form').onsubmit = function(e) {
+    e.preventDefault();
+    const input = document.getElementById('chat-message-input');
+    if (input.value.trim()) {
+      chatSocket.send(JSON.stringify({
+        'message': input.value
+      }));
+      input.value = '';
+    }
+  }
+</script>
+{% endblock %}

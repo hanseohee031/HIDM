@@ -34,7 +34,15 @@ from django.views.decorators.http import require_POST
 from django.http import HttpResponseForbidden
 
 
-
+@login_required
+def my_friends(request):
+    user = request.user
+    friends = Friendship.objects.filter(
+        (Q(from_user=user) | Q(to_user=user)) & Q(status='accepted')
+    )
+    # 실제 친구 User 객체만 뽑기
+    friend_users = [f.to_user if f.from_user == user else f.from_user for f in friends]
+    return render(request, 'accounts/my_friends.html', {'friends': friend_users})
 
 @login_required
 def chat_request_send(request, username):
