@@ -1,27 +1,38 @@
 {# accounts/templates/accounts/partials/ai_matches.html #}
-<ul class="recommendations-list">
-  {% for rec in recommendations %}
-    <li class="recommendation-item">
-      <h3>{{ rec.nickname }}</h3>
-      <p>Similarity: {{ rec.score|floatformat:4 }}</p>
-      <ul class="rec-details">
-        <li>Gender: {{ rec.gender }}</li>
-        <li>Native Language: {{ rec.native_language }}</li>
-        <li>Nationality: {{ rec.nationality }}</li>
-        <li>Major: {{ rec.major }}</li>
-        <li>Personality (MBTI): {{ rec.personality }}</li>
-        <li>Birth Year: {{ rec.birth_year }}</li>
-        <li>Interests: {{ rec.interests|join:", " }}</li>
-      </ul>
-      <button
-        type="button"
-        class="ai-match-link btn btn-primary btn-request-chat"
-        data-username="{{ rec.username }}"
-      >
-        Request Chat
-      </button>
-    </li>
-  {% empty %}
-    <li>No recommendations found.</li>
-  {% endfor %}
-</ul>
+<div id="recommendations-container">
+  <ul class="recommendations-list">
+    {% for rec in recommendations %}
+      <li class="recommendation-item" id="card-{{ rec.username }}">
+        <h3>{{ rec.nickname }}</h3>
+        <p>Similarity: {{ rec.score|floatformat:4 }}</p>
+        <ul class="rec-details">
+          <li>Gender: {{ rec.gender }}</li>
+          <li>Native Language: {{ rec.native_language }}</li>
+          <li>Nationality: {{ rec.nationality }}</li>
+          <li>Major: {{ rec.major }}</li>
+          <li>Personality (MBTI): {{ rec.personality }}</li>
+          <li>Birth Year: {{ rec.birth_year }}</li>
+          <li>Interests: {{ rec.interests|join:", " }}</li>
+        </ul>
+        <!-- Request Chat 버튼 -->
+        <button
+          type="button"
+          class="ai-match-request btn btn-primary"
+          data-username="{{ rec.username }}"
+        >
+          Request Chat
+        </button>
+        <!-- Swap 버튼 -->
+        <button
+          type="button"
+          class="swap-btn btn btn-secondary"
+          data-username="{{ rec.username }}"
+        >
+          Swap
+        </button>
+      </li>
+    {% empty %}
+      <li>No recommendations found.</li>
+    {% endfor %}
+  </ul>
+</div>

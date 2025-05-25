@@ -1,0 +1,28 @@
+{# 한 명짜리 추천 카드 (swap시 이 HTML로 교체됩니다) #}
+<li class="recommendation-item" id="card-{{ username }}">
+  <h3>{{ nickname }}</h3>
+  <p>Similarity: {{ score|floatformat:4 }}</p>
+  <ul class="rec-details">
+    <li>Gender: {{ gender }}</li>
+    <li>Native Language: {{ native_language }}</li>
+    <li>Nationality: {{ nationality }}</li>
+    <li>Major: {{ major }}</li>
+    <li>Personality (MBTI): {{ personality }}</li>
+    <li>Birth Year: {{ birth_year }}</li>
+    <li>Interests: {{ interests|join:", " }}</li>
+  </ul>
+
+  {# Request Chat 버튼 #}
+  <button
+    type="button"
+    class="ai-match-request btn btn-primary"
+    data-username="{{ username }}"
+  >Request Chat</button>
+
+  {# Swap 버튼 #}
+  <button
+    type="button"
+    class="swap-btn btn btn-secondary"
+    data-username="{{ username }}"
+  >Swap</button>
+</li>

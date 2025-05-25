@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from .views import ai_matching
+from .views import ai_matching, ai_matching_swap
+
 urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('login/', views.login_view, name='login'),
@@ -33,7 +35,10 @@ urlpatterns = [
     # Find Topics feature
     path('find-topics/', views.find_topics, name='find_topics'),
     path('topic/<int:topic_id>/vote/<str:vote_type>/',views.vote_topic, name='vote_topic' ),
+
     path('ai-matching/', ai_matching, name='ai_matching'),
+    path('ai-matching/swap/<str:username>/', views.ai_matching_swap, name='ai_matching_swap'),
+
     path('chat-request/send/<str:username>/', views.chat_request_send, name='chat_request_send'),
     path('chat-requests/', views.chat_request_list, name='chat_request_list'),  # 목록 뷰도 곧 추가 예정
     path('chat-request/<int:pk>/confirm/<int:slot_index>/', views.chat_request_confirm, name='chat_request_confirm'),

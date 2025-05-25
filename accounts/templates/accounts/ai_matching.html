@@ -9,7 +9,7 @@
   <div class="ai-header">
     <h1>AI Matching</h1>
     {% if started %}
-      <a href="{% url 'ai_matching' %}?start=1&refresh=1" class="btn-refresh">
+      <a href="{% url 'ai_matching' %}?start=1&refresh=1" class="btn-refresh btn btn-secondary">
         {% if refreshed %}Refreshed{% else %}Refresh Recommendations{% endif %}
       </a>
     {% endif %}
@@ -19,23 +19,33 @@
     {# ── (A) 추천 영역 ── #}
     <aside class="ai-sidebar">
       <h2>Recommendations</h2>
-      {% if not started %}
-        <p>Click “Start AI match” to get recommendations.</p>
-      {% else %}
-        {% if error %}
-          <p class="error">{{ error }}</p>
+
+      {# 이 컨테이너는 항상 존재해야 JS가 innerHTML로 교체 가능 #}
+      <div id="recommendations-container">
+        {% if not started %}
+          <p>Click “Start AI match” to get recommendations.</p>
+          <button
+            type="button"
+            id="btn-start"
+            class="btn btn-primary"
+            data-url="{% url 'ai_matching' %}?start=1"
+          >
+            Start AI match
+          </button>
         {% else %}
-          {% include 'accounts/partials/ai_matches.html' %}
+          {% if error %}
+            <p class="error">{{ error }}</p>
+          {% else %}
+            {% include 'accounts/partials/ai_matches.html' %}
+          {% endif %}
         {% endif %}
-      {% endif %}
+      </div>
     </aside>
 
     {# ── (B) 중앙 메시지 영역 ── #}
     <main class="ai-main" id="profile-and-form">
       {% if not started %}
-        <form method="get" action="{% url 'ai_matching' %}">
-          <button type="submit" name="start" value="1">Start AI match</button>
-        </form>
+        <p>Press the button on the left to begin.</p>
       {% else %}
         <p>Select one of the recommendations on the left to send a chat request.</p>
       {% endif %}
@@ -79,7 +89,6 @@
                 <li>Interests: {{ req.sender.userprofile.favorite_categories.all|join:", " }}</li>
               </ul>
             </div>
-
             <ul class="slot-list">
               <li>
                 {{ req.slot1 }}
@@ -103,7 +112,6 @@
                 </form>
               </li>
             </ul>
-
             <form method="post" action="{% url 'chat_request_reject' req.pk %}">
               {% csrf_token %}
               <button type="submit">Reject</button>
@@ -135,5 +143,6 @@
 {% endblock %}
 
 {% block extra_js %}
+  <script src="{% static 'js/ai_matching.js' %}"></script>
   <script src="{% static 'js/chat_requests.js' %}"></script>
 {% endblock %}
