@@ -2,11 +2,10 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/ai_matching.css' %}">
+  <link rel="stylesheet" href="{% static 'css/ai_matching.css' %}">
 {% endblock %}
 
 {% block content %}
-
   <div class="ai-header">
     <h1>AI Matching</h1>
     <a href="{% url 'ai_matching' %}?refresh=1" class="btn-refresh">
@@ -16,8 +15,7 @@
 
   {% if error %}
     <p class="error">{{ error }}</p>
-
-  {% elif recommendations %}
+  {% else %}
     <div class="ai-container">
       <!-- 왼쪽: 추천 리스트 -->
       <aside class="ai-sidebar">
@@ -25,71 +23,99 @@
         {% include 'accounts/partials/ai_matches.html' %}
       </aside>
 
-      <!-- 가운데: 프로필 상세 + 폼 -->
+      <!-- 가운데: (선택 시) 프로필+폼 영역 -->
       <main class="ai-main" id="profile-and-form">
-        {% if selected_rec %}
-          {# 선택된 프로필 상세 + 시간대 폼 렌더 #}
-        {% else %}
-          <p>Select one of the recommendations on the left to send a chat request.</p>
-        {% endif %}
+        <p>Select one of the recommendations on the left to send a chat request.</p>
       </main>
 
-      <!-- 오른쪽: 채팅 요청 내역 -->
+      <!-- 오른쪽: 요청 현황 -->
       <section class="ai-requests">
-        <h3>Sent Requests</h3>
-        {% if sent_requests %}
-          <ul>
-            {% for req in sent_requests %}
-              <li>
-                To {{ req.receiver.username }}:
-                {{ req.slot1 }} / {{ req.slot2 }} / {{ req.slot3 }}
-                ({{ req.status }})
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>No sent requests.</p>
-        {% endif %}
+        <h2>Sent Requests</h2>
+        <ul>
+          {% for req in sent_requests %}
+            <li>
+              {% if req.receiver.userprofile.nickname %}
+                {{ req.receiver.userprofile.nickname }}
+              {% else %}
+                {{ req.receiver.username }}
+              {% endif %}
+              <ul>
+                <li>{{ req.slot1 }}</li>
+                <li>{{ req.slot2 }}</li>
+                <li>{{ req.slot3 }}</li>
+              </ul>
+              <form method="post" action="{% url 'chat_request_reject' req.pk %}">
+                {% csrf_token %}
+                <button type="submit">Cancel</button>
+              </form>
+            </li>
+          {% empty %}
+            <li>No sent requests.</li>
+          {% endfor %}
+        </ul>
 
-        <h3>Received Requests</h3>
-        {% if received_requests %}
-          <ul>
-            {% for req in received_requests %}
-              <li>
-                From {{ req.sender.username }}:
-                {{ req.slot1 }} / {{ req.slot2 }} / {{ req.slot3 }}
-                <a href="{% url 'chat_request_confirm' req.id 0 %}">Confirm slot1</a>
-                {# slot2, slot3 수락 링크도 유사하게 추가 가능 #}
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>No incoming requests.</p>
-        {% endif %}
+        <h2>Received Requests</h2>
+        <ul>
+          {% for req in received_requests %}
+            <li>
+              {% if req.sender.userprofile.nickname %}
+                {{ req.sender.userprofile.nickname }}
+              {% else %}
+                {{ req.sender.username }}
+              {% endif %}
+              <ul>
+                <li>
+                  {{ req.slot1 }}
+                  <a href="{% url 'chat_request_confirm' req.pk 0 %}">Confirm</a>
+                </li>
+                <li>
+                  {{ req.slot2 }}
+                  <a href="{% url 'chat_request_confirm' req.pk 1 %}">Confirm</a>
+                </li>
+                <li>
+                  {{ req.slot3 }}
+                  <a href="{% url 'chat_request_confirm' req.pk 2 %}">Confirm</a>
+                </li>
+              </ul>
+              <form method="post" action="{% url 'chat_request_reject' req.pk %}">
+                {% csrf_token %}
+                <button type="submit">Reject</button>
+              </form>
+            </li>
+          {% empty %}
+            <li>No incoming requests.</li>
+          {% endfor %}
+        </ul>
 
-        <h3>Confirmed Chats</h3>
-        {% if confirmed_chats %}
-          <ul>
-            {% for req in confirmed_chats %}
+        <h2>Confirmed Chats</h2>
+        <ul>
+          {% for req in confirmed_chats %}
+            {% if req.sender == user %}
               <li>
                 Chat with
-                {% if req.sender == request.user %}
+                {% if req.receiver.userprofile.nickname %}
+                  {{ req.receiver.userprofile.nickname }}
+                {% else %}
                   {{ req.receiver.username }}
+                {% endif %}
+                at {{ req.chosen_slot }}
+              </li>
+            {% else %}
+              <li>
+                Chat with
+                {% if req.sender.userprofile.nickname %}
+                  {{ req.sender.userprofile.nickname }}
                 {% else %}
                   {{ req.sender.username }}
                 {% endif %}
                 at {{ req.chosen_slot }}
               </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>No confirmed chats.</p>
-        {% endif %}
+            {% endif %}
+          {% empty %}
+            <li>No confirmed chats.</li>
+          {% endfor %}
+        </ul>
       </section>
     </div>
-
-  {% else %}
-    <p>No recommendations available.</p>
   {% endif %}
-
 {% endblock %}

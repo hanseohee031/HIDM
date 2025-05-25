@@ -1,12 +1,24 @@
+{# accounts/templates/accounts/partials/ai_matches.html #}
 <ul class="recommendations-list">
   {% for rec in recommendations %}
     <li class="recommendation-item">
       <h3>{{ rec.nickname }}</h3>
       <p>Similarity: {{ rec.score|floatformat:4 }}</p>
-      <!-- 프로필 정보 생략 -->
-      <form action="{% url 'chat_request_send' rec.username %}" method="get" style="display:inline;">
-        <button type="submit" class="btn-request-chat">Request Chat</button>
-      </form>
+      <ul class="rec-details">
+        <li>Gender: {{ rec.gender }}</li>
+        <li>Native Language: {{ rec.native_language }}</li>
+        <li>Nationality: {{ rec.nationality }}</li>
+        <li>Major: {{ rec.major }}</li>
+        <li>Personality (MBTI): {{ rec.personality }}</li>
+        <li>Birth Year: {{ rec.birth_year }}</li>
+        <li>Interests: {{ rec.interests|join:", " }}</li>
+      </ul>
+      <button
+        class="btn btn-primary btn-request-chat"
+        data-username="{{ rec.username }}"
+      >
+        Request Chat
+      </button>
     </li>
   {% empty %}
     <li>No recommendations found.</li>

@@ -32,15 +32,12 @@ urlpatterns = [
     path('announcement/<int:pk>/delete/', views.announcement_delete, name='announcement_delete'),
     # Find Topics feature
     path('find-topics/', views.find_topics, name='find_topics'),
-    path(
-        'topic/<int:topic_id>/vote/<str:vote_type>/',
-        views.vote_topic,
-        name='vote_topic'
-    ),
+    path('topic/<int:topic_id>/vote/<str:vote_type>/',views.vote_topic, name='vote_topic' ),
     path('ai-matching/', ai_matching, name='ai_matching'),
     path('chat-request/send/<str:username>/', views.chat_request_send, name='chat_request_send'),
     path('chat-requests/', views.chat_request_list, name='chat_request_list'),  # 목록 뷰도 곧 추가 예정
     path('chat-request/<int:pk>/confirm/<int:slot_index>/', views.chat_request_confirm, name='chat_request_confirm'),
+    path('chat-request/<int:pk>/reject/', views.chat_request_reject, name='chat_request_reject'),
 ]
 
 

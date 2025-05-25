@@ -29,6 +29,9 @@ from recommendation.recommend import recommend_similar_users
 from .models import ChatRequest
 from .forms  import ChatRequestForm
 
+
+from django.views.decorators.http import require_POST
+
 @login_required
 def chat_request_send(request, username):
     """
@@ -79,31 +82,32 @@ def chat_request_list(request):
     })
 
 
+@require_POST
 @login_required
 def chat_request_confirm(request, pk, slot_index):
-    # 1) 자신에게 온 요청인지 확인
-    chat_request = get_object_or_404(
+    # 1) 자신에게 온, 아직 pending 상태인 요청인지 확인
+    chat_req = get_object_or_404(
         ChatRequest,
         pk=pk,
-        receiver=request.user
+        receiver=request.user,
+        status='pending'
     )
 
     # 2) slot_index 에 따라 chosen_slot 과 status 업데이트
-    slots = [chat_request.slot1, chat_request.slot2, chat_request.slot3]
+    slots = [chat_req.slot1, chat_req.slot2, chat_req.slot3]
     if 0 <= slot_index < len(slots):
-        chat_request.chosen_slot = slots[slot_index]
-        chat_request.status      = 'confirmed'
-        chat_request.save(update_fields=['chosen_slot', 'status'])
+        chat_req.chosen_slot = slots[slot_index]
+        chat_req.status      = 'confirmed'
+        chat_req.save(update_fields=['chosen_slot', 'status'])
         messages.success(
             request,
-            f"Chat confirmed at {chat_request.chosen_slot}."
+            f"Chat confirmed at {chat_req.chosen_slot}."
         )
     else:
-        messages.error(request, "Invalid slot.")
+        messages.error(request, "Invalid slot selection.")
 
     # 3) AI Matching 화면으로 돌아가기
     return redirect('ai_matching')
-
 
 @login_required
 def ai_matching(request):
@@ -112,14 +116,14 @@ def ai_matching(request):
     cache_key = f"ai_recs_user_{me}"
     refresh = request.GET.get('refresh') == '1'
 
-    # 캐시 무효화
+    # 1) 캐시 무효화
     if refresh:
         cache.delete(cache_key)
 
-    # 1) 캐시에서 불러오기
+    # 2) 캐시에서 추천 불러오기
     raw_recs = cache.get(cache_key)
     if raw_recs is None:
-        # 2) 후보 필터링 (한국인 ↔ 교환학생)
+        # — 후보 필터링 (한국인 ↔ 교환학생 분리)
         me_profile = UserProfile.objects.get(user=me_user)
         my_nat = me_profile.nationality
         candidates = []
@@ -132,30 +136,27 @@ def ai_matching(request):
                 continue
             candidates.append(prof)
 
-        # 3) 관심사 dict 생성
+        # — 관심사 dict 생성
         user_profiles = {
             prof.user.username: [c.name for c in prof.favorite_categories.all()]
             for prof in candidates if prof.favorite_categories.exists()
         }
-        # 자기 자신 포함
         user_profiles[me] = [c.name for c in me_profile.favorite_categories.all()]
 
-        # 4) 최소 하나 이상의 관심사 체크
         if not user_profiles[me]:
             return render(request, 'accounts/ai_matching.html', {
                 'error': 'Please select at least one interest in your profile.'
             })
 
-        # 5) SBERT로 추천 계산
+        # — SBERT로 추천 계산
         raw_recs = recommend_similar_users(
             user_id=me,
             user_profiles=user_profiles,
             top_k=3
         )
-        # 6) 캐시에 저장 (24시간)
         cache.set(cache_key, raw_recs, timeout=60*60*24)
 
-    # 7) 프로필 객체 불러오기
+    # 3) 추천 대상 프로필 로드
     rec_usernames = [r['user'] for r in raw_recs]
     rec_profiles = (
         UserProfile.objects
@@ -164,7 +165,7 @@ def ai_matching(request):
         .filter(user__username__in=rec_usernames)
     )
 
-    # 8) 컨텍스트용 리스트 조립
+    # 4) 컨텍스트용 recommendations 리스트 조립
     recommendations = []
     for r in raw_recs:
         prof = rec_profiles.get(user__username=r['user'])
@@ -181,32 +182,46 @@ def ai_matching(request):
             'interests':       [c.name for c in prof.favorite_categories.all()],
         })
 
-    # ―― 여기서 채팅 요청 내역 조회
+    # 5) 채팅 요청 내역 조회
     sent_requests = ChatRequest.objects.filter(
-        sender=request.user
+        sender=request.user,
+        status='pending'
     ).order_by('-created_at')
 
     received_requests = ChatRequest.objects.filter(
-        receiver=request.user
+        receiver=request.user,
+        status='pending'
     ).order_by('-created_at')
 
     confirmed_chats = ChatRequest.objects.filter(
-        Q(sender=request.user) | Q(receiver=request.user),
-        status='confirmed'
+        Q(sender=request.user, status='confirmed') |
+        Q(receiver=request.user, status='confirmed')
     ).order_by('-created_at')
-    # ――
 
+    # 6) 렌더
     return render(request, 'accounts/ai_matching.html', {
         'recommendations':    recommendations,
         'refreshed':          refresh,
-
-        # 채팅 요청 내역
         'sent_requests':      sent_requests,
         'received_requests':  received_requests,
         'confirmed_chats':    confirmed_chats,
     })
 
 
+@require_POST
+@login_required
+def chat_request_reject(request, pk):
+    """
+    받은(chat_request.receiver) 채팅 요청을 거절(삭제 혹은 상태 변경)합니다.
+    """
+    chat_req = get_object_or_404(ChatRequest, pk=pk, receiver=request.user, status='pending')
+    # 1) 완전 삭제하려면:
+    # chat_req.delete()
+    # 2) 상태만 변경하려면:
+    chat_req.status = 'rejected'
+    chat_req.save(update_fields=['status'])
+    messages.info(request, "Chat request rejected.")
+    return redirect('ai_matching')
 
 # 1. Signup View (uses Student ID, Email Verification)
 def signup_view(request):
