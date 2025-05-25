@@ -9,7 +9,15 @@
   <!-- ✅ 메인 스타일 -->
   <link rel="stylesheet" href="{% static 'css/home.css' %}?v=2">
 
-  <!-- ✅ 어비 슬기로운생활체 폰트 불러오기 -->
+  <!-- ★ 정자체 불러오기 & 전역 기본 폰트 설정 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      font-family: 'Noto Serif KR', serif;
+    }
+  </style>
+
+  <!-- ✅ 어비 슬기로운생활체(손글씨체) 폰트 불러오기 -->
   <link href="https://webfontworld.github.io/uhbee/UhBeeSeulgiro.css" rel="stylesheet">
 
   {% block head %}{% endblock %}
@@ -19,9 +27,7 @@
   <!-- ✅ 네비게이션바 -->
   <nav class="navbar">
     <div class="navbar-logo">
-      <a href="/">
-        <img src="{% static 'images/logo.png' %}" alt="HIDM Logo">
-      </a>
+      <a href="/"><img src="{% static 'images/logo.png' %}" alt="HIDM Logo"></a>
     </div>
     <div class="nav-row-container">
       <ul class="nav-row first-row">
@@ -30,7 +36,6 @@
         <li><a href="{% url 'find_topics' %}">Find Topics</a></li>
         <li><a href="{% url 'announcement_list' %}">Announcement</a></li>
         <li><a href="{% url 'profile' %}">My Profile</a></li>
-
         {% if user.is_authenticated %}
           <li><a href="{% url 'logout' %}">Logout</a></li>
         {% else %}
@@ -42,8 +47,7 @@
 
   <!-- ✅ 콘텐츠 영역 -->
   <div style="padding: 20px;">
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
   </div>
 
   <!-- ✅ 푸터 -->

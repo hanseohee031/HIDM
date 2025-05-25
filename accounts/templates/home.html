@@ -1,11 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block head %}
+  {{ block.super }}
+  <!-- 홈 메인 컨테이너에만 손글씨체 유지 -->
+  <style>
+    .main-container,
+    .main-container * {
+      font-family: 'UhBeeSeulvely', sans-serif !important;
+    }
+  </style>
+{% endblock %}
+
 {% block content %}
 <style>
-  /* 기본 설정 */
+  /* 기본 설정: 폰트(family)만 전역에서 내려온 정자체 사용 */
   html, body {
-    font-family: 'UhBeeSeulvely', sans-serif;
+    /* font-family 제거 */
     font-size: 18px;
     background-color: #f9f9f7;
     margin: 0;
@@ -19,18 +30,18 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 40px;
-    padding: 60px 20px 20px; /* 위쪽 여백 확대 */
+    padding: 60px 20px 20px;
     max-width: 1400px;
     margin: 0 auto;
   }
 
-  /* 왼쪽: Hallym Links (이미지 버튼 + 로고) */
+  /* 왼쪽: Hallym Links */
   .links-section {
     width: 280px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* 세로 중앙 정렬 */
+    justify-content: center;
     gap: 16px;
   }
   .links-section .section-title {
@@ -44,11 +55,7 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    width: 100%;
-  }
-  .link-buttons a {
     width: 90%;
-    display: block;
   }
   .link-buttons img {
     width: 100%;
@@ -69,7 +76,7 @@
     opacity: 0.9;
   }
 
-  /* 중앙: 배너 */
+  /* 가운데: 배너 */
   .center-image-wrapper {
     flex: 1;
     display: flex;
@@ -85,7 +92,7 @@
 
   /* 오른쪽: Signup + Announcement */
   .side-box {
-    width: 320px; /* 영역 넓히기 */
+    width: 320px;
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -93,14 +100,13 @@
   .section-title {
     color: #254e91;
     font-size: 1.4rem;
-    font-weight: bold; /* 제목만 볼드 */
+    font-weight: bold;
     margin-bottom: 8px;
   }
   .signup-stats, .signup-list, .announcement-list {
     color: #666;
     line-height: 1.6;
-    margin-bottom: 0;
-    font-weight: normal; /* 본문은 노멀 */
+    font-weight: normal;
   }
   .signup-list, .announcement-list {
     list-style: disc inside;
@@ -109,14 +115,13 @@
   }
   .announcement-list li,
   .signup-list li {
-    white-space: nowrap; /* 줄바꿈 방지 */
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .announcement-list li a {
     color: #666;
     text-decoration: none;
-    font-weight: normal;
   }
   .announcement-list li a:hover {
     text-decoration: underline;
@@ -182,5 +187,4 @@
     </div>
   </div>
 </div>
-
 {% endblock %}
