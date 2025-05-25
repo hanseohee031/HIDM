@@ -1,33 +1,62 @@
+.ai-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.btn-refresh {
+  font-size: 0.9rem;
+  padding: 0.3rem 0.8rem;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  text-decoration: none;
+}
 .ai-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-  margin-top: 1rem;
 }
 .ai-card {
-  border: 2px solid #1e40af;
-  border-radius: .5rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
   padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 .ai-card h2 {
-  margin-bottom: .75rem;
+  margin: 0 0 0.5rem;
   font-size: 1.25rem;
 }
+.score {
+  margin: 0 0 0.75rem;
+  font-style: italic;
+  color: #4b5563;
+}
 .profile-details {
-  list-style: disc inside;
-  margin: 0;
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 .profile-details li {
-  margin-bottom: .25rem;
+  margin-bottom: 0.4rem;
 }
 .btn-add-friend {
-  margin-top: 1rem;
-  background-color: #1e40af;
-  color: white;
+  margin-top: 0.75rem;
+  display: inline-block;
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
+  background: #10b981;
+  color: #fff;
   border: none;
-  padding: .5rem 1rem;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   cursor: pointer;
+}
+.btn-add-friend:hover {
+  opacity: 0.9;
+}
+.error {
+  color: #dc2626;
+  font-weight: bold;
 }

@@ -2,11 +2,16 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/ai_matching.css' %}">
+  <link rel="stylesheet" href="{% static 'css/ai_matching.css' %}">
 {% endblock %}
 
 {% block content %}
-  <h1>AI Matching</h1>
+  <div class="ai-header">
+    <h1>AI Matching</h1>
+    <a href="{% url 'ai_matching' %}?refresh=1" class="btn-refresh">
+      {% if refreshed %}Refreshed{% else %}Refresh Recommendations{% endif %}
+    </a>
+  </div>
 
   {% if error %}
     <p class="error">{{ error }}</p>
@@ -14,7 +19,8 @@
     <div class="ai-cards-grid">
       {% for rec in recommendations %}
         <div class="ai-card">
-          <h2>{{ rec.nickname }}'s Public Profile</h2>
+          <h2>{{ rec.nickname }}</h2>
+          <p class="score">Similarity: {{ rec.score }}</p>
           <ul class="profile-details">
             <li><strong>Gender:</strong> {{ rec.gender }}</li>
             <li><strong>Native Language:</strong> {{ rec.native_language }}</li>

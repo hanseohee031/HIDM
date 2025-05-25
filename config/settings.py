@@ -159,7 +159,17 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'hanseohee031@gmail.com'   # 여기 본인 이메일
 EMAIL_HOST_PASSWORD = 'rgwa naeu ovak mjpr'          # Gmail 앱 비밀번호(계정 비번 X)
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
-
-
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+
+
+
+# AI 매칭 결과 캐싱용 Django Cache 설정
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'ai-matching-cache',  
+        # TIMEOUT은 None(무제한) 또는 per-key에서 지정
+        'TIMEOUT': None,
+    }
+}
+# ────────────────────────────────────────────────────

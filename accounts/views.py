@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -26,57 +27,64 @@ from .forms  import TopicForm
 from .forms import CategorySelectionForm  # InterestForm 대신 이걸 import
 from recommendation.recommend import recommend_similar_users
 
-# accounts/views.py
 @login_required
 def ai_matching(request):
     me_user = request.user
     me = me_user.username
+    cache_key = f"ai_recs_user_{me}"
+    refresh = request.GET.get('refresh') == '1'
 
-    # 0) Candidate filtering: Koreans ↔ exchange students only
-    me_profile = UserProfile.objects.get(user=me_user)
-    my_nat = me_profile.nationality  # e.g. 'KR'
+    # If “Refresh” requested, invalidate cache
+    if refresh:
+        cache.delete(cache_key)
 
-    candidates = []
-    for prof in UserProfile.objects.prefetch_related('favorite_categories').all():
-        if prof.user_id == me_user.id:
-            continue
-        if my_nat == 'KR' and prof.nationality == 'KR':
-            continue
-        if my_nat != 'KR' and prof.nationality != 'KR':
-            continue
-        candidates.append(prof)
+    # 1) Try to get from cache
+    raw_recs = cache.get(cache_key)
+    if raw_recs is None:
+        # 2) Candidate filtering: Koreans ↔ exchange students only
+        me_profile = UserProfile.objects.get(user=me_user)
+        my_nat = me_profile.nationality  # e.g. 'KR'
+        candidates = []
+        for prof in UserProfile.objects.prefetch_related('favorite_categories').all():
+            if prof.user_id == me_user.id:
+                continue
+            if my_nat == 'KR' and prof.nationality == 'KR':
+                continue
+            if my_nat != 'KR' and prof.nationality != 'KR':
+                continue
+            candidates.append(prof)
 
-    # 1) Build a dict of username → list of interest names
-    user_profiles = {}
-    for prof in candidates:
-        cats = [c.name for c in prof.favorite_categories.all()]
-        if cats:
-            user_profiles[prof.user.username] = cats
+        # 3) Build interest dict
+        user_profiles = {
+            prof.user.username: [c.name for c in prof.favorite_categories.all()]
+            for prof in candidates
+            if prof.favorite_categories.exists()
+        }
+        # include self
+        user_profiles[me] = [c.name for c in me_profile.favorite_categories.all()]
 
-    # Always include self
-    my_cats = [c.name for c in me_profile.favorite_categories.all()]
-    user_profiles[me] = my_cats
+        # 4) Ensure at least one interest
+        if not user_profiles[me]:
+            return render(request, 'accounts/ai_matching.html', {
+                'error': 'Please select at least one interest in your profile.'
+            })
 
-    # 2) Require at least one interest
-    if not user_profiles[me]:
-        return render(request, 'accounts/ai_matching.html', {
-            'error': 'Please select at least one interest in your profile.'
-        })
+        # 5) Compute recommendations
+        raw_recs = recommend_similar_users(
+            user_id=me,
+            user_profiles=user_profiles,
+            top_k=3
+        )
+        # 6) Cache for 24 hours
+        cache.set(cache_key, raw_recs, timeout=60*60*24)
 
-    # 3) Run SBERT recommendation for top 3
-    raw_recs = recommend_similar_users(
-        user_id=me,
-        user_profiles=user_profiles,
-        top_k=3
-    )
-
-    # 4) Fetch full UserProfile objects for the recommended usernames
+    # 7) Fetch full profiles
     rec_usernames = [r['user'] for r in raw_recs]
     rec_profiles = UserProfile.objects.select_related('user') \
                                       .prefetch_related('favorite_categories') \
                                       .filter(user__username__in=rec_usernames)
 
-    # 5) Assemble the final recommendations list
+    # 8) Assemble context
     recommendations = []
     for r in raw_recs:
         prof = rec_profiles.get(user__username=r['user'])
@@ -93,7 +101,8 @@ def ai_matching(request):
         })
 
     return render(request, 'accounts/ai_matching.html', {
-        'recommendations': recommendations
+        'recommendations': recommendations,
+        'refreshed':       refresh,
     })
 
 # 1. Signup View (uses Student ID, Email Verification)
