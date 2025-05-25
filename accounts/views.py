@@ -31,6 +31,10 @@ from .forms  import ChatRequestForm
 
 
 from django.views.decorators.http import require_POST
+from django.http import HttpResponseForbidden
+
+
+
 
 @login_required
 def chat_request_send(request, username):
@@ -212,16 +216,34 @@ def ai_matching(request):
 @login_required
 def chat_request_reject(request, pk):
     """
-    받은(chat_request.receiver) 채팅 요청을 거절(삭제 혹은 상태 변경)합니다.
+    보낸 사람(sender) 또는 받은 사람(receiver) 모두
+    pending 상태의 ChatRequest를 취소/거절할 수 있게 처리합니다.
     """
-    chat_req = get_object_or_404(ChatRequest, pk=pk, receiver=request.user, status='pending')
-    # 1) 완전 삭제하려면:
-    # chat_req.delete()
-    # 2) 상태만 변경하려면:
-    chat_req.status = 'rejected'
-    chat_req.save(update_fields=['status'])
-    messages.info(request, "Chat request rejected.")
-    return redirect('ai_matching')
+    # pending 상태인지, pk가 맞는지 확인
+    chat_req = get_object_or_404(
+        ChatRequest,
+        pk=pk,
+        status='pending'
+    )
+
+    # 권한 체크: sender나 receiver만 삭제 가능
+    if chat_req.sender == request.user or chat_req.receiver == request.user:
+        chat_req.delete()
+        messages.info(request, "Chat request cancelled.")
+        return redirect('ai_matching')
+    else:
+        return HttpResponseForbidden("You cannot cancel this request.")
+
+
+
+
+
+
+
+
+
+
+
 
 # 1. Signup View (uses Student ID, Email Verification)
 def signup_view(request):
