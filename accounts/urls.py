@@ -38,8 +38,9 @@ urlpatterns = [
         name='vote_topic'
     ),
     path('ai-matching/', ai_matching, name='ai_matching'),
-
-
+    path('chat-request/send/<str:username>/', views.chat_request_send, name='chat_request_send'),
+    path('chat-requests/', views.chat_request_list, name='chat_request_list'),  # 목록 뷰도 곧 추가 예정
+    path('chat-request/<int:pk>/confirm/<int:slot_index>/', views.chat_request_confirm, name='chat_request_confirm'),
 ]
 
 

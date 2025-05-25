@@ -26,6 +26,84 @@ from .forms  import TopicForm
 
 from .forms import CategorySelectionForm  # InterestForm 대신 이걸 import
 from recommendation.recommend import recommend_similar_users
+from .models import ChatRequest
+from .forms  import ChatRequestForm
+
+@login_required
+def chat_request_send(request, username):
+    """
+    Send a chat request to the user identified by `username`.
+    GET  -> render the full page or (if ?ajax=1) the partial form
+    POST -> validate and save the ChatRequest, then redirect or return JSON on AJAX.
+    """
+    receiver = get_object_or_404(User, username=username)
+
+    if request.method == 'POST':
+        form = ChatRequestForm(request.POST)
+        if form.is_valid():
+            chat_req = form.save(commit=False)
+            chat_req.sender   = request.user
+            chat_req.receiver = receiver
+            chat_req.save()
+
+            # AJAX POST requests
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'success': True})
+
+            # normal POST: redirect to list
+            messages.success(request, f"Chat request sent to {receiver.username}.")
+            return redirect('chat_request_list')
+
+    else:
+        form = ChatRequestForm()
+
+    ctx = {'form': form, 'receiver': receiver}
+
+    # AJAX GET requests return the partial form only
+    if request.method == 'GET' and request.GET.get('ajax') == '1':
+        return render(request, 'accounts/partials/chat_request_form.html', ctx)
+
+    # fallback: render the full page
+    return render(request, 'accounts/chat_request_send.html', ctx)
+
+
+@login_required
+def chat_request_list(request):
+    """
+    나에게 온 대화 요청 목록을 보여줍니다.
+    """
+    # 나에게 온 모든 ChatRequest 객체 가져오기
+    incoming = ChatRequest.objects.filter(receiver=request.user).order_by('-created_at')
+    return render(request, 'accounts/chat_request_list.html', {
+        'incoming_requests': incoming,
+    })
+
+
+@login_required
+def chat_request_confirm(request, pk, slot_index):
+    # 1) 자신에게 온 요청인지 확인
+    chat_request = get_object_or_404(
+        ChatRequest,
+        pk=pk,
+        receiver=request.user
+    )
+
+    # 2) slot_index 에 따라 chosen_slot 과 status 업데이트
+    slots = [chat_request.slot1, chat_request.slot2, chat_request.slot3]
+    if 0 <= slot_index < len(slots):
+        chat_request.chosen_slot = slots[slot_index]
+        chat_request.status      = 'confirmed'
+        chat_request.save(update_fields=['chosen_slot', 'status'])
+        messages.success(
+            request,
+            f"Chat confirmed at {chat_request.chosen_slot}."
+        )
+    else:
+        messages.error(request, "Invalid slot.")
+
+    # 3) AI Matching 화면으로 돌아가기
+    return redirect('ai_matching')
+
 
 @login_required
 def ai_matching(request):
@@ -34,16 +112,16 @@ def ai_matching(request):
     cache_key = f"ai_recs_user_{me}"
     refresh = request.GET.get('refresh') == '1'
 
-    # If “Refresh” requested, invalidate cache
+    # 캐시 무효화
     if refresh:
         cache.delete(cache_key)
 
-    # 1) Try to get from cache
+    # 1) 캐시에서 불러오기
     raw_recs = cache.get(cache_key)
     if raw_recs is None:
-        # 2) Candidate filtering: Koreans ↔ exchange students only
+        # 2) 후보 필터링 (한국인 ↔ 교환학생)
         me_profile = UserProfile.objects.get(user=me_user)
-        my_nat = me_profile.nationality  # e.g. 'KR'
+        my_nat = me_profile.nationality
         candidates = []
         for prof in UserProfile.objects.prefetch_related('favorite_categories').all():
             if prof.user_id == me_user.id:
@@ -54,42 +132,45 @@ def ai_matching(request):
                 continue
             candidates.append(prof)
 
-        # 3) Build interest dict
+        # 3) 관심사 dict 생성
         user_profiles = {
             prof.user.username: [c.name for c in prof.favorite_categories.all()]
-            for prof in candidates
-            if prof.favorite_categories.exists()
+            for prof in candidates if prof.favorite_categories.exists()
         }
-        # include self
+        # 자기 자신 포함
         user_profiles[me] = [c.name for c in me_profile.favorite_categories.all()]
 
-        # 4) Ensure at least one interest
+        # 4) 최소 하나 이상의 관심사 체크
         if not user_profiles[me]:
             return render(request, 'accounts/ai_matching.html', {
                 'error': 'Please select at least one interest in your profile.'
             })
 
-        # 5) Compute recommendations
+        # 5) SBERT로 추천 계산
         raw_recs = recommend_similar_users(
             user_id=me,
             user_profiles=user_profiles,
             top_k=3
         )
-        # 6) Cache for 24 hours
+        # 6) 캐시에 저장 (24시간)
         cache.set(cache_key, raw_recs, timeout=60*60*24)
 
-    # 7) Fetch full profiles
+    # 7) 프로필 객체 불러오기
     rec_usernames = [r['user'] for r in raw_recs]
-    rec_profiles = UserProfile.objects.select_related('user') \
-                                      .prefetch_related('favorite_categories') \
-                                      .filter(user__username__in=rec_usernames)
+    rec_profiles = (
+        UserProfile.objects
+        .select_related('user')
+        .prefetch_related('favorite_categories')
+        .filter(user__username__in=rec_usernames)
+    )
 
-    # 8) Assemble context
+    # 8) 컨텍스트용 리스트 조립
     recommendations = []
     for r in raw_recs:
         prof = rec_profiles.get(user__username=r['user'])
         recommendations.append({
             'nickname':        prof.nickname or prof.user.username,
+            'username':        prof.user.username,
             'score':           r['score'],
             'gender':          prof.get_gender_display(),
             'native_language': prof.get_native_language_display(),
@@ -100,10 +181,32 @@ def ai_matching(request):
             'interests':       [c.name for c in prof.favorite_categories.all()],
         })
 
+    # ―― 여기서 채팅 요청 내역 조회
+    sent_requests = ChatRequest.objects.filter(
+        sender=request.user
+    ).order_by('-created_at')
+
+    received_requests = ChatRequest.objects.filter(
+        receiver=request.user
+    ).order_by('-created_at')
+
+    confirmed_chats = ChatRequest.objects.filter(
+        Q(sender=request.user) | Q(receiver=request.user),
+        status='confirmed'
+    ).order_by('-created_at')
+    # ――
+
     return render(request, 'accounts/ai_matching.html', {
-        'recommendations': recommendations,
-        'refreshed':       refresh,
+        'recommendations':    recommendations,
+        'refreshed':          refresh,
+
+        # 채팅 요청 내역
+        'sent_requests':      sent_requests,
+        'received_requests':  received_requests,
+        'confirmed_chats':    confirmed_chats,
     })
+
+
 
 # 1. Signup View (uses Student ID, Email Verification)
 def signup_view(request):

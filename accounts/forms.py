@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import UserProfile, Category
 from .models import Announcement  # 맨 위 import 추가 필요
 from .models import Interest
+from .models import ChatRequest
 
 ### 1. 회원가입용 SignupForm
 class SignupForm(UserCreationForm):
@@ -150,3 +151,45 @@ class CategorySelectionForm(forms.ModelForm):
         if count != 5:
             raise forms.ValidationError("정확히 5개를 선택해야 합니다.")
         return cats
+
+
+class ChatRequestForm(forms.ModelForm):
+    class Meta:
+        model = ChatRequest
+        fields = ['slot1', 'slot2', 'slot3']
+        widgets = {
+            'slot1': forms.DateTimeInput(
+                attrs={'type': 'datetime-local', 'class': 'form-control'}
+            ),
+            'slot2': forms.DateTimeInput(
+                attrs={'type': 'datetime-local', 'class': 'form-control'}
+            ),
+            'slot3': forms.DateTimeInput(
+                attrs={'type': 'datetime-local', 'class': 'form-control'}
+            ),
+        }
+        labels = {
+            'slot1': 'Option 1',
+            'slot2': 'Option 2',
+            'slot3': 'Option 3',
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        s1 = cleaned_data.get('slot1')
+        s2 = cleaned_data.get('slot2')
+        s3 = cleaned_data.get('slot3')
+
+        # Ensure all three are provided
+        if not (s1 and s2 and s3):
+            raise forms.ValidationError(
+                "Please select three time slots."
+            )
+
+        # Prevent duplicates
+        if len({s1, s2, s3}) < 3:
+            raise forms.ValidationError(
+                "Please choose three distinct time slots."
+            )
+
+        return cleaned_data

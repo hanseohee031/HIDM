@@ -1,9 +1,14 @@
+/* static/css/ai_matching.css */
+
+/* Header */
 .ai-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
 }
+
+/* Refresh button */
 .btn-refresh {
   font-size: 0.9rem;
   padding: 0.3rem 0.8rem;
@@ -13,27 +18,69 @@
   border-radius: 0.25rem;
   text-decoration: none;
 }
+.btn-refresh:hover {
+  opacity: 0.9;
+}
+
+/* Layout container */
+.ai-container {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Sidebar (recommendations list) */
+.ai-sidebar {
+  width: 30%;
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+/* Main panel (profile/form) */
+.ai-main {
+  flex: 1;
+  padding: 1rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  min-height: 300px;
+}
+
+/* Grid for match cards */
 .ai-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
+
+/* Individual match card */
 .ai-card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
   padding: 1rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  cursor: pointer;
 }
-.ai-card h2 {
+.ai-card h5 {
   margin: 0 0 0.5rem;
-  font-size: 1.25rem;
+  font-size: 1rem;
+  color: #1f2937;
 }
+.ai-card:hover {
+  background: #f3f4f6;
+}
+
+/* Similarity score text */
 .score {
   margin: 0 0 0.75rem;
   font-style: italic;
   color: #4b5563;
+  font-size: 0.9rem;
 }
+
+/* Profile details list */
 .profile-details {
   list-style: none;
   padding: 0;
@@ -41,7 +88,11 @@
 }
 .profile-details li {
   margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  color: #374151;
 }
+
+/* “Add Friend” / action button */
 .btn-add-friend {
   margin-top: 0.75rem;
   display: inline-block;
@@ -56,7 +107,10 @@
 .btn-add-friend:hover {
   opacity: 0.9;
 }
+
+/* Error text */
 .error {
   color: #dc2626;
   font-weight: bold;
+  font-size: 1rem;
 }

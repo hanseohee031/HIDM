@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+
+
+
 
 
 # ─── 1) 새 모델 추가: Interest ───
@@ -347,3 +351,42 @@ class Announcement(models.Model):
 
     def __str__(self):
         return self.title
+class ChatRequest(models.Model):
+    STATUS_CHOICES = [
+        ('pending',   'Pending'),    # 요청 보냄, 상대 확인 대기
+        ('confirmed', 'Confirmed'),  # 상대가 슬롯 하나를 선택함
+        ('cancelled', 'Cancelled'),  # 취소된 요청
+    ]
+
+    sender        = models.ForeignKey(
+                        User,
+                        related_name='chat_requests_sent',
+                          on_delete=models.CASCADE
+                    )
+    receiver      = models.ForeignKey(
+                        User,
+                        related_name='chat_requests_received',
+                          on_delete=models.CASCADE
+                    )
+    slot1         = models.DateTimeField(verbose_name='Slot 1')
+    slot2         = models.DateTimeField(verbose_name='Slot 2')
+    slot3         = models.DateTimeField(verbose_name='Slot 3')
+    status        = models.CharField(
+                        max_length=10,
+                        choices=STATUS_CHOICES,
+                        default='pending'
+                    )
+    chosen_slot   = models.DateTimeField(
+                        null=True,
+                        blank=True,
+                        verbose_name='Confirmed Slot'
+                    )
+    created_at    = models.DateTimeField(auto_now_add=True)
+    updated_at    = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('sender', 'receiver', 'created_at')
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.sender.username} → {self.receiver.username} ({self.status})"

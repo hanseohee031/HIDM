@@ -1,0 +1,32 @@
+{# accounts/templates/accounts/partials/chat_request_form.html #}
+
+<h2>Request Chat with {{ receiver.nickname }}</h2>
+
+<form id="chat-request-form"
+      action="{% url 'chat_request_send' receiver.username %}"
+      method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <div class="form-group">
+    {{ form.slot1.label_tag }}
+    {{ form.slot1 }} 
+    {{ form.slot1.errors }}
+  </div>
+
+  <div class="form-group">
+    {{ form.slot2.label_tag }}
+    {{ form.slot2 }} 
+    {{ form.slot2.errors }}
+  </div>
+
+  <div class="form-group">
+    {{ form.slot3.label_tag }}
+    {{ form.slot3 }} 
+    {{ form.slot3.errors }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">
+    Send Request
+  </button>
+</form>

@@ -1,0 +1,14 @@
+<ul class="recommendations-list">
+  {% for rec in recommendations %}
+    <li class="recommendation-item">
+      <h3>{{ rec.nickname }}</h3>
+      <p>Similarity: {{ rec.score|floatformat:4 }}</p>
+      <!-- 프로필 정보 생략 -->
+      <form action="{% url 'chat_request_send' rec.username %}" method="get" style="display:inline;">
+        <button type="submit" class="btn-request-chat">Request Chat</button>
+      </form>
+    </li>
+  {% empty %}
+    <li>No recommendations found.</li>
+  {% endfor %}
+</ul>

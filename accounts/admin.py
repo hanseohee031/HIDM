@@ -1,6 +1,7 @@
 # accounts/admin.py
 from django.contrib import admin
 from .models import UserProfile
+from .models import ChatRequest
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
@@ -31,3 +32,20 @@ class UserProfileAdmin(admin.ModelAdmin):
         qs = obj.interests.all()[:5]
         return ", ".join(i.name for i in qs)
     display_interests.short_description = 'My Interests (5)'
+
+
+
+# ChatRequest 모델 등록
+@admin.register(ChatRequest)
+class ChatRequestAdmin(admin.ModelAdmin):
+    list_display = (
+        'sender', 'receiver',
+        'status', 'slot1', 'slot2', 'slot3', 'chosen_slot',
+        'created_at',
+    )
+    list_filter = ('status', 'created_at')
+    search_fields = (
+        'sender__username',
+        'receiver__username',
+    )
+    readonly_fields = ('created_at', 'updated_at')
