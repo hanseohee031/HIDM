@@ -10,6 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+# settings.py 상단
+from decouple import config
+
+# 기존 하드코딩된 부분은 지우고 이렇게 변경
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -151,15 +162,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
-# Email sending settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'      # 학교 SMTP가 있다면 여기에 변경
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'hanseohee031@gmail.com'   # 여기 본인 이메일
-EMAIL_HOST_PASSWORD = 'rgwa naeu ovak mjpr'          # Gmail 앱 비밀번호(계정 비번 X)
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 
 

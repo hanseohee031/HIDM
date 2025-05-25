@@ -2,14 +2,18 @@
 {% load static %}
 
 {% block content %}
-  <div class="container mt-5">
-    <h2>Select Your Favorite Categories</h2>
-    <p>Please choose <strong>exactly 5</strong> categories from the 16 options below.</p>
-
-    <form method="post">
+<link rel="stylesheet" href="{% static 'css/category_select.css' %}">
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 class="auth-title">Select Your Favorite Categories</h2>
+    <p class="auth-desc">Please choose <b>exactly 5</b> categories from the options below.</p>
+    <form method="post" autocomplete="off" id="category-form">
       {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="form-fields">
+        {{ form.as_p }}
+      </div>
+      <button type="submit" class="auth-button">Submit</button>
     </form>
   </div>
+</div>
 {% endblock %}
