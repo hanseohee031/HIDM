@@ -1,0 +1,23 @@
+{
+  "alice": [
+    "Digital_Tech_Development",
+    "Travel_Outdoor_Leisure",
+    "Entertainment_Hobbies",
+    "Reading_Writing",
+    "Daily_Life_Shopping_Home_Life"
+  ],
+  "bob": [
+    "Travel_Outdoor_Leisure",
+    "Daily_Life_Shopping_Home_Life",
+    "Health_Fitness_Wellness",
+    "Digital_Tech_Development",
+    "Reading_Writing"
+  ],
+  "carol": [
+    "Food_Cooking_Cafe",
+    "Digital_Tech_Development",
+    "Travel_Outdoor_Leisure",
+    "Daily_Life_Shopping_Home_Life",
+    "Pets"
+  ]
+}

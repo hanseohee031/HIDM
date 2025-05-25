@@ -1,0 +1,1687 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:int="http://example.org/interest#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://example.org/interest#economic_crises">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>economic crises</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#pilates">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>pilates</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#social_networking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>social networking</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#VR_gaming">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>VR gaming</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#binge-watching_dramas">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>binge-watching dramas</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#book_clubs">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>book clubs</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#medicine">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>medicine</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#outfit_coordination">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>outfit coordination</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#League_of_Legends">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>League of Legends</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#baking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>baking</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#social_issues">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>social issues</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#brewing_coffee">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>brewing coffee</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#basketball">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>basketball</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#chatbot_development">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>chatbot development</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#watercolor_painting">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>watercolor painting</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#trail_trekking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>trail trekking</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#parcel_delivery">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>parcel delivery</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#cold_noodles">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>cold noodles</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#double_major">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>double major</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#blockchain_technology">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>blockchain technology</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Osaka_trip">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>Osaka trip</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#dog_walking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>dog walking</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#language_tests">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>language tests</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#brunch">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>brunch</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#making_new_friends">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>making new friends</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#grooming">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>grooming</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#sunscreen_recommendations">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>sunscreen recommendations</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#waterskiing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>waterskiing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#programming">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>programming</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#health_checkup">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>health checkup</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#sightseeing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>sightseeing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#snorkeling">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>snorkeling</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#laundry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>laundry</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#shopping">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>shopping</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#pet_training">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>pet training</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#thesis_writing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>thesis writing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#cat_care">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>cat care</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#interview_preparation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>interview preparation</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#restaurant_hopping">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>restaurant hopping</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#YouTube_creator">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>YouTube creator</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#rabbit_care">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>rabbit care</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#dentist">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>dentist</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#flirting">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>flirting</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#artificial_intelligence">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>artificial intelligence</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#transportation_card">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>transportation card</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#coffee_shop">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>coffee shop</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#tennis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>tennis</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#study_planning">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>study planning</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#fashion_trends">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>fashion trends</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#airport">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>airport</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#bathing_pets">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>bathing pets</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#floristry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>floristry</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#camping">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>camping</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#internship">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>internship</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#hip-hop_music">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>hip-hop music</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#cosmetic_reviews">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>cosmetic reviews</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#healing_travel">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>healing travel</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Saipan_trip">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>Saipan trip</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#dancing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>dancing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#mentoring_others">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>mentoring others</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#choir_singing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>choir singing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#perfume_collecting">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>perfume collecting</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#pediatrics">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>pediatrics</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#running_a_blog">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>running a blog</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#squash">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>squash</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#NFT_trading">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>NFT trading</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#wedding_preparation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>wedding preparation</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#nature_exploration">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>nature exploration</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#attending_classes">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>attending classes</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#paragliding">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>paragliding</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#college_admission">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>college admission</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#political_news">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>political news</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#virtual_reality__VR_">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>virtual reality (VR)</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#scrapbooking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>scrapbooking</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#global_warming">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>global warming</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#finding_a_mentor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>finding a mentor</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#band_activities">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>band activities</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#night_view_sightseeing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>night view sightseeing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#bead_crafts">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>bead crafts</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#gym_workout">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>gym workout</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#cleaning">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>cleaning</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#bank_errands">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>bank errands</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#backpacking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>backpacking</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#new_IT_technologies">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>new IT technologies</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#fatigue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>fatigue</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#calligraphy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>calligraphy</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#pet_insurance">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>pet insurance</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#environmental_protection">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>environmental protection</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#XBOX_gaming">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>XBOX gaming</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#inflation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>inflation</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#startup_trends">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>startup trends</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#room_tour">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>room tour</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#smart_home_technology">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>smart home technology</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#art_exhibitions">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>art exhibitions</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#yoga">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>yoga</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#plogging">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>plogging</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#snowboarding">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>snowboarding</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Fashion_Beauty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#law_reforms">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>law reforms</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Nintendo_Switch_games">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>Nintendo Switch games</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#snack_foods">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>snack foods</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#gender_issues">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>gender issues</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#rock_climbing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>rock climbing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#billiards">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>billiards</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Pets">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#credit_card_management">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>credit card management</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#married_life">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>married life</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#augmented_reality__AR_">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>augmented reality (AR)</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#app_development">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>app development</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#kitchen_supplies">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>kitchen supplies</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#book_reviews">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>book reviews</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#robotics">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>robotics</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#study_abroad">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>study abroad</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#sneaker_collection">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>sneaker collection</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#digital_nomad_lifestyle">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>digital nomad lifestyle</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#vintage_fashion">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>vintage fashion</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Steam_games">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>Steam games</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#karaoke_sessions">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>karaoke sessions</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#siblings_relationship">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>siblings relationship</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Netflix_shows">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>Netflix shows</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#media_criticism">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>media criticism</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#note-taking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>note-taking</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#car_rental">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>car rental</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#professor_consultation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>professor consultation</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#crossfit">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>crossfit</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#trail_hiking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>trail hiking</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#organizing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>organizing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#classical_music">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>classical music</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#self-help_books">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>self-help books</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#convenience_store_trends">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>convenience store trends</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#study_group">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>study group</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#home_interior_design">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>home interior design</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#home_cafe">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>home cafe</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#illustration">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>illustration</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#nail_art">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>nail art</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#hedgehog_care">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>hedgehog care</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#writing_reports">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>writing reports</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#research">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>research</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#indie_music">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>indie music</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#heating_systems">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>heating systems</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#cultural_experience">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>cultural experience</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#clothing_shopping">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>clothing shopping</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#flute_playing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>flute playing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#marathon">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>marathon</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#airbnb_stays">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>airbnb stays</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#board_games">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>board games</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#academic_conferences">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>academic conferences</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#dog_care">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>dog care</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#cooking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>cooking</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#managing_connections">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>managing connections</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#hotel">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>hotel</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#portfolio_building">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>portfolio building</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#flight">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>flight</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#date_course_planning">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>date course planning</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#yacht_sailing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>yacht sailing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Food_Cooking_Cafe">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#watching_movies">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>watching movies</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Digital_Tech_Development">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#pet_cafe">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>pet cafe</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#poetry_writing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>poetry writing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#cycling">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>cycling</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#pet_hotel">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>pet hotel</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#blind_dates">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>blind dates</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#protests">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>protests</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#listening_to_music">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>listening to music</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#handcrafts">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>handcrafts</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#air_conditioner">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>air conditioner</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#kimchi">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>kimchi</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#sushi">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>sushi</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#pet_food">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>pet food</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#violin_playing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>violin playing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#vaccination">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>vaccination</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#career_transition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>career transition</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#fish_tank">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>fish tank</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#breakup_recovery">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>breakup recovery</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#hairstyling">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>hairstyling</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#writing_essays">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>writing essays</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#internship_experience">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>internship experience</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#feminism">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>feminism</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#hiking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>hiking</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#swimming">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>swimming</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#graduation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>graduation</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#performance_management">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>performance management</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#leadership_development">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>leadership development</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#dating_life">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>dating life</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#DIY_home_decor">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>DIY home decor</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#tuition_fees">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>tuition fees</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#world_tour">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>world tour</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#jazz_music">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>jazz music</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#street_fashion">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>street fashion</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#stress_management">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>stress management</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#table_tennis">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>table tennis</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#busking_performances">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>busking performances</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#journal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>journal</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#comforter">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>comforter</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#music_composing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>music composing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#drumming">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>drumming</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#major_studies">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>major studies</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#meal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>meal</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#publishing_preparation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>publishing preparation</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#family_relationships">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>family relationships</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#digital_drawing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>digital drawing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#pasta">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>pasta</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#career_change">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>career change</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#surfing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>surfing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#K-pop_fandom">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>K-pop fandom</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#School_Academics">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#map_reading">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>map reading</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#bowling">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>bowling</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#furniture_shopping">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>furniture shopping</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#crush_stories">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>crush stories</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#exam_preparation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>exam preparation</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#comedy_shows">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>comedy shows</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#leather_crafting">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>leather crafting</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#accessories_shopping">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>accessories shopping</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#asking_for_advice">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Relationships_Dating"/>
+    <rdfs:label>asking for advice</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Relationships_Dating"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#makeup_tutorials">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>makeup tutorials</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Relationships_Dating">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#fashion_design">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>fashion design</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#lipstick_reviews">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+    <rdfs:label>lipstick reviews</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Fashion_Beauty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#horseback_riding">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>horseback riding</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#animation_watching">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>animation watching</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#job_hunting">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>job hunting</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#baseball">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>baseball</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#musical_theater">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>musical theater</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#minority_rights">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>minority rights</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#column_writing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>column writing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#nutrition_supplement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>nutrition supplement</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#web_development">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>web development</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#self-development_reading">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>self-development reading</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#pet_adoption">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>pet adoption</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#overseas_travel">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>overseas travel</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#machine_learning">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+    <rdfs:label>machine learning</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Digital_Tech_Development"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#hospital">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>hospital</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#golf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>golf</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Reading_Writing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#scholarships">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>scholarships</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#badminton">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>badminton</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#exchange_student_life">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>exchange student life</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#web_novel_writing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>web novel writing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#certification_exams">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>certification exams</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#snack">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>snack</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#cooking_classes">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>cooking classes</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#lyric_writing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>lyric writing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#fan_meetings">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>fan meetings</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#international_news">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>international news</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#food_review">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>food review</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#domestic_travel">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+    <rdfs:label>domestic travel</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Travel_Outdoor_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#reading_novels">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Reading_Writing"/>
+    <rdfs:label>reading novels</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Reading_Writing"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#cold">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>cold</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#songwriting">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>songwriting</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#animal_hospital">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Pets"/>
+    <rdfs:label>animal hospital</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Pets"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#online_courses">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>online courses</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Arts_Creation_DIY">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#piano_playing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>piano playing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#treatment">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>treatment</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#certification_acquisition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>certification acquisition</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#concert_attendance">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>concert attendance</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#guitar_playing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Music_Instruments"/>
+    <rdfs:label>guitar playing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Music_Instruments"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#running">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>running</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#TikTok_browsing">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>TikTok browsing</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#presidential_elections">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>presidential elections</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#chocolate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>chocolate</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#woodworking">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>woodworking</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#PlayStation_5_games">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>PlayStation 5 games</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#acrylic_painting">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+    <rdfs:label>acrylic painting</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Arts_Creation_DIY"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#desserts">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>desserts</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#TRPG_games">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>TRPG games</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#clinic">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>clinic</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Sports_Leisure">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#back_pain">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+    <rdfs:label>back pain</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Health_Fitness_Wellness"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#campus_life">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#School_Academics"/>
+    <rdfs:label>campus life</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#School_Academics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Health_Fitness_Wellness">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#soccer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>soccer</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#home_workout">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>home workout</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#human_rights">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+    <rdfs:label>human rights</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Society_Current_Issues_Politics"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#ramen_noodles">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>ramen noodles</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#startup_entrepreneurship">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Self-Development_Career"/>
+    <rdfs:label>startup entrepreneurship</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Self-Development_Career"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#skateboarding">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Sports_Leisure"/>
+    <rdfs:label>skateboarding</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Sports_Leisure"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#espresso">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+    <rdfs:label>espresso</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Food_Cooking_Cafe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Disney__shows">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+    <rdfs:label>Disney+ shows</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Entertainment_Hobbies"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Music_Instruments">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Entertainment_Hobbies">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Daily_Life_Shopping_Home_Life">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#household_items">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+    <rdfs:label>household items</rdfs:label>
+    <int:broader rdf:resource="http://example.org/interest#Daily_Life_Shopping_Home_Life"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Society_Current_Issues_Politics">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Travel_Outdoor_Leisure">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/interest#Self-Development_Career">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+</rdf:RDF>

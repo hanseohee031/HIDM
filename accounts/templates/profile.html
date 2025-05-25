@@ -4,6 +4,15 @@
 {% block title %}My Profile{% endblock %}
 
 {% block content %}
+
+{% if user.is_superuser %}
+  <form action="{% url 'update_user_interests_from_chat' %}" method="post" style="margin-top:24px;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">[관리자] 채팅 기반 관심사 자동 분석/업데이트</button>
+  </form>
+{% endif %}
+
+
 <link rel="stylesheet" href="{% static 'css/profile.css' %}?v=plain">
 
 <div class="profile-2col-wrap">

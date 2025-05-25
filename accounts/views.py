@@ -1,3 +1,6 @@
+
+
+
 from django.core.cache import cache
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
@@ -32,6 +35,41 @@ from django.template.loader import render_to_string
 
 from django.views.decorators.http import require_POST
 from django.http import HttpResponseForbidden
+
+
+
+
+# 파일 상단에 추가
+import os
+from django.conf import settings
+from interest_classifier.dialog_prcr import extract_user_interests
+from .models import UserProfile, Category
+
+@login_required
+def update_user_interests_from_chat(request):
+    # 관리자만 허용 (필요시)
+    if not request.user.is_superuser:
+        return HttpResponseForbidden("관리자만 가능합니다.")
+
+    # 파일 경로 설정
+    chat_jsonl_path = os.path.join(settings.BASE_DIR, "logs", "chat.jsonl")
+    owl_path        = os.path.join(settings.BASE_DIR, "interest_classifier", "interest.owl")
+
+    # 1. 파이프라인 실행 (user_id: [category, ...] dict 반환)
+    results = extract_user_interests(chat_jsonl_path, owl_path, top_n=5)
+
+    # 2. 결과를 UserProfile.favorite_categories에 저장
+    for user_id, category_names in results.items():
+        try:
+            profile = UserProfile.objects.get(user__username=user_id)
+            # Category 모델에서 이름으로 조회
+            cats = Category.objects.filter(name__in=category_names)
+            profile.favorite_categories.set(cats)
+        except UserProfile.DoesNotExist:
+            continue
+
+    messages.success(request, "관심사 카테고리가 채팅 기반으로 업데이트 되었습니다!")
+    return redirect('profile')
 
 
 @login_required

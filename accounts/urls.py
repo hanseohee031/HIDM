@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from .views import ai_matching
 from .views import ai_matching, ai_matching_swap
-
+from .views import update_user_interests_from_chat
 urlpatterns = [
     path('signup/', views.signup_view, name='signup'),
     path('login/', views.login_view, name='login'),
@@ -44,6 +44,8 @@ urlpatterns = [
     path('chat-request/<int:pk>/reject/', views.chat_request_reject, name='chat_request_reject'),
 
     path('my-friends/', views.my_friends, name='my_friends'),
+    path('update-interests-from-chat/', update_user_interests_from_chat, name='update_user_interests_from_chat'),
+
 ]
 
 
