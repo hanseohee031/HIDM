@@ -36,7 +36,7 @@ from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
 from django.http import HttpResponseForbidden
 
-
+from django.core.cache import cache
 
 
 # 파일 상단에 추가
@@ -81,330 +81,6 @@ def my_friends(request):
     # 실제 친구 User 객체만 뽑기
     friend_users = [f.to_user if f.from_user == user else f.from_user for f in friends]
     return render(request, 'accounts/my_friends.html', {'friends': friend_users})
-
-@login_required
-def chat_request_send(request, username):
-    """
-    Send a chat request to the user identified by `username`.
-    GET  -> render the full page or (if ?ajax=1) the partial form
-    POST -> validate and save the ChatRequest, then redirect or return JSON on AJAX.
-    """
-    receiver = get_object_or_404(User, username=username)
-
-    if request.method == 'POST':
-        form = ChatRequestForm(request.POST)
-        if form.is_valid():
-            chat_req = form.save(commit=False)
-            chat_req.sender   = request.user
-            chat_req.receiver = receiver
-            chat_req.save()
-
-            # AJAX POST requests
-            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                return JsonResponse({'success': True})
-
-            # normal POST: redirect to list
-            messages.success(request, f"Chat request sent to {receiver.username}.")
-            return redirect('chat_request_list')
-
-    else:
-        form = ChatRequestForm()
-
-    ctx = {'form': form, 'receiver': receiver}
-
-    # AJAX GET requests return the partial form only
-    if request.method == 'GET' and request.GET.get('ajax') == '1':
-        return render(request, 'accounts/partials/chat_request_form.html', ctx)
-
-    # fallback: render the full page
-    return render(request, 'accounts/chat_request_send.html', ctx)
-
-
-@login_required
-def chat_request_list(request):
-    """
-    나에게 온 대화 요청 목록을 보여줍니다.
-    """
-    # 나에게 온 모든 ChatRequest 객체 가져오기
-    incoming = ChatRequest.objects.filter(receiver=request.user).order_by('-created_at')
-    return render(request, 'accounts/chat_request_list.html', {
-        'incoming_requests': incoming,
-    })
-
-
-@require_POST
-@login_required
-def chat_request_confirm(request, pk, slot_index):
-    # 1) 자신에게 온, 아직 pending 상태인 요청인지 확인
-    chat_req = get_object_or_404(
-        ChatRequest,
-        pk=pk,
-        receiver=request.user,
-        status='pending'
-    )
-
-    # 2) slot_index 에 따라 chosen_slot 과 status 업데이트
-    slots = [chat_req.slot1, chat_req.slot2, chat_req.slot3]
-    if 0 <= slot_index < len(slots):
-        chat_req.chosen_slot = slots[slot_index]
-        chat_req.status      = 'confirmed'
-        chat_req.save(update_fields=['chosen_slot', 'status'])
-        messages.success(
-            request,
-            f"Chat confirmed at {chat_req.chosen_slot}."
-        )
-    else:
-        messages.error(request, "Invalid slot selection.")
-
-    # 3) AI Matching 화면으로 돌아가기
-    return redirect('ai_matching')
-
-
-
-
-@login_required
-def ai_matching(request):
-    # 파라미터
-    start    = request.GET.get('start') == '1'
-    refresh  = start and request.GET.get('refresh') == '1'
-    is_ajax  = request.GET.get('ajax') == '1'
-
-    me_user    = request.user
-    cache_key  = f"ai_recs_user_{me_user.username}"
-
-    recommendations = []
-    error = None
-
-    if start:
-        # 새로고침 시 캐시·세션 초기화
-        if refresh:
-            cache.delete(cache_key)
-            request.session.pop('last_recs', None)
-
-        # 캐시 또는 계산
-        raw_recs = cache.get(cache_key)
-        if raw_recs is None:
-            # — 후보 필터링
-            me_profile = UserProfile.objects.get(user=me_user)
-            my_nat = me_profile.nationality
-            candidates = []
-            for prof in UserProfile.objects.prefetch_related('favorite_categories').all():
-                if prof.user_id == me_user.id: continue
-                if my_nat == 'KR' and prof.nationality == 'KR': continue
-                if my_nat != 'KR' and prof.nationality != 'KR': continue
-                candidates.append(prof)
-
-            # — 관심사 dict 생성
-            user_profiles = {
-                prof.user.username: [c.name for c in prof.favorite_categories.all()]
-                for prof in candidates if prof.favorite_categories.exists()
-            }
-            user_profiles[me_user.username] = [
-                c.name for c in me_profile.favorite_categories.all()
-            ]
-
-            if not user_profiles[me_user.username]:
-                error = 'Please select at least one interest in your profile.'
-            else:
-                # — 추천 계산 (여기선 top_k=10)
-                raw_recs = recommend_similar_users(
-                    user_id=me_user.username,
-                    user_profiles=user_profiles,
-                    top_k=10
-                )
-                cache.set(cache_key, raw_recs, timeout=60*60*24)
-
-        # — raw_recs 중 3명만 골라서 recommendations 구성
-        if raw_recs and not error:
-            # Refresh면 지난 3명 제외, 아니면 그냥 앞에서 3명
-            prev = request.session.get('last_recs', [])
-            filtered = [r for r in raw_recs if not (refresh and r['user'] in prev)]
-            selected = filtered[:3]
-
-            # 프로필 로드
-            rec_usernames = [r['user'] for r in selected]
-            rec_profiles = UserProfile.objects.select_related('user')\
-                .prefetch_related('favorite_categories')\
-                .filter(user__username__in=rec_usernames)
-
-            for r in selected:
-                prof = rec_profiles.get(user__username=r['user'])
-                recommendations.append({
-                    'nickname':        prof.nickname or prof.user.username,
-                    'username':        prof.user.username,
-                    'score':           r['score'],
-                    'gender':          prof.get_gender_display(),
-                    'native_language': prof.get_native_language_display(),
-                    'nationality':     prof.nationality,
-                    'major':           prof.major,
-                    'personality':     prof.personality,
-                    'birth_year':      prof.born_year,
-                    'interests':       [c.name for c in prof.favorite_categories.all()],
-                })
-
-            # 세션에 이번 3명 저장
-            request.session['last_recs'] = [u['username'] for u in recommendations]
-
-    # — 요청 내역은 항상 가져오기
-    sent_requests = ChatRequest.objects.filter(
-        sender=request.user, status='pending'
-    ).order_by('-created_at')
-    received_requests = ChatRequest.objects.filter(
-        receiver=request.user, status='pending'
-    ).order_by('-created_at')
-    confirmed_chats = ChatRequest.objects.filter(
-        Q(sender=request.user, status='confirmed') |
-        Q(receiver=request.user, status='confirmed')
-    ).order_by('-created_at')
-
-    context = {
-        'started':         start,
-        'recommendations': recommendations,
-        'error':           error,
-        'refreshed':       refresh,
-        'sent_requests':     sent_requests,
-        'received_requests': received_requests,
-        'confirmed_chats':   confirmed_chats,
-    }
-
-    # AJAX 요청: 추천 영역만 HTML로 뽑아서 JSON 리턴
-    if is_ajax:
-        html = render_to_string(
-            'accounts/partials/ai_matches.html',
-            {'recommendations': recommendations, 'error': error},
-            request=request
-        )
-        return JsonResponse({
-            'html':      html,
-            'last_recs': request.session.get('last_recs', []),
-        })
-
-    # 일반 요청: 전체 페이지 렌더
-    return render(request, 'accounts/ai_matching.html', context)
-
-
-
-
-@login_required
-def ai_matching_swap(request, username):
-    """
-    AJAX POST로 들어온 username을 제외한 다음 후보 1명만 뽑아 JSON으로 리턴.
-    """
-    # 1) AJAX POST 요청인지 확인
-    if request.method != 'POST' or request.headers.get('x-requested-with') != 'XMLHttpRequest':
-        return HttpResponseForbidden()
-
-    me_user   = request.user
-    me        = me_user.username
-    cache_key = f"ai_recs_user_{me}"
-
-    # 2) 이전 추천 목록에 이번 username 추가
-    prev = request.session.get('last_recs', [])
-    prev.append(username)
-
-    # 3) 후보 필터링 및 user_profiles dict 생성 (ai_matching과 동일 로직)
-    me_profile = UserProfile.objects.get(user=me_user)
-    my_nat     = me_profile.nationality
-
-    candidates = []
-    for prof in UserProfile.objects.prefetch_related('favorite_categories').all():
-        if prof.user_id == me_user.id:
-            continue
-        if my_nat == 'KR' and prof.nationality == 'KR':
-            continue
-        if my_nat != 'KR' and prof.nationality != 'KR':
-            continue
-        candidates.append(prof)
-
-    user_profiles = {
-        prof.user.username: [c.name for c in prof.favorite_categories.all()]
-        for prof in candidates if prof.favorite_categories.exists()
-    }
-    # 나(self)도 dict에 추가
-    user_profiles[me] = [c.name for c in me_profile.favorite_categories.all()]
-
-    # 4) SBERT 추천 계산 (top_k 넉넉히)
-    full_recs = recommend_similar_users(
-        user_id=me,
-        user_profiles=user_profiles,
-        top_k=10
-    )
-
-    # 5) prev 목록에 있는 사람 제외
-    new_candidates = [r for r in full_recs if r['user'] not in prev]
-    if not new_candidates:
-        return JsonResponse({'error': 'No more new match'}, status=404)
-
-    # 6) 첫 번째 신규 사용자 선택 & 세션 업데이트
-    next_one = new_candidates[0]
-    request.session['last_recs'] = prev + [next_one['user']]
-
-    # 7) UserProfile 불러와서 카드 partial 렌더
-    prof = UserProfile.objects.get(user__username=next_one['user'])
-    card_html = render_to_string(
-        'accounts/partials/ai_match_card.html',  # 한 카드만 그리는 partial
-        {
-            'nickname':        prof.nickname or prof.user.username,
-            'username':        prof.user.username,
-            'score':           next_one['score'],
-            'gender':          prof.get_gender_display(),
-            'native_language': prof.get_native_language_display(),
-            'nationality':     prof.nationality,
-            'major':           prof.major,
-            'personality':     prof.personality,
-            'birth_year':      prof.born_year,
-            'interests':       [c.name for c in prof.favorite_categories.all()],
-        },
-        request=request
-    )
-
-    # 8) JSON으로 반환
-    return JsonResponse({
-        'username': next_one['user'],
-        'html':     card_html,
-    })
-
-
-
-
-
-
-
-
-
-
-
-@require_POST
-@login_required
-def chat_request_reject(request, pk):
-    """
-    보낸 사람(sender) 또는 받은 사람(receiver) 모두
-    pending 상태의 ChatRequest를 취소/거절할 수 있게 처리합니다.
-    """
-    # pending 상태인지, pk가 맞는지 확인
-    chat_req = get_object_or_404(
-        ChatRequest,
-        pk=pk,
-        status='pending'
-    )
-
-    # 권한 체크: sender나 receiver만 삭제 가능
-    if chat_req.sender == request.user or chat_req.receiver == request.user:
-        chat_req.delete()
-        messages.info(request, "Chat request cancelled.")
-        return redirect('ai_matching')
-    else:
-        return HttpResponseForbidden("You cannot cancel this request.")
-
-
-
-
-
-
-
-
-
-
 
 
 # 1. Signup View (uses Student ID, Email Verification)
@@ -651,109 +327,6 @@ from .models import UserProfile, Friendship
 from django.contrib.auth.decorators import login_required
 
 
-@login_required
-def find_friends_view(request):
-    # 1) 내가 보낸 친구 요청 ID 리스트
-    sent_requests_ids = list(
-        Friendship.objects
-        .filter(from_user=request.user, status='requested')
-        .values_list('to_user_id', flat=True)
-    )
-
-    # 2) 친구 관계(accepted)인 서로의 ID 쌍을 풀고, 자기 자신 제외
-    raw_pairs = Friendship.objects.filter(
-        (Q(from_user=request.user) | Q(to_user=request.user)),
-        status='accepted'
-    ).values_list('from_user_id', 'to_user_id')
-    friends_ids = set(i for pair in raw_pairs for i in pair if i != request.user.id)
-
-    # 3) User 객체 리스트로 변환
-    friends = User.objects.filter(id__in=friends_ids)
-
-    # 4) 나에게 온 친구 요청(Friendship 객체)
-    friend_requests_received = Friendship.objects.filter(
-        to_user=request.user, status='requested'
-    ).select_related('from_user__userprofile')
-
-    # ────── [제외할 username 리스트] ──────
-    EXCLUDED_USERNAMES = ['limino', 'admin', 'HID', 'dev', 'developer', '관리자', '개발자']
-    # 필요하면 더 추가 가능
-
-    # ────────────── [국적 기준 필터 + username 제외] ──────────────
-    my_profile = request.user.userprofile
-    if my_profile.nationality == 'KR':
-        # 한국인 → 외국인만 (본인 및 제외 계정 제외)
-        profiles = UserProfile.objects.exclude(user=request.user) \
-                                     .exclude(nationality='KR') \
-                                     .exclude(user__username__in=EXCLUDED_USERNAMES) \
-                                     .prefetch_related('favorite_categories')
-    else:
-        # 외국인 → 한국인만 (본인 및 제외 계정 제외)
-        profiles = UserProfile.objects.exclude(user=request.user) \
-                                     .filter(nationality='KR') \
-                                     .exclude(user__username__in=EXCLUDED_USERNAMES) \
-                                     .prefetch_related('favorite_categories')
-    # ──────────────────────────────────────────────
-
-    # === [유사도 기반 정렬 추가] ===
-    try:
-        me_profile = request.user.userprofile
-        user_profiles = {}
-        for prof in profiles:
-            cats = [c.name for c in prof.favorite_categories.all()]
-            if cats:
-                user_profiles[prof.user.username] = cats
-        me_cats = [c.name for c in me_profile.favorite_categories.all()]
-        if me_cats:
-            user_profiles[request.user.username] = me_cats
-
-            from recommendation.recommend import recommend_similar_users
-            similar = recommend_similar_users(
-                user_id=request.user.username,
-                user_profiles=user_profiles,
-                top_k=len(user_profiles)  # 전체 유저 유사도 구해서 모두 정렬
-            )
-            sim_dict = {r['user']: r['score'] for r in similar}
-            # profiles는 QuerySet이므로, list로 변환해 정렬
-            profiles = sorted(
-                profiles,
-                key=lambda p: sim_dict.get(p.user.username, 0),
-                reverse=True
-            )
-        # 본인 관심사 없으면 순서 변경 없음
-    except Exception as e:
-        print("유사도 정렬 오류:", e)
-        pass
-
-    # 6) Public Profile 카드용 JSON 데이터 생성
-    public_profiles = {}
-    for prof in profiles:
-        public_profiles[prof.user.id] = {
-            "nickname": prof.nickname,
-            "gender": prof.get_gender_display(),
-            "native_language": prof.get_native_language_display(),
-
-            # 고급 필드는 공개 플래그 체크 후 포함
-            "nationality": prof.show_nationality and prof.nationality or None,
-            "major":       prof.show_major and prof.major or None,
-            "personality": prof.show_personality and prof.personality or None,
-            "born_year":   prof.show_born_year and prof.born_year or None,
-
-            # interests
-            "interests": [cat.name for cat in prof.favorite_categories.all()],
-        }
-    public_profiles_json = json.dumps(public_profiles)
-
-    # 7) 템플릿에 모든 컨텍스트 전달
-    return render(request, "accounts/find_friends.html", {
-        "profiles": profiles,
-        "public_profiles_json": public_profiles_json,
-        "friends": friends,
-        "friend_requests_received": friend_requests_received,
-        "friends_ids": list(friends_ids),
-        "sent_requests_ids": sent_requests_ids,
-    })
-
 
 
 
@@ -887,7 +460,6 @@ def is_allowed_user(user):
 
 
 
-
 def announcement_list(request):
     allowed_users = ['admin', 'HID', '개발자']
 
@@ -1003,3 +575,87 @@ def select_categories_view(request):
     return render(request, 'accounts/select_categories.html', {'form': form})
 
 
+@login_required
+def find_friends_view(request):
+    user = request.user
+    cache_key = f'friend_recommend_{user.id}'
+    profiles = cache.get(cache_key)
+
+    # 1. 친구 요청/수락 정보는 매번 계산 (캐시 안 함)
+    sent_requests_ids = list(Friendship.objects
+                             .filter(from_user=user, status='requested')
+                             .values_list('to_user_id', flat=True))
+
+    raw_pairs = Friendship.objects.filter(
+        (Q(from_user=user) | Q(to_user=user)),
+        status='accepted'
+    ).values_list('from_user_id', 'to_user_id')
+    friends_ids = set(i for pair in raw_pairs for i in pair if i != user.id)
+    friends = User.objects.filter(id__in=friends_ids)
+
+    friend_requests_received = Friendship.objects.filter(
+        to_user=user, status='requested'
+    ).select_related('from_user__userprofile')
+
+    if profiles:
+        print("✅ [캐시] 친구 추천 불러옴")
+    else:
+        print("🔍 [계산] 친구 추천 새로함")
+        # 2. 추천 대상 필터링 (한국인/외국인 구분)
+        EXCLUDED_USERNAMES = ['limino', 'admin', 'HID', 'dev', 'developer', '관리자', '개발자']
+        my_profile = user.userprofile
+
+        if my_profile.nationality == 'KR':
+            profiles = UserProfile.objects.exclude(user=user) \
+                                          .exclude(nationality='KR') \
+                                          .exclude(user__username__in=EXCLUDED_USERNAMES) \
+                                          .prefetch_related('favorite_categories')
+        else:
+            profiles = UserProfile.objects.exclude(user=user) \
+                                          .filter(nationality='KR') \
+                                          .exclude(user__username__in=EXCLUDED_USERNAMES) \
+                                          .prefetch_related('favorite_categories')
+
+        try:
+            user_profiles = {}
+            for prof in profiles:
+                cats = [c.name for c in prof.favorite_categories.all()]
+                if cats:
+                    user_profiles[prof.user.username] = cats
+            me_cats = [c.name for c in my_profile.favorite_categories.all()]
+            if me_cats:
+                user_profiles[user.username] = me_cats
+                similar = recommend_similar_users(user.username, user_profiles, top_k=len(user_profiles))
+                sim_dict = {r['user']: r['score'] for r in similar}
+                profiles = sorted(profiles, key=lambda p: sim_dict.get(p.user.username, 0), reverse=True)
+        except Exception as e:
+            print("❌ 유사도 정렬 실패:", e)
+
+        if profiles is None:
+            profiles = []
+
+        cache.set(cache_key, profiles, timeout=600)  # 10분 캐시
+
+    # 3. public_profiles_json 구성
+    public_profiles = {
+        prof.user.id: {
+            "nickname": prof.nickname,
+            "gender": prof.get_gender_display(),
+            "native_language": prof.get_native_language_display(),
+            "nationality": prof.show_nationality and prof.nationality or None,
+            "major":       prof.show_major and prof.major or None,
+            "personality": prof.show_personality and prof.personality or None,
+            "born_year":   prof.show_born_year and prof.born_year or None,
+            "interests":   [cat.name for cat in prof.favorite_categories.all()],
+        }
+        for prof in profiles
+    }
+
+    return render(request, "accounts/find_friends.html", {
+        "profiles": profiles,
+        "public_profiles_json": json.dumps(public_profiles),
+        "friends": friends,
+        "friend_requests_received": friend_requests_received,
+        "friends_ids": list(friends_ids),
+        "sent_requests_ids": sent_requests_ids,
+    })

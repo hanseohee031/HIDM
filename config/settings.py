@@ -175,13 +175,12 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
 
-# AI 매칭 결과 캐싱용 Django Cache 설정
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'ai-matching-cache',  
-        # TIMEOUT은 None(무제한) 또는 per-key에서 지정
-        'TIMEOUT': None,
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",  # Redis DB 1번 사용
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
     }
 }
-# ────────────────────────────────────────────────────
