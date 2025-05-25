@@ -612,6 +612,7 @@ from accounts.models import UserProfile
 from .models import UserProfile, Friendship
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def find_friends_view(request):
     # 1) 내가 보낸 친구 요청 ID 리스트
@@ -636,9 +637,55 @@ def find_friends_view(request):
         to_user=request.user, status='requested'
     ).select_related('from_user__userprofile')
 
-    # 5) 모든 다른 유저 프로필 (나 자신 제외)
-    profiles = UserProfile.objects.exclude(user=request.user) \
-                                  .prefetch_related('favorite_categories')
+    # ────── [제외할 username 리스트] ──────
+    EXCLUDED_USERNAMES = ['limino', 'admin', 'HID', 'dev', 'developer', '관리자', '개발자']
+    # 필요하면 더 추가 가능
+
+    # ────────────── [국적 기준 필터 + username 제외] ──────────────
+    my_profile = request.user.userprofile
+    if my_profile.nationality == 'KR':
+        # 한국인 → 외국인만 (본인 및 제외 계정 제외)
+        profiles = UserProfile.objects.exclude(user=request.user) \
+                                     .exclude(nationality='KR') \
+                                     .exclude(user__username__in=EXCLUDED_USERNAMES) \
+                                     .prefetch_related('favorite_categories')
+    else:
+        # 외국인 → 한국인만 (본인 및 제외 계정 제외)
+        profiles = UserProfile.objects.exclude(user=request.user) \
+                                     .filter(nationality='KR') \
+                                     .exclude(user__username__in=EXCLUDED_USERNAMES) \
+                                     .prefetch_related('favorite_categories')
+    # ──────────────────────────────────────────────
+
+    # === [유사도 기반 정렬 추가] ===
+    try:
+        me_profile = request.user.userprofile
+        user_profiles = {}
+        for prof in profiles:
+            cats = [c.name for c in prof.favorite_categories.all()]
+            if cats:
+                user_profiles[prof.user.username] = cats
+        me_cats = [c.name for c in me_profile.favorite_categories.all()]
+        if me_cats:
+            user_profiles[request.user.username] = me_cats
+
+            from recommendation.recommend import recommend_similar_users
+            similar = recommend_similar_users(
+                user_id=request.user.username,
+                user_profiles=user_profiles,
+                top_k=len(user_profiles)  # 전체 유저 유사도 구해서 모두 정렬
+            )
+            sim_dict = {r['user']: r['score'] for r in similar}
+            # profiles는 QuerySet이므로, list로 변환해 정렬
+            profiles = sorted(
+                profiles,
+                key=lambda p: sim_dict.get(p.user.username, 0),
+                reverse=True
+            )
+        # 본인 관심사 없으면 순서 변경 없음
+    except Exception as e:
+        print("유사도 정렬 오류:", e)
+        pass
 
     # 6) Public Profile 카드용 JSON 데이터 생성
     public_profiles = {}
@@ -668,6 +715,13 @@ def find_friends_view(request):
         "friends_ids": list(friends_ids),
         "sent_requests_ids": sent_requests_ids,
     })
+
+
+
+
+
+
+
 
 @login_required
 def find_topics(request):

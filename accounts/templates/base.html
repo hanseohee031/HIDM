@@ -18,22 +18,17 @@
       </div>
       <div class="nav-row-container">
         <ul class="nav-row first-row">
-
-          <li><a href="{% url 'ai_matching' %}">AI Matching</a></li>
-
+          <li><a href="{% url 'find_friends' %}">AI Matching</a></li>
           <li><a href="{% url 'my_friends' %}">Direct Message</a></li>  <!-- ← 여기 추가 -->
           <li><a href="{% url 'find_topics' %}">Find Topics</a></li>
+          <li><a href="{% url 'announcement_list' %}">Announcement</a></li>
+          <li><a href="{% url 'profile' %}">My Profile</a></li>
 
-          <li><a href="{% url 'find_friends' %}">Find Friends</a></li>
           {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
             <li><a href="{% url 'login' %}">Login</a></li>
           {% endif %}
-        </ul>
-        <ul class="nav-row second-row">
-          <li><a href="{% url 'announcement_list' %}">Announcement</a></li>
-          <li><a href="{% url 'profile' %}">My Profile</a></li>
         </ul>
       </div>
     </nav>
