@@ -4,262 +4,107 @@
 {% block content %}
 <style>
   html, body {
+    font-family: 'UhBeeSeulvely', sans-serif;
     font-size: 18px;
-    box-sizing: border-box;
+    background-color: #f9f9f7;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
   }
   .main-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
-    gap: 42px;
-    padding: 46px 0 0 0;
-    max-width: 1700px;
+    gap: 40px;
+    padding: 20px;
+    max-width: 1400px;
     margin: 0 auto;
-    min-height: 0;
-    height: calc(100vh - 180px);
-    box-sizing: border-box;
   }
-
-  /* 왼쪽 섹션 */
-  .side-box {
-    max-width: 460px;
-    min-width: 320px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0;
-  }
-  .side-box-inner {
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: 0;
-    padding: 0;
+  /* 왼쪽: Hallym Links (이미지 버튼) */
+  .links-section {
+    width: 260px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
-    overflow: hidden;
+    gap: 12px;
   }
-  .signup-section, .announcement-section {
-    width: 100%;
-    background: none !important;
-    border: none !important;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    text-align: center;
-    overflow: hidden;
-  }
-  .section-title {
+  .links-section .section-title {
     color: #254e91;
-    font-size: 1.21rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    margin: 0 0 13px;
-    text-align: center;
-  }
-  .signup-stats {
-    text-align: center;
-    font-size: 1.1rem;
     margin-bottom: 8px;
   }
-  .signup-list, .announcement-list {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    font-size: 1.04rem;
+  .link-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
   }
-  .signup-list li, .announcement-list li {
-    margin-bottom: 8px;
-    line-height: 1.5;
+  .link-buttons a {
+    display: block;
+    width: 80%;
   }
-  .announcement-title {
-    color: #254e91;
-    text-decoration: none;
-    font-weight: 600;
-    max-width: 220px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 1.07rem;
+  .link-buttons img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
-  .announcement-title:hover {
-    text-decoration: underline;
-  }
-  .announcement-date {
-    color: #888;
-    font-size: 0.95em;
-    margin-left: 6px;
-  }
-
-  /* 중앙 이미지 */
+  /* 중앙: 배너 */
   .center-image-wrapper {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 580px;
-    min-width: 300px;
-    width: 100%;
-    height: 580px;
-    background: none;
-    box-sizing: border-box;
   }
   .center-image-wrapper img {
     max-width: 100%;
-    max-height: 580px;
-    width: auto;
-    height: 100%;
-    border-radius: 16px;
-    display: block;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.09);
-    background: #fff;
-    object-fit: contain;
+    max-height: 600px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
-
-  /* 오른쪽 섹션 */
-  .links-section.links-box {
-    max-width: 460px;
-    min-width: 320px;
-    height: 580px;
+  /* 오른쪽: Signup + Announcement */
+  .side-box {
+    width: 300px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-  }
-  .links-section.links-box .section-title {
-    margin-bottom: 16px;
-  }
-  .link-buttons {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 17px;
-  }
-  .link-buttons a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    margin: 0 auto;
-  }
-  .link-buttons img {
-    max-width: 250px;
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    object-fit: contain;
-    filter: none;
-  }
-
-  /* 한 화면에 다 들어오게 */
-  @media (max-width: 1600px) {
-    .main-container { max-width: 98vw; }
-    .center-image-wrapper, .links-section.links-box, .side-box { max-width: 420px; }
-    .center-image-wrapper { height: 420px; }
-    .links-section.links-box, .side-box { height: 420px; }
-    .center-image-wrapper img { max-height: 420px; }
-    .link-buttons img { max-width: 180px; }
-  }
-  @media (max-width: 1200px) {
-    html, body { font-size: 15px; }
-    .main-container { flex-direction: column; align-items: center; gap: 18px; }
-    .center-image-wrapper, .links-section.links-box, .side-box { max-width: 98vw; min-width: 0; }
-    .center-image-wrapper { height: 280px; }
-    .links-section.links-box, .side-box { height: 280px; }
-    .center-image-wrapper img { max-height: 280px; }
-    .link-buttons img { max-width: 120px; }
-  }
-
-  /* ——— Your requested tweaks ——— */
-
-  /* 1) Push “Announcement” down a bit */
-  .announcement-section {
-    margin-top: 20px;
-  }
-
-  /* 2) Force announcement text to black */
-  .announcement-list li,
-  .announcement-title,
-  .announcement-date {
-    color: #000 !important;
-  }
-
-  /* 3) Add extra vertical padding in the links box */
-  .links-section.links-box {
-    padding-top: 24px;
-    padding-bottom: 24px;
-  }
-
-  /* 4) Increase gap and let logos fill their container */
-  .link-buttons {
     gap: 24px;
   }
-  .link-buttons img {
-    max-width: 100%;
-    height: auto;
+  .section-title {
+    color: #254e91;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+  .signup-stats, .signup-list, .announcement-list {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .signup-list, .announcement-list {
+    list-style: disc inside;
+    padding: 0;
+    margin: 0 0 16px;
+  }
+  .announcement-list li a {
+    color: #666;
+    text-decoration: none;
+  }
+  .announcement-list li a:hover {
+    text-decoration: underline;
   }
 </style>
 
 <div class="main-container">
-  <!-- 왼쪽: Signup + Announcement -->
-  <div class="side-box">
-    <div class="side-box-inner">
-      <div class="signup-section">
-        <div class="section-title">Signup Overview</div>
-        <div class="signup-stats">
-          <div><strong>Total members:</strong> {{ total_users }}</div>
-        </div>
-        <ul class="signup-list">
-          {% for user in recent_users %}
-            <li>{{ user.userprofile.nickname }} – {{ user.date_joined|date:"Y-m-d" }}</li>
-          {% empty %}
-            <li>No recent signups.</li>
-          {% endfor %}
-        </ul>
-      </div>
-      <div class="announcement-section">
-        <div class="section-title">Announcement</div>
-        <ul class="announcement-list">
-          {% for post in recent_announcements %}
-            <li>
-              <a class="announcement-title" href="{% url 'announcement_detail' post.pk %}">
-                {{ post.title|truncatechars:25 }}
-              </a>
-              <span class="announcement-date">({{ post.created_at|date:"Y-m-d" }})</span>
-            </li>
-          {% empty %}
-            <li>No recent announcements.</li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- 가운데: Banner 이미지 -->
-  <div class="center-image-wrapper">
-    <img src="{% static 'images/banner1.png' %}" alt="HIDM Banner">
-  </div>
-
-  <!-- 오른쪽: Hallym Links -->
-  <div class="links-section links-box">
+  <!-- 왼쪽: Hallym Links -->
+  <div class="links-section">
     <div class="section-title">Hallym Links</div>
     <div class="link-buttons">
       <a href="https://www.hallym.ac.kr/" target="_blank">
-        <img src="{% static 'images/homepage.png' %}" alt="Hallym University Homepage">
+        <img src="{% static 'images/homepage.png' %}" alt="Hallym Main Homepage">
       </a>
       <a href="https://smartlead.hallym.ac.kr/" target="_blank">
-        <img src="{% static 'images/smartlead.png' %}" alt="smartLEAD">
+        <img src="{% static 'images/smartlead.png' %}" alt="Hallym smartLEAD">
       </a>
       <a href="https://was1.hallym.ac.kr:8087/hlwc/mdi/Login.html" target="_blank">
         <img src="{% static 'images/sis.png' %}" alt="Student Info System">
@@ -272,5 +117,39 @@
       </a>
     </div>
   </div>
+
+  <!-- 가운데: 배너 이미지 -->
+  <div class="center-image-wrapper">
+    <img src="{% static 'images/banner1.png' %}" alt="HIDM Banner">
+  </div>
+
+  <!-- 오른쪽: Signup + Announcement -->
+  <div class="side-box">
+    <div class="signup-section">
+      <div class="section-title">Signup Overview</div>
+      <div class="signup-stats"><strong>Total members:</strong> {{ total_users }}</div>
+      <ul class="signup-list">
+        {% for user in recent_users %}
+          <li>{{ user.userprofile.nickname }} – {{ user.date_joined|date:"Y-m-d" }}</li>
+        {% empty %}
+          <li>No recent signups.</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="announcement-section">
+      <div class="section-title">Announcement</div>
+      <ul class="announcement-list">
+        {% for post in recent_announcements %}
+          <li>
+            <a href="{% url 'announcement_detail' post.pk %}">{{ post.title|truncatechars:25 }}</a>
+            <span> ({{ post.created_at|date:"Y-m-d" }})</span>
+          </li>
+        {% empty %}
+          <li>No recent announcements.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 </div>
+
 {% endblock %}
