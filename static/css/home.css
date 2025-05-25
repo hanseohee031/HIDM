@@ -71,3 +71,17 @@
 * {
   border-radius: 0 !important;
 }
+
+
+.site-footer {
+  background-color: #000;      /* 검정 배경 */
+  color: #fff;                 /* 흰 글씨 */
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 60px;
+}
+
+.site-footer .footer-info p {
+  margin: 8px 0;
+}

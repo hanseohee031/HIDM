@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}My Chat App{% endblock %}</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=2">
     
     {% block head %}{% endblock %}
 </head>
@@ -42,7 +42,21 @@
         {% endblock %}
     </div>
 
+<footer class="site-footer">
+  <div class="footer-info">
+    <p>본 서비스는 한림대학교 교내 국제 교류 활성화를 위한 프로젝트입니다.</p>
+    <p>(우) 강원특별자치도 춘천시 한림대학길 1 한림대학교 공학관</p>
+    <p>Email. 20215267@hallym.ac.kr</p>
+    <p>Copyright © Hanseohee. All Rights Reserved.</p>
+  </div>
+</footer>
+
+
     {# ─── 여기에만 추가 ─── #}
     {% block extra_js %}{% endblock %}
+
+
+
+
 </body>
 </html>
