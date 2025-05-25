@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}My Chat App{% endblock %}</title>
     {% load static %}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap">
-
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    
+    {% block head %}{% endblock %}
 </head>
+
+
 <body>
     <!-- 네비게이션바 시작 -->
     <nav class="navbar">

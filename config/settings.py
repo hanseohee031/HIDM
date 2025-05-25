@@ -10,8 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+
+from pathlib import Path
+import os
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # settings.py 상단
 from decouple import config
+from dotenv import load_dotenv
+import os
+
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
 
 # 기존 하드코딩된 부분은 지우고 이렇게 변경
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -21,10 +32,9 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-from pathlib import Path
-import os
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
