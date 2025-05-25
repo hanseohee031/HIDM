@@ -1,21 +1,34 @@
-{# accounts/templates/accounts/ai_matching.html #}
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/ai_matching.css' %}">
+{% endblock %}
+
 {% block content %}
   <h1>AI Matching</h1>
 
   {% if error %}
-    <p style="color: red;">{{ error }}</p>
+    <p class="error">{{ error }}</p>
+  {% elif recommendations %}
+    <div class="ai-cards-grid">
+      {% for rec in recommendations %}
+        <div class="ai-card">
+          <h2>{{ rec.nickname }}'s Public Profile</h2>
+          <ul class="profile-details">
+            <li><strong>Gender:</strong> {{ rec.gender }}</li>
+            <li><strong>Native Language:</strong> {{ rec.native_language }}</li>
+            <li><strong>Nationality:</strong> {{ rec.nationality }}</li>
+            <li><strong>Major:</strong> {{ rec.major }}</li>
+            <li><strong>Personality (MBTI):</strong> {{ rec.personality }}</li>
+            <li><strong>Birth Year:</strong> {{ rec.birth_year }}</li>
+            <li><strong>Interests:</strong> {{ rec.interests|join:", " }}</li>
+          </ul>
+          <button class="btn-add-friend">Add Friend</button>
+        </div>
+      {% endfor %}
+    </div>
   {% else %}
-    {% if recommendations %}
-      <ul>
-        {% for rec in recommendations %}
-          <li>
-            <strong>{{ rec.nickname }}</strong> — 유사도: {{ rec.score }}
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p>추천할 사용자가 없습니다.</p>
-    {% endif %}
+    <p>No recommendations available.</p>
   {% endif %}
 {% endblock %}

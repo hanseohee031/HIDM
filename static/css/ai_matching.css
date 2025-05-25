@@ -1,19 +1,33 @@
-/* static/css/ai_matching.css */
-
-.card.h-100 {
-  border-radius: 0.75rem;
-  transition: transform 0.2s;
+.ai-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
-
-.card.h-100:hover {
-  transform: translateY(-5px);
+.ai-card {
+  border: 2px solid #1e40af;
+  border-radius: .5rem;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-
-.card-title {
-  font-size: 1.3rem;
-  margin-bottom: 0.75rem;
+.ai-card h2 {
+  margin-bottom: .75rem;
+  font-size: 1.25rem;
 }
-
-.card-text {
-  font-size: 0.95rem;
+.profile-details {
+  list-style: disc inside;
+  margin: 0;
+  padding: 0;
+}
+.profile-details li {
+  margin-bottom: .25rem;
+}
+.btn-add-friend {
+  margin-top: 1rem;
+  background-color: #1e40af;
+  color: white;
+  border: none;
+  padding: .5rem 1rem;
+  border-radius: .25rem;
+  cursor: pointer;
 }

@@ -27,61 +27,70 @@ from .forms import CategorySelectionForm  # InterestForm 대신 이걸 import
 from recommendation.recommend import recommend_similar_users
 
 # accounts/views.py
-
 @login_required
 def ai_matching(request):
     me_user = request.user
     me = me_user.username
 
-    # 0) 후보군 필터링: “한국인은 교환학생만, 교환학생은 한국인만”
+    # 0) Candidate filtering: Koreans ↔ exchange students only
     me_profile = UserProfile.objects.get(user=me_user)
     my_nat = me_profile.nationality  # e.g. 'KR'
 
     candidates = []
     for prof in UserProfile.objects.prefetch_related('favorite_categories').all():
-        # 자신 제외
         if prof.user_id == me_user.id:
             continue
-        # 한국인인 경우 → 상대는 교환학생만
         if my_nat == 'KR' and prof.nationality == 'KR':
             continue
-        # 교환학생인 경우 → 상대는 한국인만
         if my_nat != 'KR' and prof.nationality != 'KR':
             continue
         candidates.append(prof)
 
-    # 1) 필터링된 후보군 중 관심사(cats)가 있는 사용자만 수집
+    # 1) Build a dict of username → list of interest names
     user_profiles = {}
     for prof in candidates:
         cats = [c.name for c in prof.favorite_categories.all()]
         if cats:
             user_profiles[prof.user.username] = cats
-    # 내 프로필도 포함
+
+    # Always include self
     my_cats = [c.name for c in me_profile.favorite_categories.all()]
     user_profiles[me] = my_cats
 
-    # 2) 내 관심사가 없으면 안내
-    if me not in user_profiles or not user_profiles[me]:
+    # 2) Require at least one interest
+    if not user_profiles[me]:
         return render(request, 'accounts/ai_matching.html', {
-            'error': '먼저 프로필에서 관심사를 하나 이상 설정해 주세요.'
+            'error': 'Please select at least one interest in your profile.'
         })
 
-    # 3) SBERT 추천 수행 (top 3)
+    # 3) Run SBERT recommendation for top 3
     raw_recs = recommend_similar_users(
         user_id=me,
         user_profiles=user_profiles,
         top_k=3
     )
 
-    # 4) 닉네임 매핑
+    # 4) Fetch full UserProfile objects for the recommended usernames
     rec_usernames = [r['user'] for r in raw_recs]
-    rec_qs = UserProfile.objects.filter(user__username__in=rec_usernames)
-    nick_map = {p.user.username: (p.nickname or p.user.username) for p in rec_qs}
+    rec_profiles = UserProfile.objects.select_related('user') \
+                                      .prefetch_related('favorite_categories') \
+                                      .filter(user__username__in=rec_usernames)
 
-    recommendations = [
-        {'nickname': nick_map.get(r['user'], r['user']), 'score': r['score']}
-        for r in raw_recs
-    ]
+    # 5) Assemble the final recommendations list
+    recommendations = []
+    for r in raw_recs:
+        prof = rec_profiles.get(user__username=r['user'])
+        recommendations.append({
+            'nickname':        prof.nickname or prof.user.username,
+            'score':           r['score'],
+            'gender':          prof.get_gender_display(),
+            'native_language': prof.get_native_language_display(),
+            'nationality':     prof.nationality,
+            'major':           prof.major,
+            'personality':     prof.personality,
+            'birth_year':      prof.born_year,
+            'interests':       [c.name for c in prof.favorite_categories.all()],
+        })
 
     return render(request, 'accounts/ai_matching.html', {
         'recommendations': recommendations
