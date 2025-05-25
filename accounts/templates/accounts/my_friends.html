@@ -1,15 +1,85 @@
 {% extends 'base.html' %}
-{% block content %}
-<h2>My Friends</h2>
-<ul>
-  {% for friend in friends %}
-    <li>
-      {{ friend.userprofile.nickname }} ({{ friend.username }})
-<a href="{% url 'dm_chat_room' friend.userprofile.nickname %}" class="btn btn-primary btn-sm">Direct Message</a>
+{% load static %}
 
-    </li>
+{% block head %}
+  {{ block.super }}
+  <style>
+    .friends-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 24px;
+    }
+
+    .friend-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .friend-card:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .friend-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .friend-nickname {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #2346a2;
+    }
+
+    .btn-dm {
+      font-size: 0.9rem;
+      background-color: #4a6ef5;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .btn-dm:hover {
+      background-color: #3751d2;
+    }
+
+    .friend-info p {
+      margin: 4px 0;
+      font-size: 0.95rem;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<h2 style="margin-left: 24px;">My Friends</h2>
+<div class="friends-list">
+  {% for friend in friends %}
+    <div class="friend-card">
+      <div class="friend-header">
+        <div class="friend-nickname">{{ friend.userprofile.nickname }}</div>
+        <a href="{% url 'dm_chat_room' friend.userprofile.nickname %}" class="btn-dm">DM</a>
+      </div>
+      <div class="friend-info">
+        <p><strong>Gender:</strong> {{ friend.userprofile.get_gender_display }}</p>
+        <p><strong>Language:</strong> {{ friend.userprofile.get_native_language_display }}</p>
+        {% if friend.userprofile.show_nationality %}<p><strong>Nationality:</strong> {{ friend.userprofile.nationality }}</p>{% endif %}
+        {% if friend.userprofile.show_major %}<p><strong>Major:</strong> {{ friend.userprofile.major }}</p>{% endif %}
+        {% if friend.userprofile.show_personality %}<p><strong>MBTI:</strong> {{ friend.userprofile.personality }}</p>{% endif %}
+        {% if friend.userprofile.show_born_year %}<p><strong>Born:</strong> {{ friend.userprofile.born_year }}</p>{% endif %}
+        <p><strong>Interests:</strong> {{ friend.userprofile.favorite_categories.all|join:", " }}</p>
+      </div>
+    </div>
   {% empty %}
-    <li>No friends yet.</li>
+    <p style="margin-left: 24px; color: #999;">No friends yet.</p>
   {% endfor %}
-</ul>
+</div>
 {% endblock %}
