@@ -8,144 +8,130 @@
 {% block content %}
   <div class="ai-header">
     <h1>AI Matching</h1>
-    <a href="{% url 'ai_matching' %}?refresh=1" class="btn-refresh">
-      {% if refreshed %}Refreshed{% else %}Refresh Recommendations{% endif %}
-    </a>
+    {% if started %}
+      <a href="{% url 'ai_matching' %}?start=1&refresh=1" class="btn-refresh">
+        {% if refreshed %}Refreshed{% else %}Refresh Recommendations{% endif %}
+      </a>
+    {% endif %}
   </div>
 
-  {% if error %}
-    <p class="error">{{ error }}</p>
-  {% else %}
-    <div class="ai-container">
-      <!-- 왼쪽: 추천 리스트 -->
-      <aside class="ai-sidebar">
-        <h2>Recommendations</h2>
-        {% include 'accounts/partials/ai_matches.html' %}
-      </aside>
+  <div class="ai-container">
+    {# ── (A) 추천 영역 ── #}
+    <aside class="ai-sidebar">
+      <h2>Recommendations</h2>
+      {% if not started %}
+        <p>Click “Start AI match” to get recommendations.</p>
+      {% else %}
+        {% if error %}
+          <p class="error">{{ error }}</p>
+        {% else %}
+          {% include 'accounts/partials/ai_matches.html' %}
+        {% endif %}
+      {% endif %}
+    </aside>
 
-      <!-- 가운데: (선택 시) 프로필+폼 영역 -->
-      <main class="ai-main" id="profile-and-form">
+    {# ── (B) 중앙 메시지 영역 ── #}
+    <main class="ai-main" id="profile-and-form">
+      {% if not started %}
+        <form method="get" action="{% url 'ai_matching' %}">
+          <button type="submit" name="start" value="1">Start AI match</button>
+        </form>
+      {% else %}
         <p>Select one of the recommendations on the left to send a chat request.</p>
-      </main>
+      {% endif %}
+    </main>
 
-      <!-- 오른쪽: 요청 현황 -->
-      <section class="ai-requests">
-        <h2>Sent Requests</h2>
-        <ul class="sent-requests-list">
-          {% for req in sent_requests %}
-            <li class="sent-item">
-              <strong>
-                {% if req.receiver.userprofile.nickname %}
-                  {{ req.receiver.userprofile.nickname }}
-                {% else %}
-                  {{ req.receiver.username }}
-                {% endif %}
-              </strong>
-              <ul class="slot-list">
-                <li>{{ req.slot1 }}</li>
-                <li>{{ req.slot2 }}</li>
-                <li>{{ req.slot3 }}</li>
+    {# ── (C) 요청·채팅 내역 영역 (항상 보임) ── #}
+    <section class="ai-requests">
+      <h2>Sent Requests</h2>
+      <ul class="sent-requests-list">
+        {% for req in sent_requests %}
+          <li>
+            <strong>{{ req.receiver.userprofile.nickname|default:req.receiver.username }}</strong>
+            <ul class="slot-list">
+              <li>{{ req.slot1 }}</li>
+              <li>{{ req.slot2 }}</li>
+              <li>{{ req.slot3 }}</li>
+            </ul>
+            <form method="post" action="{% url 'chat_request_reject' req.pk %}">
+              {% csrf_token %}
+              <button type="submit">Cancel</button>
+            </form>
+          </li>
+        {% empty %}
+          <li>No sent requests.</li>
+        {% endfor %}
+      </ul>
+
+      <h2>Received Requests</h2>
+      <ul class="received-requests-list">
+        {% for req in received_requests %}
+          <li>
+            <div class="profile-summary">
+              <h3>{{ req.sender.userprofile.nickname|default:req.sender.username }}</h3>
+              <ul class="profile-details">
+                <li>Gender: {{ req.sender.userprofile.get_gender_display }}</li>
+                <li>Native Language: {{ req.sender.userprofile.get_native_language_display }}</li>
+                <li>Nationality: {{ req.sender.userprofile.nationality }}</li>
+                <li>Major: {{ req.sender.userprofile.major }}</li>
+                <li>MBTI: {{ req.sender.userprofile.personality }}</li>
+                <li>Birth Year: {{ req.sender.userprofile.born_year }}</li>
+                <li>Interests: {{ req.sender.userprofile.favorite_categories.all|join:", " }}</li>
               </ul>
-              <form method="post" action="{% url 'chat_request_reject' req.pk %}">
-                {% csrf_token %}
-                <button type="submit">Cancel</button>
-              </form>
-            </li>
-          {% empty %}
-            <li>No sent requests.</li>
-          {% endfor %}
-        </ul>
+            </div>
 
-        <h2>Received Requests</h2>
-        <ul class="received-requests-list">
-          {% for req in received_requests %}
-            <li class="received-item">
-              <!-- 보낸 사람 프로필 요약 -->
-              <div class="profile-summary">
-                <h3>
-                  {% if req.sender.userprofile.nickname %}
-                    {{ req.sender.userprofile.nickname }}
-                  {% else %}
-                    {{ req.sender.username }}
-                  {% endif %}
-                </h3>
-                <ul class="profile-details">
-                  <li>Gender: {{ req.sender.userprofile.get_gender_display }}</li>
-                  <li>Native Language: {{ req.sender.userprofile.get_native_language_display }}</li>
-                  <li>Nationality: {{ req.sender.userprofile.nationality }}</li>
-                  <li>Major: {{ req.sender.userprofile.major }}</li>
-                  <li>Personality (MBTI): {{ req.sender.userprofile.personality }}</li>
-                  <li>Birth Year: {{ req.sender.userprofile.born_year }}</li>
-                  <li>
-                    Interests:
-                    {{ req.sender.userprofile.favorite_categories.all|join:", " }}
-                  </li>
-                </ul>
-              </div>
+            <ul class="slot-list">
+              <li>
+                {{ req.slot1 }}
+                <form method="post" action="{% url 'chat_request_confirm' req.pk 0 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit">Confirm</button>
+                </form>
+              </li>
+              <li>
+                {{ req.slot2 }}
+                <form method="post" action="{% url 'chat_request_confirm' req.pk 1 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit">Confirm</button>
+                </form>
+              </li>
+              <li>
+                {{ req.slot3 }}
+                <form method="post" action="{% url 'chat_request_confirm' req.pk 2 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit">Confirm</button>
+                </form>
+              </li>
+            </ul>
 
-              <!-- 제안된 시간 슬롯 + Confirm 폼 -->
-              <ul class="slot-list">
-                <li>
-                  {{ req.slot1 }}
-                  <form method="post" action="{% url 'chat_request_confirm' req.pk 0 %}" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">Confirm</button>
-                  </form>
-                </li>
-                <li>
-                  {{ req.slot2 }}
-                  <form method="post" action="{% url 'chat_request_confirm' req.pk 1 %}" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">Confirm</button>
-                  </form>
-                </li>
-                <li>
-                  {{ req.slot3 }}
-                  <form method="post" action="{% url 'chat_request_confirm' req.pk 2 %}" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">Confirm</button>
-                  </form>
-                </li>
-              </ul>
+            <form method="post" action="{% url 'chat_request_reject' req.pk %}">
+              {% csrf_token %}
+              <button type="submit">Reject</button>
+            </form>
+          </li>
+        {% empty %}
+          <li>No incoming requests.</li>
+        {% endfor %}
+      </ul>
 
-              <!-- 거절 버튼 -->
-              <form method="post" action="{% url 'chat_request_reject' req.pk %}">
-                {% csrf_token %}
-                <button type="submit">Reject</button>
-              </form>
-            </li>
-          {% empty %}
-            <li>No incoming requests.</li>
-          {% endfor %}
-        </ul>
-
-        <h2>Confirmed Chats</h2>
-        <ul class="confirmed-chats-list">
-          {% for req in confirmed_chats %}
-            <li>
-              Chat with
-              {% if req.sender == user %}
-                {% if req.receiver.userprofile.nickname %}
-                  {{ req.receiver.userprofile.nickname }}
-                {% else %}
-                  {{ req.receiver.username }}
-                {% endif %}
-              {% else %}
-                {% if req.sender.userprofile.nickname %}
-                  {{ req.sender.userprofile.nickname }}
-                {% else %}
-                  {{ req.sender.username }}
-                {% endif %}
-              {% endif %}
-              at {{ req.chosen_slot }}
-            </li>
-          {% empty %}
-            <li>No confirmed chats.</li>
-          {% endfor %}
-        </ul>
-      </section>
-    </div>
-  {% endif %}
+      <h2>Confirmed Chats</h2>
+      <ul class="confirmed-chats-list">
+        {% for req in confirmed_chats %}
+          <li>
+            Chat with
+            {% if req.sender == user %}
+              {{ req.receiver.userprofile.nickname|default:req.receiver.username }}
+            {% else %}
+              {{ req.sender.userprofile.nickname|default:req.sender.username }}
+            {% endif %}
+            at {{ req.chosen_slot }}
+          </li>
+        {% empty %}
+          <li>No confirmed chats.</li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
 {% endblock %}
 
 {% block extra_js %}

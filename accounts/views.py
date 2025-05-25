@@ -113,103 +113,113 @@ def chat_request_confirm(request, pk, slot_index):
     # 3) AI Matching 화면으로 돌아가기
     return redirect('ai_matching')
 
+
+
+
 @login_required
 def ai_matching(request):
+    # ① start 파라미터 체크
+    start = request.GET.get('start') == '1'
     me_user = request.user
     me = me_user.username
     cache_key = f"ai_recs_user_{me}"
-    refresh = request.GET.get('refresh') == '1'
+    # refresh는 start 상태일 때만 동작
+    refresh = start and request.GET.get('refresh') == '1'
 
-    # 1) 캐시 무효화
-    if refresh:
-        cache.delete(cache_key)
-
-    # 2) 캐시에서 추천 불러오기
-    raw_recs = cache.get(cache_key)
-    if raw_recs is None:
-        # — 후보 필터링 (한국인 ↔ 교환학생 분리)
-        me_profile = UserProfile.objects.get(user=me_user)
-        my_nat = me_profile.nationality
-        candidates = []
-        for prof in UserProfile.objects.prefetch_related('favorite_categories').all():
-            if prof.user_id == me_user.id:
-                continue
-            if my_nat == 'KR' and prof.nationality == 'KR':
-                continue
-            if my_nat != 'KR' and prof.nationality != 'KR':
-                continue
-            candidates.append(prof)
-
-        # — 관심사 dict 생성
-        user_profiles = {
-            prof.user.username: [c.name for c in prof.favorite_categories.all()]
-            for prof in candidates if prof.favorite_categories.exists()
-        }
-        user_profiles[me] = [c.name for c in me_profile.favorite_categories.all()]
-
-        if not user_profiles[me]:
-            return render(request, 'accounts/ai_matching.html', {
-                'error': 'Please select at least one interest in your profile.'
-            })
-
-        # — SBERT로 추천 계산
-        raw_recs = recommend_similar_users(
-            user_id=me,
-            user_profiles=user_profiles,
-            top_k=3
-        )
-        cache.set(cache_key, raw_recs, timeout=60*60*24)
-
-    # 3) 추천 대상 프로필 로드
-    rec_usernames = [r['user'] for r in raw_recs]
-    rec_profiles = (
-        UserProfile.objects
-        .select_related('user')
-        .prefetch_related('favorite_categories')
-        .filter(user__username__in=rec_usernames)
-    )
-
-    # 4) 컨텍스트용 recommendations 리스트 조립
     recommendations = []
-    for r in raw_recs:
-        prof = rec_profiles.get(user__username=r['user'])
-        recommendations.append({
-            'nickname':        prof.nickname or prof.user.username,
-            'username':        prof.user.username,
-            'score':           r['score'],
-            'gender':          prof.get_gender_display(),
-            'native_language': prof.get_native_language_display(),
-            'nationality':     prof.nationality,
-            'major':           prof.major,
-            'personality':     prof.personality,
-            'birth_year':      prof.born_year,
-            'interests':       [c.name for c in prof.favorite_categories.all()],
-        })
+    error = None
 
-    # 5) 채팅 요청 내역 조회
+    if start:
+        # — 캐시 무효화
+        if refresh:
+            cache.delete(cache_key)
+
+        # — 캐시에서 가져오기
+        raw_recs = cache.get(cache_key)
+        if raw_recs is None:
+            me_profile = UserProfile.objects.get(user=me_user)
+            my_nat = me_profile.nationality
+
+            # 후보 필터링
+            candidates = []
+            for prof in UserProfile.objects.prefetch_related('favorite_categories').all():
+                if prof.user_id == me_user.id: continue
+                if my_nat == 'KR' and prof.nationality == 'KR': continue
+                if my_nat != 'KR' and prof.nationality != 'KR': continue
+                candidates.append(prof)
+
+            # 관심사 dict
+            user_profiles = {
+                prof.user.username: [c.name for c in prof.favorite_categories.all()]
+                for prof in candidates if prof.favorite_categories.exists()
+            }
+            user_profiles[me] = [c.name for c in me_profile.favorite_categories.all()]
+
+            if not user_profiles[me]:
+                error = 'Please select at least one interest in your profile.'
+            else:
+                # SBERT 추천 호출
+                raw_recs = recommend_similar_users(
+                    user_id=me,
+                    user_profiles=user_profiles,
+                    top_k=3
+                )
+                cache.set(cache_key, raw_recs, timeout=60*60*24)
+
+        # raw_recs 있을 때만 recommendations 구성
+        if raw_recs and not error:
+            rec_usernames = [r['user'] for r in raw_recs]
+            rec_profiles = UserProfile.objects.select_related('user')\
+                .prefetch_related('favorite_categories')\
+                .filter(user__username__in=rec_usernames)
+
+            for r in raw_recs:
+                prof = rec_profiles.get(user__username=r['user'])
+                recommendations.append({
+                    'nickname':    prof.nickname or prof.user.username,
+                    'username':    prof.user.username,
+                    'score':       r['score'],
+                    'gender':      prof.get_gender_display(),
+                    'native_language': prof.get_native_language_display(),
+                    'nationality': prof.nationality,
+                    'major':       prof.major,
+                    'personality': prof.personality,
+                    'birth_year':  prof.born_year,
+                    'interests':   [c.name for c in prof.favorite_categories.all()],
+                })
+
+    # ② 요청 내역은 항상 가져오기
     sent_requests = ChatRequest.objects.filter(
-        sender=request.user,
-        status='pending'
+        sender=request.user, status='pending'
     ).order_by('-created_at')
-
     received_requests = ChatRequest.objects.filter(
-        receiver=request.user,
-        status='pending'
+        receiver=request.user, status='pending'
     ).order_by('-created_at')
-
     confirmed_chats = ChatRequest.objects.filter(
         Q(sender=request.user, status='confirmed') |
         Q(receiver=request.user, status='confirmed')
     ).order_by('-created_at')
 
-    # 6) 렌더
+    # ③ 렌더
     return render(request, 'accounts/ai_matching.html', {
-        'recommendations':    recommendations,
-        'refreshed':          refresh,
-        'sent_requests':      sent_requests,
-        'received_requests':  received_requests,
-        'confirmed_chats':    confirmed_chats,
+        'started':           start,
+        'recommendations':   recommendations,
+        'error':             error,
+        'refreshed':         refresh,
+        'sent_requests':     sent_requests,
+        'received_requests': received_requests,
+        'confirmed_chats':   confirmed_chats,
     })
+
+
+
+
+
+
+
+
+
+
 
 
 @require_POST
