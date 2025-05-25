@@ -24,7 +24,7 @@
     margin: 0 auto;
   }
 
-  /* 왼쪽: Hallym Links (이미지 버튼) */
+  /* 왼쪽: Hallym Links (이미지 버튼 + 로고) */
   .links-section {
     width: 280px;
     display: flex;
@@ -53,10 +53,20 @@
   .link-buttons img {
     width: 100%;
     height: auto;
-    max-height: 60px; /* 높이 키우기 */
+    max-height: 60px;
     object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .hallym-logo {
+    margin-top: 20px;
+  }
+  .hallym-logo img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    object-fit: contain;
+    opacity: 0.9;
   }
 
   /* 중앙: 배너 */
@@ -133,6 +143,9 @@
       <a href="https://library.hallym.ac.kr/" target="_blank">
         <img src="{% static 'images/library.png' %}" alt="Hallym Library">
       </a>
+    </div>
+    <div class="hallym-logo">
+      <img src="{% static 'images/hallym.png' %}" alt="Hallym University Logo">
     </div>
   </div>
 
