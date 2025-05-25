@@ -8,8 +8,12 @@ from . import matchmaker
 from accounts.models import UserProfile, Friendship
 from django.contrib.auth.models import User
 from django.db.models import Q
+from .models import DirectMessage
+from channels.db import database_sync_to_async
 
-
+@database_sync_to_async
+def save_dm(sender, receiver, message):
+    DirectMessage.objects.create(sender=sender, receiver=receiver, message=message)
 
 # 로그 파일 경로 (JSONL 포맷)
 LOG_JSONL = os.path.join(
@@ -60,6 +64,7 @@ class DMChatConsumer(AsyncWebsocketConsumer):
         data = json.loads(text_data)
         message = data.get('message')
         sender_nickname = await self.get_nickname(self.user)
+        await save_dm(self.user, self.friend_user, message)
         await self.channel_layer.group_send(
             self.room_group_name,
             {

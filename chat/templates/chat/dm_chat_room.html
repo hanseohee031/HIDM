@@ -84,7 +84,15 @@
 
 {% block content %}
 <div class="chat-header">Chat with {{ friend_profile.nickname }}</div>
-<div class="chat-box" id="chat-log"></div>
+
+<div class="chat-box" id="chat-log">
+  {# ✅ 이전 메시지 출력 #}
+  {% for msg in messages %}
+    <div class="message {% if msg.sender == request.user %}me{% else %}other{% endif %}">
+      {{ msg.message }}
+    </div>
+  {% endfor %}
+</div>
 
 <div class="chat-input">
   <input type="text" id="chat-message-input" autocomplete="off" placeholder="Type a message...">
@@ -95,8 +103,7 @@
   const friendNickname = "{{ friend_profile.nickname }}";
   const ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
   const chatSocket = new WebSocket(
-    ws_scheme + '://' + window.location.host +
-    '/ws/dm/' + friendNickname + '/'
+    ws_scheme + '://' + window.location.host + '/ws/dm/' + friendNickname + '/'
   );
 
   const chatLog = document.getElementById('chat-log');
@@ -130,6 +137,11 @@
       chatSocket.send(JSON.stringify({ 'message': message }));
       inputBox.value = '';
     }
+  }
+
+  // ✅ 페이지 로드 시 자동 스크롤
+  window.onload = () => {
+    chatLog.scrollTop = chatLog.scrollHeight;
   }
 </script>
 {% endblock %}
