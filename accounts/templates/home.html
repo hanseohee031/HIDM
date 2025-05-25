@@ -3,6 +3,7 @@
 
 {% block content %}
 <style>
+  /* 기본 설정 */
   html, body {
     font-family: 'UhBeeSeulvely', sans-serif;
     font-size: 18px;
@@ -11,22 +12,26 @@
     padding: 0;
     overflow-x: hidden;
   }
+
+  /* 메인 컨테이너: 화면 아래로 넉넉히 띄우기 */
   .main-container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 40px;
-    padding: 20px;
+    padding: 60px 20px 20px; /* 위쪽 여백 확대 */
     max-width: 1400px;
     margin: 0 auto;
   }
+
   /* 왼쪽: Hallym Links (이미지 버튼) */
   .links-section {
-    width: 260px;
+    width: 280px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    justify-content: center; /* 세로 중앙 정렬 */
+    gap: 16px;
   }
   .links-section .section-title {
     color: #254e91;
@@ -42,15 +47,18 @@
     width: 100%;
   }
   .link-buttons a {
+    width: 90%;
     display: block;
-    width: 80%;
   }
   .link-buttons img {
     width: 100%;
     height: auto;
+    max-height: 60px; /* 높이 키우기 */
+    object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
+
   /* 중앙: 배너 */
   .center-image-wrapper {
     flex: 1;
@@ -64,31 +72,41 @@
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
+
   /* 오른쪽: Signup + Announcement */
   .side-box {
-    width: 300px;
+    width: 320px; /* 영역 넓히기 */
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
   }
   .section-title {
     color: #254e91;
     font-size: 1.4rem;
+    font-weight: bold; /* 제목만 볼드 */
     margin-bottom: 8px;
   }
   .signup-stats, .signup-list, .announcement-list {
     color: #666;
     line-height: 1.6;
-    margin-bottom: 16px;
+    margin-bottom: 0;
+    font-weight: normal; /* 본문은 노멀 */
   }
   .signup-list, .announcement-list {
     list-style: disc inside;
     padding: 0;
-    margin: 0 0 16px;
+    margin: 8px 0 0;
+  }
+  .announcement-list li,
+  .signup-list li {
+    white-space: nowrap; /* 줄바꿈 방지 */
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .announcement-list li a {
     color: #666;
     text-decoration: none;
+    font-weight: normal;
   }
   .announcement-list li a:hover {
     text-decoration: underline;
@@ -127,7 +145,7 @@
   <div class="side-box">
     <div class="signup-section">
       <div class="section-title">Signup Overview</div>
-      <div class="signup-stats"><strong>Total members:</strong> {{ total_users }}</div>
+      <div class="signup-stats">Total members: {{ total_users }}</div>
       <ul class="signup-list">
         {% for user in recent_users %}
           <li>{{ user.userprofile.nickname }} – {{ user.date_joined|date:"Y-m-d" }}</li>
@@ -141,7 +159,7 @@
       <ul class="announcement-list">
         {% for post in recent_announcements %}
           <li>
-            <a href="{% url 'announcement_detail' post.pk %}">{{ post.title|truncatechars:25 }}</a>
+            <a href="{% url 'announcement_detail' post.pk %}">{{ post.title|truncatechars:40 }}</a>
             <span> ({{ post.created_at|date:"Y-m-d" }})</span>
           </li>
         {% empty %}
