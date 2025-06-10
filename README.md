@@ -128,4 +128,4 @@ echo "http://127.0.0.1:8000"
  
 ---
 ## 발표 자료
-- [2025 1학기 SW캡스톤 발표자료 (최종본)](docs/HIDMpresentation.ppt)
+- [2025 1학기 SW캡스톤 발표자료 (최종본)](docs/HIDMpresentation.pptx)
